@@ -1,0 +1,37 @@
+10
+
+dir
+857
+https://webbigcamera.googlecode.com/svn/trunk/application/modules/admin_hilight
+https://webbigcamera.googlecode.com/svn
+
+
+
+2012-09-23T18:20:01.387697Z
+830
+ultraauchz@gmail.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0082d233-60f2-60e8-f415-122b9b6c92ff
+
+controllers
+dir
+
+models
+dir
+
+views
+dir
+

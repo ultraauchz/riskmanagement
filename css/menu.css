@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+.sidebarmenu {background:url(../images/side_menu_categories.gif) no-repeat top center; padding-top: 54px; padding-bottom: 5px; border: #e7e7e7 solid 1px; font-size: 13px; margin-bottom:10px;}
+.sidebarmenu a{background: url(../images/symbol_dot1.gif) no-repeat left; background-position: 1px 11px; display: block; line-height: 16px; margin: 0px 10px; padding: 6px 0px; color: #666666; padding-left: 18px; border-bottom: #e5e5e5 solid 1px;}
+.sidebarmenu a:link {text-decoration: none;}
+.sidebarmenu a:visited {text-decoration: none;}
+.sidebarmenu a:hover {background: url(../images/symbol_dot2.gif) no-repeat left; background-position: 1px 11px; color: #000000; text-decoration: none;}
+.sidebarmenu a:active {text-decoration: none;}
+.sidebarmenu a b{color: #ed1c24;}
+
+
+.sidebarmenu ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+ 
+.sidebarmenu ul li{
+position: relative;
+}
+
+/* Top level menu links style */
+.sidebarmenu ul li a{
+display: block;
+overflow: auto; /*force hasLayout in IE7 */
+text-decoration: none;
+padding: 6px;
+padding-left:20px;
+}
+
+.sidebarmenu ul li a:link, .sidebarmenu ul li a:visited, .sidebarmenu ul li a:active{
+ /*background of tabs (default state)*/
+}
+
+.sidebarmenu ul li a:visited{
+
+}
+
+.sidebarmenu ul li a:hover{
+
+}
+
+/*Sub level menu items */
+.sidebarmenu ul li ul{
+position: absolute;
+width: 170px; /*Sub Menu Items width */
+top: 0;
+visibility: hidden;
+z-index:1000;
+background-color:#FFF;
+border-top:1px solid #CCC;
+border-bottom:1px solid #CCC;
+border-right:1px solid #CCC;
+
+}
+
+.sidebarmenu a.subfolderstyle{
+
+}
+
+ 
+/* Holly Hack for IE \*/
+* html .sidebarmenu ul li { float: left; height: 1%; }
+* html .sidebarmenu ul li a { height: 1%; }
+/* End */
