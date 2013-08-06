@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Members Only"
+AuthUserFile /var/www/clients/client46/web147/.htpasswd_stats
+require valid-user

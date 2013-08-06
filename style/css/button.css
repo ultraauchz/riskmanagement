@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+#buttonGray
+{
+		display:block;
+		width:50px;
+		padding:10px 20px; 
+		background-color:#CCC; border:solid 1px #999;
+		color:#000;
+		cursor:pointer;		
+}
