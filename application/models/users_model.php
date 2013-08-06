@@ -1,6 +1,6 @@
 <?
-class menu_model extends MY_Model{
-	public $table = 'admin_menu';
+class users_model extends MY_Model{
+	public $table = 'users';
 	
     function __construct()
     {
