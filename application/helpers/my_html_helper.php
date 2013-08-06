@@ -25,7 +25,7 @@ if(!function_exists('get_one'))
 			$id = 'id';
 		}
 		$result = $CI->db->getone('select '.$field.' from '.$table.' where '.$id.' = ?',$value);
-		dbConvert($result);
+		//dbConvert($result);
 		return $result;
 	}
 }
@@ -127,7 +127,7 @@ function get_option($value,$text,$table,$where = FALSE)
 	$CI =& get_instance();
 	$where = ($where) ? 'where '.$where : '';
 	$result = $CI->db->GetAssoc('select '.$value.','.$text.' from '.$table.' '.$where);
-	array_walk($result,'dbConvert');
+	//array_walk($result,'dbConvert');
 	return $result;
 }
 
@@ -257,6 +257,7 @@ if (!function_exists('json_encode'))
 
 function dbConvert(&$value,$key = null,$output='UTF-8')
 {
+	/*
 	$encode = array('UTF-8'=>'TIS-620','TIS-620'=>'UTF-8');
 	if(is_array($value))
 	{
@@ -267,6 +268,8 @@ function dbConvert(&$value,$key = null,$output='UTF-8')
 	{
 		$value = iconv($encode[$output],$output,$value);
 	}
+	 * 
+	 */
 }
 
 function fix_file(&$files)
