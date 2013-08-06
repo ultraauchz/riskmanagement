@@ -41,9 +41,7 @@
 */
 
 $route['default_controller'] = "home";
-$route['admin']="users/admin/users/index";
 $route['scaffolding_trigger'] = "";
-
 
 
 /* End of file routes.php */

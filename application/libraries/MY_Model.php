@@ -14,9 +14,10 @@ class MY_Model extends Model{
 	public $where = '';
 	public $join = '';
 	public $sort = '';
+	public $having = '';
 	public $order = 'asc';
 	public $target = '';
-	public $limit = 12;
+	public $limit = 20;
 	public $pagination = '';
 	public $current_page = '';
 	public $record_count = '';
@@ -27,7 +28,7 @@ class MY_Model extends Model{
 		parent::__construct();
 		$this->sort($this->primary_key);
 		$this->target();
-		$this->current_page = number_format(@$_GET['page']);	
+		$this->current_page = @$_GET['page'];	
 	}
 	
 	function free_result()
@@ -38,7 +39,7 @@ class MY_Model extends Model{
 		$this->sort = 'order by ' . $this->primary_key;
 		$this->order = 'asc';
 		$this->target = '';
-		$this->limit = 12;
+		$this->limit = 20;
 		$this->current_page = '';
 		$this->__construct();
 	}
@@ -103,6 +104,14 @@ class MY_Model extends Model{
 		$this->sort = 'order by ' . $sort;
 		return $this;
 	}
+	function having($condition)
+	{
+		if($condition)
+		{
+			$this->having = ' having ' . $condition;
+		}
+		return $this;
+	}
 	
 	function order($order)
 	{
@@ -125,18 +134,19 @@ class MY_Model extends Model{
 	
 	function get($sql = FALSE,$noSplitPage = FALSE)
 	{
-		$sql = $sql ? $sql : 'select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where.' '.$this->sort.' '.$this->order;
-		//$sql = iconv('UTF-8','TIS-620',$sql);
+		
+		$sql = $sql ? $sql : 'select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where.' '.$this->having.' '.$this->sort.' '.$this->order;
+		$sql = iconv('UTF-8','TIS-620',$sql);
 		if($noSplitPage==FALSE)
 		{
 			$this->load->library('pagination');
 			$page = new pagination();
 			$page->target($this->target);
 			$page->limit($this->limit);
-			@$page->currentPage($this->current_page);
+			$page->currentPage($this->current_page);
 			$rs = $this->db->PageExecute($sql,$page->limit,$page->page);
-			$page->Items($rs->_maxRecordCount);
-			$this->pagination = $page->show();
+			$page->Items($rs->_maxRecordCount);			
+			$this->pagination = $page->show();						
 		}
 		else
 		{
@@ -144,7 +154,7 @@ class MY_Model extends Model{
 		}
 		$this->free_result();
 		$data = $rs->GetArray();
-		///array_walk($data,'dbConvert');
+		array_walk($data,'dbConvert');
 		
 		return $data;
 	}
@@ -165,28 +175,31 @@ class MY_Model extends Model{
 			$result = $this->db->getone('select '.$this->select.' from '.$this->table.' '.$this->where);
 		}
 		$this->free_result();
-	//	dbConvert($result);
+		dbConvert($result);
 		return $result;
 	}
 	
-	function get_row($id = FALSE,$value = FALSE)
+	function get_row($id = FALSE,$value = FALSE,$sql = FALSE)
 	{
-		if($value)
-		{
-			$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' where '.$this->table.'.'.$id.' = ?',$value);	
-		}
-		else if($id)
-		{
-			$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' where '.$this->table.'.'.$this->primary_key.' = ?',$id);
-		}
-		else if($this->where != "")
-		{
-			$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where);
+		if($sql){
+			$result = $this->db->getrow($sql.' where '.$id.' = ?',$value);			
+		}else{					
+			if($value)
+			{
+				$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' where '.$this->table.'.'.$id.' = ?',$value);	
+			}
+			else if($id)
+			{
+				$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' where '.$this->table.'.'.$this->primary_key.' = ?',$id);
+			}
+			else if($this->where != "")
+			{
+				$result = $this->db->getrow('select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where);
+			}
 		}
 		$this->free_result();
-		//@array_walk($result,'dbConvert');
-		//return @array_change_key_case($result);
-		return $result;
+		@array_walk($result,'dbConvert');
+		return @array_change_key_case($result);
 	}
 	
 	function pagination()
@@ -194,11 +207,11 @@ class MY_Model extends Model{
 		return $this->pagination;
 	}
 	
-	function save($data)
+	function save($data, $fix_import = FALSE)
 	{	
 		$columns = $this->db->MetaColumnNames($this->table);
 		$meta = $this->db->MetaColumns($this->table);
-		//array_walk($data,'dbConvert','TIS-620');
+		if($fix_import == FALSE)array_walk($data,'dbConvert','TIS-620');
 		$data = array_change_key_case($data, CASE_UPPER);
 		$data = array_intersect_key($data,$columns);
 		@$mode = ($data[$this->primary_key]) ? 'UPDATE' : 'INSERT';
@@ -212,20 +225,25 @@ class MY_Model extends Model{
 			$comma = '';
 			foreach($data as $key => $item)
 			{
-				$column .= $comma.''.$key.'';
-				if($meta[$key]->type=='N')
-				{
+				$column .= $comma.'"'.$key.'"';
+				//echo $meta[$key]->type;
+				
+				if($meta[$key]->type=='N' || $meta[$key]->type=='I' ||$meta[$key]->type=="INT")
+				{					
 						$value .= $item == '' ? $comma."0" : $comma.str_replace(',','',$item);
+				}
+				else if($meta[$key]->type=='D')
+				{
+						$value .= $item == 'NULL' ? $comma."NULL" : $comma.'\''.$item.'\'';
 				}
 				else
 				{
-						//$value .=  $comma.'\''.$item.'\'';
-						$value .=  $comma.'\''.str_replace("'","&#39;", $item).'\'';
+						$value .=  $comma.'\''.$item.'\'';
 				}
 			
 				$comma = ',';
 			}
-			$sql = 'INSERT INTO '.$this->table.'('.$this->primary_key.','.$column.') VALUES ("",'.$value.')';
+			$sql = 'INSERT INTO '.$this->table.'('.$this->primary_key.','.$column.') VALUES ('.'(select COALESCE(max('.$this->primary_key.'),0)+1 from '.$this->table.'),'.$value.')';
 			//echo $sql;
 			
 			$this->db->Execute($sql);
@@ -236,15 +254,17 @@ class MY_Model extends Model{
 			$comma = '';
 			foreach($data as $key => $item)
 			{
-				if($meta[$key]->type=='N')
+				if($meta[$key]->type=='N' || $meta[$key]->type=='I')
 				{
-					$column .= $comma.$key.' = '.$item;
+					$column .= $comma.$key.' = '.str_replace(',','',$item);
+				}
+				else if($meta[$key]->type=='D')
+				{
+						$column .= $item == 'NULL' ? $comma.'"'.$key.'"='."NULL" : $comma.'"'.$key.'"=\''.$item.'\'';
 				}
 				else
 				{
-					//$column .= $comma.''.$key.' = \''.$item.'\'';
-					$column .= $comma.''.$key.' = \''.str_replace("'","&#39;", $item).'\'';
-					
+					$column .= $comma.'"'.$key.'" = \''.$item.'\'';
 				}
 				$comma = ',';
 			}
@@ -253,7 +273,7 @@ class MY_Model extends Model{
 		return ($mode == 'UPDATE') ? $pk : $this->db->getOne('select MAX('.$this->primary_key.') from '.$this->table);
 	}
 	
-	function delete($id,$value = FALSE,$all = FALSE)
+	function delete($id=FALSE,$value = FALSE,$all = FALSE)
 	{
 		if($all)
 		{				
@@ -261,23 +281,30 @@ class MY_Model extends Model{
 		}
 		else
 		{
-			if($value)
+			if($id)
 			{
-				$this->db->Execute('delete from '.$this->table.' where '.$id.' = ?',$value);
+				if($value)
+				{
+					$this->db->Execute('delete from '.$this->table.' where '.$id.' = ?',$value);
+				}
+				else
+				{
+					$this->db->Execute('delete from '.$this->table.' where '.$this->table.'.ID = ?',$id);
+				}
 			}
 			else
 			{
-				$this->db->Execute('delete from '.$this->table.' where '.$this->table.'.ID = ?',$id);
+				$this->db->Execute('delete from '.$this->table.' '.$this->where);				
 			}
 		}
-		
 	}
 
-	function get_option($value,$text,$table = FALSE)
+	function get_option($value,$text,$table = FALSE,$condition=FALSE)
 	{
 		$table = $table ? $table : $this->table;
-		$result = $this->db->getassoc('select '.$value.','.$text.' from '.$table);
-		//array_walk($result,'dbConvert');
+		$condition = $condition != FALSE || $condition != '' ? " WHERE ".$condition : "";		
+		$result = $this->db->getassoc('select '.$value.','.$text.' from '.$table.$condition);
+		array_walk($result,'dbConvert');
 		return $result;
 	}
 
@@ -353,7 +380,6 @@ class MY_Model extends Model{
 	
 	function delete_file($id,$path,$field = 'image',$value)
 	{
-		
 		$file = $this->get_one($field,$id,$value);
 		//return $file;
 		@unlink($path.$file);

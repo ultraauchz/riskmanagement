@@ -51,7 +51,7 @@ $autoload['libraries'] = array('adodb','template','parser','session','auth');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','html','inflector','auth','language','date','my_date','my_custom','my_form','my_html','my_url');
+$autoload['helper'] = array('url','html','form','inflector','auth','language','date', 'array');
 
 
 /*
@@ -110,7 +110,7 @@ $autoload['language'] = array('admin');
 
 $autoload['model'] = array();
 
-
+putenv("NLS_LANG=AMERICAN_AMERICA.TH8TISASCII");
 
 /* End of file autoload.php */
 /* Location: ./system/application/config/autoload.php */

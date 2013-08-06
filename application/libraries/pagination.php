@@ -14,11 +14,12 @@ Author URI: http://www.mis-algoritmos.com
 		var $target = ""; 
 		var $page = 1;
 		var $adjacents = 2;
-		var $showCounter = false;
+		var $showCounter = true;
 		var $className = "pagination";
 		var $parameterName = "page";
 		var $urlF = false;//urlFriendly
-
+		
+		var $record_cound = 0;
 		/*Buttons next and previous*/
 		var $nextT = "Next";
 		var $nextI = "&#187;"; //&#9658;
@@ -38,7 +39,7 @@ Author URI: http://www.mis-algoritmos.com
 		function target($value){$this->target = $value;}
 		
 		#Current page
-		function currentPage($value){$this->page = ($value) ? (int) $value : 1 ;}
+		function currentPage($value){$this->page = ($value) ? (int) $value : 1 ;}				
 		
 		#How many adjacent pages should be shown on each side of the current page?
 		function adjacents($value){$this->adjacents = (int) $value;}
@@ -132,6 +133,15 @@ Author URI: http://www.mis-algoritmos.com
 					We're actually saving the code to a variable in case we want to draw it more than once.
 				*/
 				
+				
+				if($this->showCounter)
+				{
+					$this->pagination .= "<div class=\"pagination_data\">
+					มีทั้งหมด  ".@number_format($this->total_pages)." รายการ   / ".@number_format($lastpage)." หน้า </div>
+					";
+				}
+				
+				
 				if($lastpage > 1){
 						if($this->page){
 								//anterior button
@@ -190,11 +200,17 @@ Author URI: http://www.mis-algoritmos.com
 							}
 						if($this->page){
 								//siguiente button
+								
+								//$curr_page = $this->page < $counter-1 ? $this->page : $counter-1;
 								if ($this->page < $counter - 1)
-										$this->pagination .= "<a href=\"".$this->get_pagenum_link($next)."\" class=\"next\">$n</a>";
-									else
-										$this->pagination .= "<span class=\"disabled\">$n</span>";
-									if($this->showCounter)$this->pagination .= "<div class=\"pagination_data\">($this->total_pages Pages)</div>";
+								{
+									$this->pagination .= "<a href=\"".$this->get_pagenum_link($next)."\" class=\"next\">$n</a>";
+								}
+								else
+								{
+									$this->pagination .= "<span class=\"disabled\">$n</span>";									
+								}
+								
 							}
 					}
 

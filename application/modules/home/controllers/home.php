@@ -1,42 +1,40 @@
 <?php
-class home extends Front_Controller
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('seminar_data_model','seminar_data');//ส่วนของก
-        $this->load->model('seminar_regist_model','seminar_regist');//ส่วนของก
-    }
-
-    function index()
-    {
-        //$data['seminar'] = $this->seminar_data->get(FALSE,TRUE);
-		$data['seminar'] = $this->seminar_data->get("SELECT seminar_data.id,seminar_data.title,seminar_end_date,seminar_start_date,COUNT(seminar_id) as cnt
-FROM seminar_data left JOIN seminar_regist
-on seminar_data.id = seminar_regist.seminar_id
-GROUP BY id");
-       	$data['pagination'] = $this->seminar_data->pagination();		
-        $this->template->build('index',$data);
-    }
-	
-
-function form($sem_id,$id=false)
-{
-	  	$data['seminar'] = $this->seminar_data->get_row($sem_id);
-		if($id>0)$data['resgist'] = $this->seminar_regist->get_row($id);
-       // $data['pagination'] = $this->seminar_data->pagination();		
-        $this->template->build('form_one',$data);
-}
-	
-	function save(){
-	
-			$this->seminar_regist->save($_POST);//////
-		redirect('home/index')	;/////
-		
-		
+Class Home extends  Public_Controller{
+	function __construct(){
+		parent::__construct();
 	}
-	function checkName(){
-		$id=$this->seminar_regist->get("select * from seminar_regist where first_name ='".$_GET['first_name']."'");
-		echo ($id)? "false":"true";
+	
+	public function index()
+	{
+		if(is_login()){		
+			redirect('front');
+		}
+		else{
+			$this->load->view('login_page');	
+		}
+	}
+	public function login()
+	{
+			//$data['message']="Please Login with Admin Member";
+			redirect('front');
+	}
+	public function signin()
+	{
+		$status = login($_POST['username'],$_POST['password']);
+		if($status==1)
+		{
+			save_log(98,'Log in','Log In To System');
+			redirect('front');
+		}
+		else
+		{
+			redirect('home');
+		}
+	}
+	public function signout(){
+		save_log(99,'Log Out','Log Out To System');
+		logout();
+		
+		redirect('home');
 	}
 }

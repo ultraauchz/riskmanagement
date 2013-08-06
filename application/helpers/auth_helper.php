@@ -3,9 +3,8 @@
 function login($username,$password)
 {
 	$CI =& get_instance();
-	//$CI->db->debug=TRUE;
-	$sql = "select * from users where  email = ? and password = ? ";
-	$id = $CI->db->GetOne($sql,array($username,$password));	
+	$sql = "select * from users where username = ? and password = ? ";
+	$id = $CI->db->GetOne($sql,array($username,md5($password)));	
 	if($id)
 	{
 		$CI->session->set_userdata('id',$id);
@@ -24,6 +23,12 @@ function login($username,$password)
 function is_login($usertype = FALSE)
 {
 	$CI =& get_instance();
+	if($usertype)
+	{		
+		$sql = 'select id from users where id = ? and user_type = ?';
+		$id = $CI->db->GetOne($sql,array($CI->session->userdata('id'),$CI->db->getone('select id from user_types where id = ?',$usertype)));
+	}
+	else
 	{
 		$sql = 'select id from users where id = ?';
 		$id = $CI->db->GetOne($sql,$CI->session->userdata('id'));
@@ -126,13 +131,12 @@ function is_regist_login()
 	return ($id) ? true : false;
 }
 
-function login_regist_data($field)
+function login_regist_data($field,$user_id=FALSE)
 {
 	$CI =& get_instance();
-	//$CI->db->debug=TRUE;
-		$sql = 'select '.$field.' from regist_person  where regist_person.id = ?';
-	
-	$result = $CI->db->GetOne($sql,$CI->session->userdata('id'));
+	$user_id = $user_id==FALSE ? $CI->session->userdata('id') : $user_id;
+	$sql = 'select '.$field.' from regist_person  where regist_person.id = ?';	
+	$result = $CI->db->GetOne($sql,$user_id);
 	//dbConvert($result);
 	return $result;
 }

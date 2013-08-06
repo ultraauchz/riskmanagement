@@ -386,6 +386,10 @@ class Spreadsheet_Excel_Reader
             if($this->_ole->error == 1) {
             // bad file
                 die('The filename ' . $sFileName . ' is not readable');
+            }else if($this->_ole->error==2){
+            	   die('The filename ' . $sFileName . ' is file_get_contents');
+            }else if($this->_ole->error==3){
+            	   die('The filename ' . $sFileName .' is IDENTIFIER_OLE');
             }
             // check other error codes here (eg bad fileformat, etc...)
         }
@@ -479,7 +483,7 @@ class Spreadsheet_Excel_Reader
                                                 $spos += 4;
                                                 $limitpos = $spos + $conlength;
                                                 }
-												echo $this->data[$spos];
+												$this->data[$spos];
                                                 $numChars = ord($this->data[$spos]) | (ord($this->data[$spos+1]) << 8);
                                                 //echo "i = $i pos = $pos numChars = $numChars ";
                                                 $spos += 2;

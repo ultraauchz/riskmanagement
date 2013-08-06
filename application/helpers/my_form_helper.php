@@ -12,7 +12,7 @@
  * @return	string
  */
 
-	function form_dropdown($name = '', $options = array(), $selected = array(), $extra = '',$default_text = FALSE,$default_value=0)
+	function form_dropdown($name = '', $options = array(), $selected = array(), $extra = '',$default_text = FALSE,$default_value="")
 	{
 		if ( ! is_array($selected))
 		{
@@ -35,7 +35,7 @@
 
 		$form = '<select name="'.$name.'"'.$extra.$multiple.">\n";
 		
-		$form .= ($default_text) ? '<option value="'.$default_value.'">'.$default_text.'</option>\n' : '';
+		$form .= $default_text!=FALSE ? '<option value="'.$default_value.'">'.$default_text.'</option>\n' : '';
 
 		foreach ($options as $key => $val)
 		{
@@ -121,17 +121,4 @@ if ( ! function_exists('form_checkbox'))
 	}
 
 }
-			
-function form_pagelist($select,$control_name="page")
-{
-	$CI =& get_instance();
-	$result = $CI->db->getarray("SELECT * FROM page_tbl ORDER BY name ");	
-	$list = '<select name="'.$control_name.'">';
-	foreach($result as $item):
-		$selected = $select == $item['name']?  'selected="selected"' : "";
-		$list .= '<option value="'.$item['name'].'" '.$selected.'>'.$item['name'].'</option>';
-	endforeach;
-	$list .= '</select>';
-	return $list;
-}			
 ?>

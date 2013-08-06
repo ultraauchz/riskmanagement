@@ -7,7 +7,7 @@ class Admin_Controller extends Controller
 		parent::__construct();	
 		
 		// check login
-		//if(!is_login()) redirect('users/admin/users/index');
+		//if(!is_login()) redirect('user/login');
 		
 		/*if(is_login()==FALSE){
 			redirect('user');
@@ -28,16 +28,16 @@ class Admin_Controller extends Controller
 		///if(login_data('dpc_id')!=1) redirect('user/profile');
 		
 		// set theme
-		$this->template->set_theme('admin');
+		$this->template->set_theme('bo');
 		
 		// set layout
 		$this->template->set_layout('layout');
 		
-		// set title		
-		$this->template->title('Seminar register system');
+		// set title
+		$this->template->title('ระบบบงานริหารราชการ กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์');
 		
 		// Set js
-		//$this->template->append_metadata(js_notify());
+		$this->template->append_metadata(js_notify());
 		
 	}
 	

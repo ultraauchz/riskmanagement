@@ -16,9 +16,14 @@ if(!function_exists('set_notify'))
 
 if(!function_exists('get_one'))
 {
-	function get_one($field,$table,$id='id',$value)
+	function get_one($field,$table,$id='id',$value = null)
 	{
 		$CI =& get_instance();
+		if(empty($value))
+		{
+			$value = $id;
+			$id = 'id';
+		}
 		$result = $CI->db->getone('select '.$field.' from '.$table.' where '.$id.' = ?',$value);
 		dbConvert($result);
 		return $result;
@@ -32,8 +37,8 @@ if(!function_exists('notify'))
 		$CI =& get_instance();
 		if($CI->session->flashdata('notify'))
 		{
-			$js = '<link rel="stylesheet" href="js/jquery.notifyBar.css" type="text/css" media="screen" />';
-		    $js .= '<script type="text/javascript" src="js/jquery.notifyBar.js"></script>';
+			$js = '<link rel="stylesheet" href="media/js/notifyBar/jquery.notifyBar.css" type="text/css" media="screen" />';
+		    $js .= '<script type="text/javascript" src="media/js/notifyBar/jquery.notifyBar.js"></script>';
 		    $js .= '<script type="text/javascript">
 		    				$(function () {
 						  		$.notifyBar({
@@ -120,7 +125,6 @@ function cycle($key,$odd = 'odd',$even = '')
 function get_option($value,$text,$table,$where = FALSE)
 {
 	$CI =& get_instance();
-	//$CI->db->debug=TRUE;
 	$where = ($where) ? 'where '.$where : '';
 	$result = $CI->db->GetAssoc('select '.$value.','.$text.' from '.$table.' '.$where);
 	array_walk($result,'dbConvert');
@@ -253,7 +257,6 @@ if (!function_exists('json_encode'))
 
 function dbConvert(&$value,$key = null,$output='UTF-8')
 {
-		/*
 	$encode = array('UTF-8'=>'TIS-620','TIS-620'=>'UTF-8');
 	if(is_array($value))
 	{
@@ -263,7 +266,7 @@ function dbConvert(&$value,$key = null,$output='UTF-8')
 	else
 	{
 		$value = iconv($encode[$output],$output,$value);
-	}*/
+	}
 }
 
 function fix_file(&$files)
@@ -282,5 +285,39 @@ function fix_file(&$files)
         }
     }
 }
- 
-?>
+
+function get_menu_info($menu_id,$field){
+	$CI=& get_instance();
+	$val = $CI->db->getrow("SELECT ".$field." FROM MENUS WHERE ID=".$menu_id);
+	$val = iconv('tis-620','utf-8',$val['TITLE']);
+	return $val;
+}
+
+function logs($action, $menu_id = null, $id = null)
+{
+    if(is_login())
+    {
+        $action = iconv('utf-8', 'tis-620', $action);
+        if(empty($menu_id))
+        {
+            $menu_title = null;
+        }
+        else 
+        {
+            $menu_title = get_instance()->db->getone('select title from menus where id = '.$menu_id);
+        }
+
+        $id = empty($id) ? null : ' ID:'.$id;
+        
+        $data = array('USER_ID' => login_data('id'), 'ACTION' => $action.$menu_title.$id, 'CREATED' => date('Y-m-d H:i:s'), 'IP' => get_instance()->input->ip_address());
+        get_instance()->db->autoexecute('logs', $data, 'INSERT');
+    }
+}
+
+if(!function_exists('nformat'))
+{
+    function nformat($number)
+    {
+        return empty($number) ? 0 : number_format($number);
+    }
+}
