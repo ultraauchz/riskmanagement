@@ -5,6 +5,12 @@ Class front extends  Public_Controller{
 	}
 	
 	function index(){
-		$this->template->build('index');
+		if(is_login()){
+			$this->template->build('index');			
+		}
+		else{
+			redirect('home');
+		}
 	}
+		
 }
