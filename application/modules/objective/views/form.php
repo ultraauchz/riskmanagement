@@ -14,10 +14,6 @@ $(function(){
 		title: 
 		{ 
 			required: true
-		},
-		divisionid: 
-		{ 
-			required: true
 		}
 	},
 	messages:
@@ -25,10 +21,6 @@ $(function(){
 		title:
 		{
 			required: " กรุณากรอกชื่อภาควิชา"
-		},
-		divisionid: 
-		{ 
-			required: " กรุณาเลือกกลุ่มวิชา"
 		}
 	}
 	});
@@ -41,7 +33,7 @@ $(function(){
 		<tr>
 			<td width="150px"><strong>กลุ่มวิชา</strong></td>
 			<td>
-            	<?=form_dropdown('divisionid',get_option('id','title','division'),@$rs['divisionid'],'style="width:350px"','--เลือกกลุ่มวิชา--');?><span class="status">*</span>
+            	<?=form_dropdown('divisionid',get_option('id','title','division'),@$rs['divisionid'],'','--เลือกกลุ่มวิชา--');?><span class="status">*</span>
             &nbsp;</td>
 		</tr>
 		<tr>
@@ -54,7 +46,7 @@ $(function(){
 		<tr>
 			<td width="150px"><strong>ชื่อภาควิชา (อังกฤษ)</strong></td>
 			<td>
-            	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" style="width:500px" />
+            	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" style="width:500px" /> <span class="status">*</span>
             &nbsp;</td>
 		</tr>		        
 	</table>
