@@ -4,7 +4,7 @@
 	<base href="<?php echo base_url(); ?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>ระบบบริหารความเสี่ยง คณะสาธารณะสุขศาสตร์ มหาวิทยาลัยมหิดล</title>
-	<?php include "themes/ppt/_css.php";?>
+	<?php include "themes/front/_css.php";?>
 </head>
 <body>
 	<style type="text/css">
@@ -41,7 +41,7 @@
         <h2 class="form-signin-heading">กรุณาเข้าสู่ระบบ</h2>
         <input type="text" class="input-block-level" placeholder="Username" name="username">
         <input type="password" class="input-block-level" placeholder="Password" name="password">
-        <button class="btn btn-large btn-danger" type="submit">เข้าสู่ระบบ</button>
+        <button class="btn btn-large btn-primary" type="submit">เข้าสู่ระบบ</button>
       </form>
 </div> <!-- /container -->
 </body>
