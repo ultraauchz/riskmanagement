@@ -219,25 +219,16 @@ class MY_Model extends Model{
 				}
 				else
 				{
-						if($this->table=='abstract' || $this->table=='tmp_abstract'){
-						$item = str_replace("'","&#39;", $item);
-						$item = str_replace('"',"&#34;", $item);
-						}
+						
 						$value .=  $comma.'\''.$item.'\'';						
 						//$value .=  $comma.'\''.str_replace("'","&#39;", $item).'\'';												
 				}
 			
 				$comma = ',';
 			}
-			if($this->table=='regist_person'){
-				if($_POST['email']!=''){
-					$sql = 'INSERT INTO '.$this->table.'('.$this->primary_key.','.$column.') VALUES ("",'.$value.')';
-					$this->db->Execute($sql);
-				}
-			}else{
+			
 				$sql = 'INSERT INTO '.$this->table.'('.$this->primary_key.','.$column.') VALUES ("",'.$value.')';
 				$this->db->Execute($sql);
-			}
 		}
 		else
 		{
@@ -251,10 +242,7 @@ class MY_Model extends Model{
 				}
 				else
 				{	
-					if($this->table=='abstract'){
-					$item = str_replace("'","&#39;", $item);
-					$item = str_replace('"',"&#34;", $item);										
-					}
+					
 					$column .= $comma.''.$key.' = \''.$item.'\'';
 					//$column .= $comma.''.$key.' = \''.str_replace("'","&#39;", $item).'\'';
 					
