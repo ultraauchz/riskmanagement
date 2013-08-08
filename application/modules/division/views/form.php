@@ -38,13 +38,13 @@ $(function(){
 			<td width="150px"><strong>ชื่อกลุ่มวิชา</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
-            	<input type="text" name="title" value="<?=@$rs['title'];?>" size="60" /> <span class="status">*</span>
+            	<input type="text" name="title" value="<?=@$rs['title'];?>" style="width:350px" /> <span class="status">*</span>
             &nbsp;</td>
 		</tr>		
 		<tr>
 			<td width="150px"><strong>English Name</strong></td>
 			<td>
-            	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" size="60" /> <span class="status">*</span>
+            	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" style="width:350px" /> <span class="status">*</span>
             &nbsp;</td>
 		</tr>		        
 	</table>
