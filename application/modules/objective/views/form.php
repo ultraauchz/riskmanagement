@@ -14,13 +14,21 @@ $(function(){
 		title: 
 		{ 
 			required: true
+		},
+		objective_type: 
+		{ 
+			required: true
 		}
 	},
 	messages:
 	{
 		title:
 		{
-			required: " กรุณากรอกชื่อภาควิชา"
+			required: " กรุณากรอกชื่อวัตถุประสงค์"
+		},
+		objective_type:
+		{
+			required: " กรุณาเลือกประเภทวัตถุประสงค์"
 		}
 	}
 	});
@@ -33,7 +41,7 @@ $(function(){
 		<tr>
 			<td width="150px"><strong>ประเภทวัตถุประสงค์</strong></td>
 			<td>
-            	<?=form_dropdown('objective_type',get_option('id','title','objective_type'),@$objective_type,'','กรุณาเลือกประเภทวัตถุประสงค์');?><span class="status">*</span>
+            	<?=form_dropdown('objective_type',get_option('id','title','objective_type'),@$rs['objective_type'],'style="width:450px;"','กรุณาเลือกประเภทวัตถุประสงค์');?><span class="status">*</span>
             &nbsp;</td>
 		</tr>
 		<tr>

@@ -9,6 +9,7 @@ class objective extends Public_Controller
 		$this->load->model('objective_type_model','objective_type');
 	}
 	public $menu_id = 51;
+
 	public function index()
 	{
 		$menu_id=$this->menu_id;
@@ -18,6 +19,10 @@ class objective extends Public_Controller
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = "";
 			$data['objective_type']=@$_GET['objective_type'];
+			if($data['objective_type'] != '')
+			{
+			 $condition = "objective_type =".$data['objective_type'];
+			}
 			$data['result'] = $this->objective->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->objective->pagination();					
 			$this->template->build('index',$data);
@@ -36,9 +41,12 @@ class objective extends Public_Controller
 		$data['id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');			
-			$data['rs'] = @$this->objective->get_row($id);								
+			$data['rs'] = @$this->objective->get_row($id);
+			if(@$_GET['objective_type'])
+			{
+				$data['rs']['objective_type']= @$_GET['objective_type'];
+			}				
 			$this->template->build('form',$data);
-			
 			if($id>0){
 			$action='View';
 			$description = $action.' '.$menu_name.' : '.$data['rs']['title'];		
@@ -65,12 +73,14 @@ class objective extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
 			save_log($menu_id,$action,$description);
 		}
+		$objective_type = $_POST['objective_type'];
 		$id = $this->objective->save($_POST);		
 		set_notify('objective', lang('save_data_complete'));
-		redirect('objective');
+		redirect("objective/?objective_type=$objective_type");
 	} 
 	function delete($id=FALSE){
 		$menu_id=$this->menu_id;
+		$objective_type = $_GET['objective_type'];
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('objective');		
 		$section = $this->objective->get_row($id);
@@ -78,7 +88,7 @@ class objective extends Public_Controller
 		$description = $action.' '.$menu_name.' : '.$section['title'];		
 		save_log($menu_id,$action,$description);
 		$this->objective->delete($id);
-		redirect('section');
+		redirect("objective/?objective_type=$objective_type");
 	}
 }
 ?>
