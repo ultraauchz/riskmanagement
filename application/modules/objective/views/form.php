@@ -14,13 +14,21 @@ $(function(){
 		title: 
 		{ 
 			required: true
+		},
+		objective_type: 
+		{ 
+			required: true
 		}
 	},
 	messages:
 	{
 		title:
 		{
-			required: " กรุณากรอกชื่อภาควิชา"
+			required: " กรุณากรอกชื่อวัตถุประสงค์"
+		},
+		objective_type:
+		{
+			required: " กรุณาเลือกประเภทวัตถุประสงค์"
 		}
 	}
 	});
