@@ -15,7 +15,7 @@
 		<?php 
 		  $rowStyle = '';
 		  $page = (isset($_GET['page']))? $_GET['page']:1;
-		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 10)+1:1;
+		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
 		  foreach($result as $row):
 		?>  
 		<tr>

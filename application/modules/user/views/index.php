@@ -8,7 +8,7 @@
 
 	<table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
-			<th></th>
+			<th>ลำดับ</th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Admin Group</th>
@@ -18,7 +18,7 @@
 		<?php 
 		  $rowStyle = '';
 		  $page = (isset($_GET['page']))? $_GET['page']:1;
-		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 10)+1:1;
+		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
 		  foreach($result as $row):
 		?>  
 		<tr <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?> >
