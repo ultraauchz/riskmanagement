@@ -18,10 +18,10 @@ img { border:0;}
 input[type=text]:hover, textarea:hover { background:#F0F0F0;}
 input[type=text]:focus, textarea:focus { background:#F9F9F9; border: solid 1px #373737;}*/
 
-#bgheader { background:url(../images/bg_header.jpg) repeat-x;}
-/*#header { background:url(../images/header.jpg) no-repeat; width:1000px; height:115px;}*/
-#header { width:1000px; height:115px; padding-top:20px; padding-left:50px;}
-#login { position:absolute; top:5px; left:135px; color:#666}
+#bgheader { background:#FFFFFF;}
+#header { background:url(../images/header.jpg) no-repeat; width:1000px; height:140px;}*/
+/*#header { width:1000px; height:115px; padding-top:20px; padding-left:50px;}*/
+#login {text-align:right;}
 #menu { background:#636; width:100%; padding:2px 0;}
 #search { padding:10px 10px 0 10px; border:1px dotted #ccc; margin:10px 0; background:url(../images/bg_search.gif) repeat-x #ffefdd;}
 #search img { margin-right:5px;}
