@@ -84,7 +84,7 @@ $(function(){
 		<tr>
 			<td><strong>ภาควิชา</strong></td>
 			<td>
-				<? echo form_dropdown('sectionid',get_option('id','title','tbsection'),@$rs['sectionid'],'','-- เลือกภาควิชา --');?>
+				<? echo form_dropdown('sectionid',get_option('id','title','section'),@$rs['sectionid'],'','-- เลือกภาควิชา --');?>
 			</td>
 		</tr>		
 		<tr>
