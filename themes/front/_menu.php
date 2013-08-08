@@ -3,7 +3,8 @@
 <? 
 $admin_system = $this->db->getarray("SELECT * FROM admin_menu where pid = 0 ORDER BY order_no ");	
 foreach($admin_system as $system):
-	echo '<li><a href="@">'.$system['title']."</a>";
+	$url = $system['url']!='' ? $system['url'] : '#';
+	echo '<li><a href="'.$url.'">'.$system['title']."</a>";
 	$admin_menu = $this->db->getarray("SELECT * FROM admin_menu WHERE pid=".$system['id']." order by order_no ");
 	if(count($admin_menu) >0)echo '<ul>';
 	foreach($admin_menu as $item):	

@@ -70,7 +70,27 @@ $admin_system = $this->admin_menu->where('pid=0')->order_by('order_no','asc')->g
 foreach($admin_system as $sitem): 
 ?>		
 		<tr>
-			<th colspan="2"><?=$sitem['title'];?></th>
+			<th><?=$sitem['title'];?></th>
+			<td>
+				<? if($sitem['attr']!=''): 
+				$permission = @$this->db->getrow("SELECT * FROM usertype_detail where menu_id=".$sitem['id']." AND usertype_id=".$rs['id']);
+				?>		
+		    	<? if ((strpos($sitem['attr'],'view'))!==FALSE){ ?>
+		    	<input type="checkbox" name="canview<?=$sitem['id'];?>" id="canview" class="checkbox canview" value="on" <? if(@$permission['canview']=='on')echo "checked";?> />View
+		    	<? } ?>
+		    	<? if ((strpos($sitem['attr'],'add'))!==FALSE){ ?>
+		    	<input type="checkbox" name="canadd<?=$sitem['id'];?>" id="canadd" class="checkbox canadd" value="on" <? if(@$permission['canadd']=='on')echo "checked";?>/> Add
+		    	<? } ?>
+		    	<? if ((strpos($sitem['attr'],'edit'))!==FALSE){ ?>
+				<input type="checkbox" name="canedit<?=$sitem['id'];?>" id="canedit" class="checkbox canedit" value="on" <? if(@$permission['canedit']=='on')echo "checked";?>/>Edit
+				<? } ?>
+		    	<? if ((strpos($sitem['attr'],'delete'))!==FALSE){ ?>
+		  		<input type="checkbox" name="candelete<?=$sitem['id'];?>" id="candelete" class="checkbox candelete" value="on" <? if(@$permission['candelete']=='on')echo "checked";?>/>Delete
+		  		<? } ?>    	
+		    	&nbsp;<span id="spCheckAllRow"  style="cursor:pointer;"><font color="green">[Checked]</font></span> 
+		    	<span id="spUnCheckAllRow" style="cursor:pointer"><font color="red">[UnChecked]</font>&nbsp;All</span>
+		    	<? endif;?>
+		    </td>
 		</tr>
 		<? 
 		$admin_menu = $this->admin_menu->where('pid='.$sitem['id'])->order_by('order_no','asc')->get();
