@@ -16,5 +16,14 @@ class risk_est extends Public_Controller
 		$data['urlpage'] = 'risk_est';
 		$this->template->build('index',$data);
 	}
+	
+	public function form()
+	{
+		$menu_id = $this->menu_id;
+		$data='';		
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$this->template->build('form',$data);
+	}
 }
 ?>	

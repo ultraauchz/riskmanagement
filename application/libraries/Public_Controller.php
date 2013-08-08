@@ -7,7 +7,6 @@ class Public_Controller extends Controller
 		
 		// check login
 		//if(!is_login()) redirect('user/inc_index');
-		
 		// set theme
 		$this->template->set_theme('front');
 		

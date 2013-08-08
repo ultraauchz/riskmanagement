@@ -1,3 +1,4 @@
+<h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง</h3>
 <form enctype="multipart/form-data" method="get">
 <div id="search">
   <div id="searchBox">
@@ -19,6 +20,7 @@
 		<th >วัตถุประสงค์</th>
 		<th >ภารกิจ</th>
 		<th >กระบวนงาน</th>
+		<th>หน่วยงาน</th>
 		<th ></th>
 	</tr>	
 	<tr>
@@ -31,6 +33,7 @@
 		</td>
 		<td>ด้านการศึกษา</td>
 		<td></td>
+		<td><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: \r\n ภาควิชา :::  "></td>
 		<td>
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
@@ -38,11 +41,12 @@
 		  	<? if(permission($menu_id, 'candelete')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/delete/<?php echo @$row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
 		  	<? } ?> 
-		  </td>
+		</td>		
 	</tr>
 	<tr>
 		<td></td>
 		<td>2556</td>
+		<td></td>
 		<td></td>
 		<td></td>
 		<td></td>
