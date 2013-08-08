@@ -6,6 +6,7 @@ class objective extends Public_Controller
 		parent::__construct();
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('objective_model','objective');
+		$this->load->model('objective_type_model','objective_type');
 	}
 	public $menu_id = 51;
 	public function index()
@@ -16,6 +17,7 @@ class objective extends Public_Controller
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = "";
+			$data['objective_type']=@$_GET['objective_type'];
 			$data['result'] = $this->objective->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->objective->pagination();					
 			$this->template->build('index',$data);

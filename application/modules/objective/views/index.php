@@ -1,4 +1,22 @@
+<script>
+	$(document).ready(function(){
+		$("select[name=objective_type]").change(function(){
+			window.location='objective/?objective_type='+this.value;
+		})
+	})
+</script>
 <h3>ข้อมูลพื้นฐาน > จัดการข้อมูลวัตถุประสงค์</h3>
+<div class="form-search">
+	<table class="search">
+		<tr>
+			<th>เลือกประเภทวัตถุประสงค์</th>
+			<td>
+				<?=form_dropdown('objective_type',get_option('id','title','objective_type'),@$objective_type,'style="width:450px;"','กรุณาเลือกประเภทวัตถุประสงค์');?>
+			</td>
+		</tr>
+	</table>
+</div>
+<? if($objective_type){ ?>
 <div id="btnBox">
 <? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form">เพิ่มรายการ</a></div><? } ?>
 </div>   
@@ -10,7 +28,7 @@
 		<tr class="head">
 					<th>ลำดับ</th>
 					<th>ชื่อวัตถุประสงค์</th>
-					<th>ประเภท</th>                  
+					<th>ประเภทวัตถุประสงค์</th>                  
 					<th>จัดการข้อมูล</th>
 		</tr>
 		<?php 
@@ -22,7 +40,6 @@
 		<tr>
 		  <td><?=$i;?></td>
 		  <td align="left" ><?=$row['title'];?></td>	  
-		  <td align="left" ><?=$row['title_en'];?></td>	
 		  <td align="left" ><?=$row['objective_type'];?></td>		  
 		  <td>
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
@@ -39,3 +56,4 @@
 		  		endforeach; 
 ?>		
 	</table>
+<? } ?>
