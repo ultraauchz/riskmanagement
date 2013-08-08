@@ -18,7 +18,7 @@
 </div>
 <? if($objective_type){ ?>
 <div id="btnBox">
-<? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form">เพิ่มรายการ</a></div><? } ?>
+<? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form/?objective_type=<?=$objective_type;?>">เพิ่มรายการ</a></div><? } ?>
 </div>   
 <div id="paging" class="pagination">
 <?php echo $pagination;?>
@@ -38,15 +38,15 @@
 		  foreach($result as $row):
 		?>  
 		<tr>
-		  <td><?=$i;?></td>
-		  <td align="left" ><?=$row['title'];?></td>	  
-		  <td align="left" ><?=$row['objective_type'];?></td>		  
-		  <td>
+		  <td width="5%"><?=$i;?></td>
+		  <td align="left" width="30%" ><?=$row['title'];?></td>	  
+		  <td align="left" ><?=$row['objective_type_title'];?></td>		  
+		  <td width="15%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
 		  	<? } ?>
 		  	<? if(permission($menu_id, 'candelete')!=''){ ?>
-		  	<a href="<?=$urlpage;?>/delete/<?php echo $row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
+		  	<a href="<?=$urlpage;?>/delete/<?php echo $row['id']?>?objective_type=<?=$objective_type;?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
 		  	<? } ?> 
 		  </td>
 		  </tr>
