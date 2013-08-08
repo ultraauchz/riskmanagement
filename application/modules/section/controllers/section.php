@@ -16,11 +16,21 @@ class section extends Public_Controller
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = "";
+			if(@$_GET['division_id'] !='' && @$_GET['section_id'] != '')
+			{
+				$condition = "section.divisionid ='".$_GET['division_id']."' AND section.id ='".$_GET['section_id']."' ";
+			}
+			else if(@$_GET['division_id'] !='')
+			{
+				$condition = "section.divisionid ='".$_GET['division_id']."' ";
+			}else if(@$_GET['section_id'] !=''){
+				$condition = "section.id ='".$_GET['section_id']."' ";
+			}
+				
 			$data['result'] = $this->section->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->section->pagination();					
 			$this->template->build('index',$data);
-		}
-		else{
+		}else{
 			
 			redirect('front');	
 		}

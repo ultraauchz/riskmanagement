@@ -1,4 +1,14 @@
 <h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา</h3>
+<form enctype="multipart/form-data" method="get" action="">
+<div id="search">
+  <div id="searchBox">
+  <h4>ค้นหา</h4>
+  <?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
+  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>    
+  <input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
+  </div>
+</div>
+</form>
 <div id="btnBox">
 <? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form">เพิ่มรายการ</a></div><? } ?>
 </div>   
@@ -17,7 +27,7 @@
 		<?php 
 		  $rowStyle = '';
 		  $page = (isset($_GET['page']))? $_GET['page']:1;
-		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 10)+1:1;
+		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
 		  foreach($result as $row):
 		?>  
 		<tr>
