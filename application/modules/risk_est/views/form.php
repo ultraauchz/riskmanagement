@@ -41,7 +41,7 @@
   </tr>
 	<tr>
 	  <th width="400px">ทบทวนเหตุการณ์ความเสี่ยง</th>
-	  <td><textarea name="textarea" class=""></textarea></td>
+	  <td><textarea name="textarea" class="" rows="4" style="width:700px"></textarea></td>
   </tr>
 </table>
 <fieldset>
@@ -50,25 +50,25 @@
     	<tr>
         	<th width="400px">ความเสี่ยงด้านยุทธศาสตร์</th>
             <td>
-            	<textarea class=""></textarea>
+            	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>
     	<tr>
         	<th width="400px">ความเสี่ยงด้านการเงิน</th>
             <td>
-               	<textarea class=""></textarea>
+               	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>
             	<tr>
         	<th width="400px">ความเสี่ยงด้านดำเนินงาน</th>
             <td>
-               	<textarea class=""></textarea>
+               	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>
             	<tr>
         	<th width="400px">ความเสี่ยงด้านกฎระเบียบหรือกฎหมายที่เกี่ยวข้อง</th>
             <td>
-               	<textarea class=""></textarea>
+               	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>        
     </table>
@@ -79,13 +79,13 @@
 <tr>
         	<th width="400px">ปัจจัยภายใน</th>
             <td>
-            	<textarea class=""></textarea>
+            	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>
     	<tr>
         	<th width="400px">ปัจจัยภายนอก</th>
             <td>
-               	<textarea class=""></textarea>
+               	<textarea name="" class="" rows="4" style="width:700px"></textarea>
             </td>
         </tr>        
     </table>
@@ -93,19 +93,19 @@
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
     <th width="400px">ตัวชี้วัดความเสี่ยง</th>
-    <td><input name="textarea3" type="text" class="" value="" /></td>
+    <td><input name="" type="text" class="" value="" /></td>
   </tr>
   <tr>
     <th width="400px">ทบทวนเหตุการณ์ความเสี่ยง</th>
-    <td><textarea name="textarea3" class=""></textarea></td>
+    <td><textarea name="" class="" rows="4" style="width:700px"></textarea></td>
   </tr>
   <tr>
     <th width="400px">การควบคุมที่มีอยู่</th>
-    <td><input name="textarea3" type="text" class="" value="" /></td>
+    <td><input name="" type="text" class="" value="" /></td>
   </tr>
   <tr>
     <th width="400px">การประเมินการควบคุมที่มีอยู่</th>
-    <td><textarea name="textarea3" class=""></textarea></td>
+    <td><textarea name="" class="" rows="4" style="width:700px"></textarea></td>
   </tr>
 </table>
 <fieldset>
@@ -134,7 +134,7 @@
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
     <th width="400px">แนวทางการจัดการ</th>
-    <td><textarea name="" class=""></textarea></td>
+    <td><textarea name="" class="" rows="4" style="width:700px"></textarea></td>
   </tr>
   <tr>
     <th width="400px">ผู้รับผิดชอบ</th>
