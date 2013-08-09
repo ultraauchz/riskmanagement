@@ -13,6 +13,9 @@
 <div id="btnBox">
 <a href="risk_est/form" class="btn btn-primary">เพิ่มรายการ</a>
 </div>
+<div id="paging" class="pagination">
+<?php echo $pagination;?>
+</div>
 <table class="table table-form table-bordered table-striped table-horizontal">
 	<tr>
 		<th >เหตุการณ์ความเสี่ยง</th>
@@ -22,7 +25,12 @@
 		<th >กระบวนงาน</th>
 		<th>หน่วยงาน</th>
 		<th ></th>
-	</tr>	
+	</tr>
+	<?php 
+		  $rowStyle = '';
+		  $page = (isset($_GET['page']))? $_GET['page']:1;
+		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
+	?>  	
 	<tr>
 		<td>
 			ขาดกระบวนการแลกเปลี่ยนเรียนรู้พันธกิจด้านการศึกษา เพื่อนำไปสู่การพัฒนากระบวนการพัฒนาหลักสูตร กระบวนการจัดการเรียนการสอน และการพัฒนาอาจารย์ นักศึกษา และบุคลากรทางการศึกษา
