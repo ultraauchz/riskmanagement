@@ -72,35 +72,35 @@ $(function(){
 <table class="table table-form table-bordered table-striped table-horizontal">	
 	<tr>
 		<th width="400px">ปีงบประมาณ</th>
-		<td><?=form_dropdown('year_data',get_year_option(),@$_rs['year_data'],'','--เลือกปี--');?></td>
+		<td><?=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','--เลือกปี--');?></td>
 	</tr>
 	<tr>
 		<th width="400px">กลุ่มวิชา</th>
-		<td><?=form_dropdown('divisionid',get_option('id','title','division order by title '),@$_rs['division'],'style="width:350px"','--เลือกกลุ่มวิชา--');?></td>
+		<td><?=form_dropdown('divisionid',get_option('id','title','division order by title '),@$rs['divisionid'],'style="width:350px"','--เลือกกลุ่มวิชา--');?></td>
 	</tr>
 	<tr>
 	  <th width="400px">ภาควิชา</th>
-	  <td><?=form_dropdown('sectionid',get_option('id','title','section order by title '),@$_rs['section'],'style="width:370px"','--เลือกภาควิชา--');?></td>
+	  <td><?=form_dropdown('sectionid',get_option('id','title','section order by title '),@$rs['sectionid'],'style="width:370px"','--เลือกภาควิชา--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</th>
-	  <td><?=form_dropdown('objectiveid_1',get_option('id','title','objective where objective_type = 1 order by title '),@$_rs['objective_id_1'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย--');?></td>
+	  <td><?=form_dropdown('objectiveid_1',get_option('id','title','objective where objective_type = 1 order by title '),@$rs['objectiveid_1'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน</th>
-	  <td><?=form_dropdown('objectiveid_2',get_option('id','title','objective where objective_type = 2 order by title '),@$_rs['objective_id_2'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน--');?></td>
+	  <td><?=form_dropdown('objectiveid_2',get_option('id','title','objective where objective_type = 2 order by title '),@$rs['objectiveid_2'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของงาน</th>
-	  <td><?=form_dropdown('objectiveid_3',get_option('id','title','objective where objective_type = 3 order by title '),@$_rs['objective_id_3'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน--');?></td>
+	  <td><?=form_dropdown('objectiveid_3',get_option('id','title','objective where objective_type = 3 order by title '),@$rs['objectiveid_3'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">ภารกิจ</th>
-	  <td><?=form_dropdown('missionid',get_option('id','title','mission order by title '),@$_rs['mission_id'],'style="width:390px"','--เลือกภารกิจ--');?></td>
+	  <td><?=form_dropdown('missionid',get_option('id','title','mission order by title '),@$rs['missionid'],'style="width:390px"','--เลือกภารกิจ--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">กระบวนงาน</th>
-	  <td><?=form_dropdown('processid',get_option('id','title','process order by title '),@$_rs['process_id'],'style="width:390px"','--เลือกกระบวนงาน--');?></td>
+	  <td><?=form_dropdown('processid',get_option('id','title','process order by title '),@$rs['processid'],'style="width:390px"','--เลือกกระบวนงาน--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">เหตุการณ์ความเสี่ยง</th>

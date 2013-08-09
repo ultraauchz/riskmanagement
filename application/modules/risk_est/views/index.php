@@ -18,31 +18,32 @@
 </div>
 <table class="table table-form table-bordered table-striped table-horizontal">
 	<tr>
+		<th >ลำดับ</th>
 		<th >เหตุการณ์ความเสี่ยง</th>
 		<th >ปีงบประมาณ</th>
 		<th >วัตถุประสงค์</th>
 		<th >ภารกิจ</th>
 		<th >กระบวนงาน</th>
 		<th>หน่วยงาน</th>
-		<th ></th>
+		<th >จัดการข้อมูล</th>
 	</tr>
 	<?php 
 		  $rowStyle = '';
 		  $page = (isset($_GET['page']))? $_GET['page']:1;
 		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
-	?>  	
+		  foreach($result as $row):
+		?>  	
 	<tr>
-		<td>
-			ขาดกระบวนการแลกเปลี่ยนเรียนรู้พันธกิจด้านการศึกษา เพื่อนำไปสู่การพัฒนากระบวนการพัฒนาหลักสูตร กระบวนการจัดการเรียนการสอน และการพัฒนาอาจารย์ นักศึกษา และบุคลากรทางการศึกษา
+		<td width="5%"><?=$i;?></td>
+		<td align="left" width="30%"><?=$row['event_risk'];?></td>
+		<td align="left" width="5%"><?=$row['year_data']?></td>
+		<td align="left" width="5%">
+			<img src="media/images/department_ico.png" title="วัตถุประสงค์ของส่วนงานตามแผนยุทธศาสตร์ ::: <?=$row['objective_title'];?>">
 		</td>
-		<td>2556</td>
-		<td>
-			<img src="media/images/department_ico.png" title="วัตถุประสงค์ของส่วนงานตามแผนยุทธศาสตร์ ::: เพื่อให้การดำเนินงานของคณะสาธารณสุขศาสตร์ เกิดประสิทธิภาพและมีความต่อเนื่อง">
-		</td>
-		<td>ด้านการศึกษา</td>
-		<td></td>
-		<td><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: \r\n ภาควิชา :::  "></td>
-		<td>
+		<td align="left" width="15%"><?=$row['mission_title']?></td>
+		<td align="left" width="15%"><?=$row['process_title']?></td>
+		<td align="left" width="5%"><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: <?=$row['division_title']?> ภาควิชา ::: <?=$row['section_title']?> "></td>
+		<td align="left" width="12%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
 		  	<? } ?>
@@ -51,13 +52,8 @@
 		  	<? } ?> 
 		</td>		
 	</tr>
-	<tr>
-		<td></td>
-		<td>2556</td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
+	<? 
+				$i++;
+		  		endforeach; 
+?>		
 </table>

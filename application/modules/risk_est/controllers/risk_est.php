@@ -41,7 +41,6 @@ class risk_est extends Public_Controller
 			
 			if($id>0){
 			$action='View';		
-			save_log($menu_id,$action,$description);
 			}
 		}
 		else{			
