@@ -5,15 +5,15 @@
 <table class="table table-form table-bordered table-striped table-horizontal">	
 	<tr>
 		<th width="400px">ปีงบประมาณ</th>
-		<td><?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?></td>
+		<td><?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?></td>
 	</tr>
 	<tr>
 		<th width="400px">กลุ่มวิชา</th>
-		<td><?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division'],'style="width:350px"','แสดงกลุ่มวิชาทั้งหมด');?></td>
+		<td><?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division'],'style="width:350px"','--เลือกกลุ่มวิชา--');?></td>
 	</tr>
 	<tr>
 	  <th width="400px">ภาควิชา</th>
-	  <td><?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?></td>
+	  <td><?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section'],'style="width:370px"','--เลือกภาควิชา--');?></td>
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</th>
