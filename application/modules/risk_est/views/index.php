@@ -4,8 +4,8 @@
   <div id="searchBox">
 		<h4>ค้นหา</h4>
 		<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-		<?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division'],'','แสดงกลุ่มวิชาทั้งหมด');?>
-		<?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section'],'','แสดงภาควิชาทั้งหมด');?>				
+		<?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
+		<?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>				
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
@@ -38,11 +38,11 @@
 		<td align="left" width="30%"><?=$row['event_risk'];?></td>
 		<td align="left" width="5%"><?=$row['year_data']?></td>
 		<td align="left" width="5%">
-			<img src="media/images/department_ico.png" title="วัตถุประสงค์ของส่วนงานตามแผนยุทธศาสตร์ ::: <?=$row['objective_title'];?>">
+			<img src="media/images/department_ico.png" title="วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย ::: <?=$row['objective_title1'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน ::: <?=$row['objective_title2'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของงาน ::: <?=$row['objective_title3'];?>">
 		</td>
 		<td align="left" width="15%"><?=$row['mission_title']?></td>
 		<td align="left" width="15%"><?=$row['process_title']?></td>
-		<td align="left" width="5%"><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: <?=$row['division_title']?> ภาควิชา ::: <?=$row['section_title']?> "></td>
+		<td align="left" width="5%"><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: <?=$row['division_title']?> \r\n  ภาควิชา ::: <?=$row['section_title']?> "></td>
 		<td align="left" width="12%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>

@@ -83,9 +83,9 @@ class objective extends Public_Controller
 		$objective_type = $_GET['objective_type'];
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('objective');		
-		$section = $this->objective->get_row($id);
+		$objective = $this->objective->get_row($id);
 		$action='Delete';
-		$description = $action.' '.$menu_name.' : '.$section['title'];		
+		$description = $action.' '.$menu_name.' : '.$objective['title'];		
 		save_log($menu_id,$action,$description);
 		$this->objective->delete($id);
 		redirect("objective/?objective_type=$objective_type");

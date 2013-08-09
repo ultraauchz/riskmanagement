@@ -71,9 +71,9 @@ class mission extends Public_Controller
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('mission');		
-		$section = $this->mission->get_row($id);
+		$mission = $this->mission->get_row($id);
 		$action='Delete';
-		$description = $action.' '.$menu_name.' : '.$section['title'];		
+		$description = $action.' '.$menu_name.' : '.$mission['title'];		
 		save_log($menu_id,$action,$description);
 		$this->mission->delete($id);
 		redirect('mission');
