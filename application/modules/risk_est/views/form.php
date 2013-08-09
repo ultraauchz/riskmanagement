@@ -1,7 +1,6 @@
 <h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง (เพิ่ม/แก้ไข)</h3>
 <form enctype="multipart/form-data" method="post">
 <div id="btnBox">
-<a href="risk_est/form" class="btn btn-primary">เพิ่มรายการ</a>
 </div>
 <table class="table table-form table-bordered table-striped table-horizontal">	
 	<tr>
@@ -10,31 +9,31 @@
 	</tr>
 	<tr>
 		<td>กลุ่มวิชา</td>
-		<td><?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division'],'','แสดงกลุ่มวิชาทั้งหมด');?></td>
+		<td><?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division'],'style="width:350px"','แสดงกลุ่มวิชาทั้งหมด');?></td>
 	</tr>
 	<tr>
 	  <td>ภาควิชา</td>
-	  <td><?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section'],'','แสดงภาควิชาทั้งหมด');?></td>
+	  <td><?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?></td>
   </tr>
 	<tr>
 	  <td>วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</td>
-	  <td>&nbsp;</td>
+	  <td><?=form_dropdown('objective_id_1',get_option('id','title','objective where objective_type = 1 order by title '),@$_GET['objective_id_1'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย--');?></td>
   </tr>
 	<tr>
 	  <td>วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน</td>
-	  <td>&nbsp;</td>
+	  <td><?=form_dropdown('objective_id_2',get_option('id','title','objective where objective_type = 2 order by title '),@$_GET['objective_id_2'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน--');?></td>
   </tr>
 	<tr>
 	  <td>วัตถุประสงค์ตามยุทธศาสตร์ของงาน</td>
-	  <td>&nbsp;</td>
+	  <td><?=form_dropdown('objective_id_3',get_option('id','title','objective where objective_type = 3 order by title '),@$_GET['objective_id_3'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน--');?></td>
   </tr>
 	<tr>
 	  <td>ภารกิจ</td>
-	  <td>&nbsp;</td>
+	  <td><?=form_dropdown('mission_id',get_option('id','title','mission order by title '),@$_GET['mission_id'],'style="width:390px"','--เลือกภารกิจ--');?></td>
   </tr>
 	<tr>
 	  <td>กระบวนงาน</td>
-	  <td>&nbsp; </td>
+	  <td><?=form_dropdown('process_id',get_option('id','title','process order by title '),@$_GET['process_id'],'style="width:390px"','--เลือกกระบวนงาน--');?></td>
   </tr>
 	<tr>
 	  <td>เหตุการณ์ความเสี่ยง</td>
@@ -100,4 +99,58 @@
     <td>ทบทวนเหตุการณ์ความเสี่ยง</td>
     <td><textarea name="textarea3" class=""></textarea></td>
   </tr>
+  <tr>
+    <td>การควบคุมที่มีอยู่</td>
+    <td><input name="textarea3" type="text" class="" value="" /></td>
+  </tr>
+  <tr>
+    <td>การประเมินการควบคุมที่มีอยู่</td>
+    <td><textarea name="textarea3" class=""></textarea></td>
+  </tr>
 </table>
+<fieldset>
+	<legend>ความเสี่ยงที่เหลืออยู่</legend>
+  <table class="table table-form table-bordered table-striped table-horizontal">	
+<tr>
+        	<th>ระดับโอกาสเกิด</th>
+            <td>
+            	<input name="" type="text" class="" value="" />
+            </td>
+        </tr>
+    	<tr>
+        	<th>ระดับผลกระทบ</th>
+            <td>
+               	<input name="" type="text" class="" value="" />
+            </td>
+        </tr>
+        <tr>
+        	<th>ระดับความเสี่ยงที่เหลือ</th>
+            <td>
+               	<input name="" type="text" class="" value="" />
+            </td>
+        </tr>        
+    </table>
+</fieldset>
+<table class="table table-form table-bordered table-striped table-horizontal">
+  <tr>
+    <td>แนวทางการจัดการ</td>
+    <td><textarea name="" class=""></textarea></td>
+  </tr>
+  <tr>
+    <td>ผู้รับผิดชอบ</td>
+    <td><input name="" type="text" class="" value="" /></td>
+  </tr>
+  <tr>
+    <td>วันที่เริ่มดำเนินการ</td>
+    <td><input type="text" name="start_date" value="" style="width:150px" class="datepicker" /></td>
+  </tr>
+  <tr>
+    <td>วันที่เสร็จสิ้น</td>
+    <td><input type="text" name="end_date" value="" style="width:150px" class="datepicker" /></td>
+  </tr>
+</table>
+<div align="center">
+				<input type="submit" value="Save" class="btn btn-primary"> 
+				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
+</div>
+</form>
