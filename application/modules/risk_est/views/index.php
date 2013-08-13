@@ -25,6 +25,7 @@
 		<th >ภารกิจ</th>
 		<th >กระบวนงาน</th>
 		<th>หน่วยงาน</th>
+		<th>แผนการปฎิบัติการและรายงานผล</th>
 		<th >จัดการข้อมูล</th>
 	</tr>
 	<?php 
@@ -35,7 +36,7 @@
 		?>  	
 	<tr>
 		<td width="5%"><?=$i;?></td>
-		<td align="left" width="30%"><?=$row['event_risk'];?></td>
+		<td align="left" width="20%"><?=$row['event_risk'];?></td>
 		<td align="left" width="5%"><?=$row['year_data']?></td>
 		<td align="left" width="5%">
 			<img src="media/images/department_ico.png" title="วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย ::: <?=$row['objective_title1'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน ::: <?=$row['objective_title2'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของงาน ::: <?=$row['objective_title3'];?>">
@@ -43,6 +44,11 @@
 		<td align="left" width="15%"><?=$row['mission_title']?></td>
 		<td align="left" width="15%"><?=$row['process_title']?></td>
 		<td align="left" width="5%"><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: <?=$row['division_title']?> \r\n  ภาควิชา ::: <?=$row['section_title']?> "></td>
+		<td align="left" width="10%">
+			<? if(permission($menu_id, 'canedit')!=''){ ?>
+		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary"><i class=" icon-pencil"></i>แผนการปฎิบัติการ</a>
+		  	<? } ?>
+		</td>
 		<td align="left" width="12%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>

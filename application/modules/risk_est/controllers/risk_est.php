@@ -6,6 +6,7 @@ class risk_est extends Public_Controller
 		parent::__construct();
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('risk_est_model','risk');
+		$this->load->model('risk_opr_model','risk_opr');
 	}
 	public $menu_id = 52;
 	public function index()
@@ -47,7 +48,11 @@ class risk_est extends Public_Controller
 		$data['id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');			
-			$data['rs'] = @$this->risk->get_row($id);								
+			$data['rs'] = @$this->risk->get_row($id);
+			$start_date = explode('-',$data['rs']['start_date']);
+			$data['rs']['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+			$end_date = explode('-',$data['rs']['end_date']);
+			$data['rs']['end_date'] = $end_date[2]."-".$end_date[1]."-".$end_date[0];								
 			$this->template->build('form',$data);
 			
 			if($id>0){
@@ -60,6 +65,67 @@ class risk_est extends Public_Controller
 			redirect('front');	
 		}
 	}
+	
+	public function form_opr($id=false)
+	{
+		$menu_id = 53;	
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$menu_name = GetMenuProperty($menu_id,'title');	
+		$data['id']=$id;
+		if(is_login()){
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			$condition = "risk_opr.risk_est_id = ".$id;			
+			$data['rs'] = @$this->risk_opr->where($condition)->get_row($id);
+			
+			if(@$data['rs']['id'] == ''){
+			$data['rs'] = @$this->risk->get_row($id);
+			}else{
+				
+				for($i=1;$i<=4;$i++){
+					$start_date = explode('-',$data['rs']['plot_start_date'.$i]);
+					$data['rs']['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+						if($data['rs']['plot_start_date'.$i] == "00-00-0000")
+						{
+							$data['rs']['plot_start_date'.$i] = '';
+						}
+					$end_date = explode('-',$data['rs']['plot_end_date'.$i]);
+					$data['rs']['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+						if($data['rs']['plot_end_date'.$i] == "00-00-0000")
+						{
+							$data['rs']['plot_end_date'.$i] = '';
+						}
+					
+					$start_date = explode('-',$data['rs']['results_start_date'.$i]);
+					$data['rs']['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+						if($data['rs']['results_start_date'.$i] == "00-00-0000")
+						{
+							$data['rs']['results_start_date'.$i] = '';
+						}
+					$end_date = explode('-',$data['rs']['results_end_date'.$i]);
+					$data['rs']['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+						if($data['rs']['results_end_date'.$i] == "00-00-0000")
+						{
+							$data['rs']['results_end_date'.$i] = '';
+						}	
+				}	
+			}	
+										
+			$this->template->build('form_opr',$data);
+			
+			if($id>0){
+			if(@$data['rs']['event_risk_opr'] != ''){
+			$action='View';
+			$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk_opr'];	
+			save_log($menu_id,$action,$description);
+			}		
+			}
+		}
+		else{			
+			redirect('front');	
+		}
+	}
+	
 	public function save(){
 		//$this->db->debug = true;
 		$menu_id=$this->menu_id;
@@ -87,7 +153,52 @@ class risk_est extends Public_Controller
 		$id = $this->risk->save($_POST);		
 		set_notify('risk_est', lang('save_data_complete'));
 		redirect('risk_est');
-	} 
+	}
+
+	public function save_opr(){
+		//$this->db->debug = true;
+		$menu_id=53;
+		$menu_name = GetMenuProperty($menu_id,'title');
+		if($_POST['id']!='')
+		{
+			if(permission($menu_id, 'canedit')=='')redirect('section');
+			$action='Update';
+			for($i=1;$i<=4;$i++){
+			$start_date = explode('-',$_POST['plot_start_date'.$i]);
+			$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+			$end_date = explode('-',$_POST['plot_end_date'.$i]);
+			$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			
+			$start_date = explode('-',$_POST['results_start_date'.$i]);
+			$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+			$end_date = explode('-',$_POST['results_end_date'.$i]);
+			$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			}
+			
+			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
+			save_log($menu_id,$action,$description);
+		}else{
+			if(permission($menu_id, 'canadd')=='')redirect('section');	
+			$action='Add';
+			for($i=1;$i<=4;$i++){
+			$start_date = explode('-',$_POST['plot_start_date'.$i]);
+			$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+			$end_date = explode('-',$_POST['plot_end_date'.$i]);
+			$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			
+			$start_date = explode('-',$_POST['results_start_date'.$i]);
+			$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+			$end_date = explode('-',$_POST['results_end_date'.$i]);
+			$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			}
+			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
+			save_log($menu_id,$action,$description);
+		}
+		$id = $this->risk_opr->save($_POST);		
+		set_notify('risk_est', lang('save_data_complete'));
+		redirect('risk_est');
+	}
+ 
 	function delete($id=FALSE){
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		

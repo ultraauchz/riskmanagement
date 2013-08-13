@@ -160,7 +160,7 @@ $(function(){
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
     <th width="400px">ตัวชี้วัดความเสี่ยง</th>
-    <td><input name="kpi_risk" type="text" class="" value="<?=@$rs['kpi_risk'];?>" /></td>
+    <td><input name="kri_risk" type="text" class="" value="<?=@$rs['kri_risk'];?>" /></td>
   </tr>
   <tr>
     <th width="400px">การควบคุมที่มีอยู่</th>
