@@ -36,11 +36,13 @@ $(function(){
 	$(".commentForm").validate({
 	rules: 
 	{
-		event_risk_opr:{ required: true}
+		event_risk_opr:{ required: true},
+		outcome:{ required: true}
 	},
 	messages:
 	{
-		event_risk_opr:{ required: " กรุณาระบุทบทวนเหตุการณ์ความเสี่ยง"}
+		event_risk_opr:{ required: " กรุณาระบุกิจกรรมการดำเนินงาน"},
+		outcome:{ required: "กรุณาระบุผลลัพธ์ที่ได้"}
 	}
 	});
 });
@@ -70,7 +72,7 @@ $(function(){
     <td><input type="text" name="plot_start_date1" value="<?=@$rs['plot_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="plot_end_date1" value="<?=@$rs['plot_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
@@ -79,7 +81,7 @@ $(function(){
     <td><input type="text" name="results_start_date1" value="<?=@$rs['results_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date1" value="<?=@$rs['results_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
 </table>
@@ -94,7 +96,7 @@ $(function(){
     <td><input type="text" name="plot_start_date2" value="<?=@$rs['plot_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="plot_end_date2" value="<?=@$rs['plot_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
@@ -103,7 +105,7 @@ $(function(){
     <td><input type="text" name="results_start_date2" value="<?=@$rs['results_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date2" value="<?=@$rs['results_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
 </table>
@@ -118,7 +120,7 @@ $(function(){
     <td><input type="text" name="plot_start_date3" value="<?=@$rs['plot_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="plot_end_date3" value="<?=@$rs['plot_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
@@ -127,7 +129,7 @@ $(function(){
     <td><input type="text" name="results_start_date3" value="<?=@$rs['results_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date3" value="<?=@$rs['results_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
 </table>
@@ -142,7 +144,7 @@ $(function(){
     <td><input type="text" name="plot_start_date4" value="<?=@$rs['plot_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="plot_end_date4" value="<?=@$rs['plot_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
@@ -151,8 +153,15 @@ $(function(){
     <td><input type="text" name="results_start_date4" value="<?=@$rs['results_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
-    <th width="400px">วันที่เสร็จสิ้น</th>
+    <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date4" value="<?=@$rs['results_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
+  </tr>
+</table>
+
+<table class="table table-form table-bordered table-striped table-horizontal">
+  <tr>
+  	<th width="400px">ผลลัพธ์ที่ได้</th>
+  	<td><textarea name="outcome" class="" rows="4" style="width:700px"><?=@$rs['outcome'];?></textarea></td>
   </tr>
 </table>
 <div align="center">
