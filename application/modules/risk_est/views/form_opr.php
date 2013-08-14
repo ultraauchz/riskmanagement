@@ -51,50 +51,45 @@ $(function(){
 
 <h3>ข้อมูลแผนการปฏิบัติการและรายงานผล</h3>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save_opr" class="commentForm">
-	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
+	<input type="hidden" name="id" value="<?=@$rs['risk_opr.id'];?>" />
 	<input type="hidden" name="risk_est_id" value="<?=@$rs['risk_est_id'];?>" />
 <div id="btnBox">
 </div>
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-    <th>ปีงบประมาณ</th>
-    <td>&nbsp;</td>
+		<th width="400px">ปีงบประมาณ</th><td><?=@$rs['year_data']?></td>
+	</tr>
+	<tr>
+		<th width="400px">กลุ่มวิชา</th><td><?=@$rs['division_title'];?></td>
+	</tr>
+	<tr>
+	  <th width="400px">ภาควิชา</th><td><?=@$rs['section_title'];?></td>
+  </tr>
+	<tr>
+	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</th><td><?=@$rs['objective_title1']?></td>
+  </tr>
+	<tr>
+	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน</th><td><?=@$rs['objective_title2'];?></td>
+  </tr>
+	<tr>
+	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของงาน</th><td><?=@$rs['objective_title3'];?></td>
+  </tr>
+	<tr>
+	  <th width="400px">ภารกิจ</th><td><?=@$rs['mission_title'];?></td>
+  </tr>
+	<tr>
+	  <th width="400px">กระบวนงาน</th><td><?=@$rs['process_title'];?></td>
+  </tr>
+	<tr>
+	  <th width="400px">เหตุการณ์ความเสี่ยง</th><td><?=@$rs['event_risk'];?></td>
   </tr>
   <tr>
-    <th>กลุ่มวิชา</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>ภาควิชา</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>ภารกิจ</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>กระบวนงาน</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>ผู้รับผิดชอบ</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>เหตุการณ์ความเสี่ยง</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th>ตัวชี้วัดความเสี่ยง</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th width="400">กิจกรรมการดำเนินงาน</th>
+    <th width="400px">กิจกรรมการดำเนินงาน</th>
     <td><input name="event_risk_opr" type="text" class="" value="<?=@$rs['event_risk_opr'];?>" /></td>
   </tr>
 </table>
 <fieldset>
-  <legend>ระยะเวลาการดำเนินการ</legend>
+	<legend>ระยะเวลาการดำเนินการ</legend>
   <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
   	<th colspan="4"><div align="center">ไตรมาสที่ 1</div></th>
