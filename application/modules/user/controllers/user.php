@@ -53,19 +53,15 @@ class user extends Public_Controller
 		}
 	}
 	
-	function user_form($id=false)
-	{
+	function user_profile(){		
 		$menu_id=2;		
 		$data['menu_id'] = $menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		$data['id']=$id;
-		$data['lang']='en';
 		if(is_login()){
-			$data['usertype'] = $this->usertype->get(FALSE,TRUE);	
-			if(permission($menu_id, 'canview')=='')redirect('front');			
+			$id = login_data('id');
+			$data['id']=$id;
 			$data['rs'] = @$this->users->where($condition)->get_row($id);								
-			$this->template->build('user_form',$data);
-			
+			$this->template->build('user_profile',$data);
 			if($id>0){
 			$action='View';
 			$description = $action.' '.$menu_name.' : '.$data['rs']['name'];		
@@ -77,6 +73,7 @@ class user extends Public_Controller
 		}
 	}
 	
+
 	public function save(){
 		//$this->db->debug = true;
 		$menu_id=2;		

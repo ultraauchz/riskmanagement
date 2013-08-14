@@ -57,12 +57,44 @@ $(function(){
 </div>
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-    <th width="400px">กิจกรรมการดำเนินงาน</th>
+    <th>ปีงบประมาณ</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>กลุ่มวิชา</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>ภาควิชา</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>ภารกิจ</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>กระบวนงาน</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>ผู้รับผิดชอบ</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>เหตุการณ์ความเสี่ยง</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>ตัวชี้วัดความเสี่ยง</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th width="400">กิจกรรมการดำเนินงาน</th>
     <td><input name="event_risk_opr" type="text" class="" value="<?=@$rs['event_risk_opr'];?>" /></td>
   </tr>
 </table>
 <fieldset>
-	<legend>ระยะเวลาการดำเนินการ</legend>
+  <legend>ระยะเวลาการดำเนินการ</legend>
   <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
   	<th colspan="4"><div align="center">ไตรมาสที่ 1</div></th>
