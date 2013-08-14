@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$('.datepicker_2').datepick({
-			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01), 
+			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
 			maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
 			minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01), 
 			buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'}); 
@@ -32,12 +32,12 @@ $(document).ready(function(){
 });
 
 $(function(){
-	
 	$(".commentForm").validate({
 	rules: 
 	{
-		event_risk_opr:{ required: true},
+		event_risk_opr:{ required: true },
 		outcome:{ required: true}
+	
 	},
 	messages:
 	{
@@ -46,6 +46,7 @@ $(function(){
 	}
 	});
 });
+
 </script>
 
 <h3>ข้อมูลแผนการปฏิบัติการและรายงานผล</h3>
@@ -69,20 +70,20 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="plot_start_date1" value="<?=@$rs['plot_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
+    <td><input type="text" name="plot_start_date1" id="plot_start_date1" value="<?=@$rs['plot_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="plot_end_date1" value="<?=@$rs['plot_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
+    <td><input type="text" name="plot_end_date1" id="plot_end_date1" value="<?=@$rs['plot_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="results_start_date1" value="<?=@$rs['results_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
+    <td><input type="text" name="results_start_date1" id="results_start_date1" value="<?=@$rs['results_start_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="results_end_date1" value="<?=@$rs['results_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
+    <td><input type="text" name="results_end_date1" id="results_end_date1" value="<?=@$rs['results_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
 </table>
 
@@ -93,20 +94,20 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="plot_start_date2" value="<?=@$rs['plot_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
+    <td><input type="text" name="plot_start_date2" id="plot_start_date2" value="<?=@$rs['plot_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="plot_end_date2" value="<?=@$rs['plot_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
+    <td><input type="text" name="plot_end_date2" id="plot_end_date2" value="<?=@$rs['plot_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="results_start_date2" value="<?=@$rs['results_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
+    <td><input type="text" name="results_start_date2" id="results_start_date2" value="<?=@$rs['results_start_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="results_end_date2" value="<?=@$rs['results_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
+    <td><input type="text" name="results_end_date2" id="results_end_date2" value="<?=@$rs['results_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
   </tr>
 </table>
 
@@ -117,20 +118,20 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="plot_start_date3" value="<?=@$rs['plot_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
+    <td><input type="text" name="plot_start_date3" id="plot_start_date3" value="<?=@$rs['plot_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="plot_end_date3" value="<?=@$rs['plot_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
+    <td><input type="text" name="plot_end_date3" id="plot_end_date3" value="<?=@$rs['plot_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="results_start_date3" value="<?=@$rs['results_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
+    <td><input type="text" name="results_start_date3" id="results_start_date3" value="<?=@$rs['results_start_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="results_end_date3" value="<?=@$rs['results_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
+    <td><input type="text" name="results_end_date3" id="results_end_date3" value="<?=@$rs['results_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
 </table>
 
@@ -141,27 +142,27 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="plot_start_date4" value="<?=@$rs['plot_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
+    <td><input type="text" name="plot_start_date4" id="plot_start_date4" value="<?=@$rs['plot_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="plot_end_date4" value="<?=@$rs['plot_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
+    <td><input type="text" name="plot_end_date4" id="plot_end_date4" value="<?=@$rs['plot_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="results_start_date4" value="<?=@$rs['results_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
+    <td><input type="text" name="results_start_date4" id="results_start_date4" value="<?=@$rs['results_start_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="results_end_date4" value="<?=@$rs['results_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
+    <td><input type="text" name="results_end_date4" id="results_end_date4" value="<?=@$rs['results_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
 </table>
 
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
   	<th width="400px">ผลลัพธ์ที่ได้</th>
-  	<td><textarea name="outcome" class="" rows="4" style="width:700px"><?=@$rs['outcome'];?></textarea></td>
+  	<td><textarea name="outcome" rows="4" style="width:700px"><?=@$rs['outcome'];?></textarea></td>
   </tr>
 </table>
 <div align="center">

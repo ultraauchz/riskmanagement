@@ -44,9 +44,21 @@ function calculateClose(dateText, inst)
 {
 				if(dateText!='')
 				{
+					var today = new Date();
 					var dt = dateText;
 					selectdate = dt.split('-');
-					dt = selectdate[2]+'-'+selectdate[1]+'-'+(parseInt(selectdate[0])+543);
-					this.value = dt;				
+					var year_ = (selectdate[0])-(today.getFullYear());
+					if(year_ >= 543){
+					dt = selectdate[2]+'-'+selectdate[1]+'-'+(parseInt(selectdate[0]));
+					}else{
+						//var year_2 = (selectdate[2])-(today.getFullYear());
+				     	if(selectdate[2] >= today.getFullYear()){
+							dt = selectdate[0]+'-'+selectdate[1]+'-'+(parseInt(selectdate[2]));	
+						}else{
+							dt = selectdate[2]+'-'+selectdate[1]+'-'+(parseInt(selectdate[0])+543);
+						}
+					}
+					this.value = dt;
+;				
 				}
 }

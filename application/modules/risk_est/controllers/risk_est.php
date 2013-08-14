@@ -49,10 +49,12 @@ class risk_est extends Public_Controller
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');			
 			$data['rs'] = @$this->risk->get_row($id);
+			if($id != ''){
 			$start_date = explode('-',$data['rs']['start_date']);
 			$data['rs']['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
 			$end_date = explode('-',$data['rs']['end_date']);
-			$data['rs']['end_date'] = $end_date[2]."-".$end_date[1]."-".$end_date[0];								
+			$data['rs']['end_date'] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			}								
 			$this->template->build('form',$data);
 			
 			if($id>0){
@@ -72,7 +74,7 @@ class risk_est extends Public_Controller
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
 		$menu_name = GetMenuProperty($menu_id,'title');	
-		$data['id']=$id;
+		$data['risk_est_id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');
 			$condition = "risk_opr.risk_est_id = ".$id;			
@@ -80,6 +82,8 @@ class risk_est extends Public_Controller
 			
 			if(@$data['rs']['id'] == ''){
 			$data['rs'] = @$this->risk->get_row($id);
+			$data['rs']['risk_est_id']=$id;
+			$data['rs']['id']='';
 			}else{
 				
 				for($i=1;$i<=4;$i++){
