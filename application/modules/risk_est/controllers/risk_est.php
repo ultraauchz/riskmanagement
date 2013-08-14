@@ -22,11 +22,11 @@ class risk_est extends Public_Controller
 			{
 				$condition .= "AND risk_est.sectionid ='".$_GET['section_id']."'  ";
 			}
-			else if(@$_GET['division_id'] !='')
+			if(@$_GET['division_id'] !='')
 			{
 				$condition .= "AND risk_est.divisionid ='".$_GET['division_id']."' ";
 			}
-			else if(@$_GET['year_data'] !=''){
+			if(@$_GET['year_data'] !=''){
 				$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
 			}
 			$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get();

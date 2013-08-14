@@ -1,7 +1,17 @@
 <h3>จัดการข้อมูลผู้ใช้</h3>
+<form enctype="multipart/form-data" method="get" action="">
+<div id="search">
+  <div id="searchBox">
+  <h4>ค้นหา</h4>
+  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+    ชื่อ-นามสกุล/Username/E-mail <input type="text" name="name_search" value="<?=@$_GET['name_search']?>" style="width:370px" />    
+  <input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
+  </div>
+</div>
+</form>
 <div id="btnBox">
 <? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form">เพิ่มรายการ</a></div><? } ?>
-</div>   
+</div>
 <div id="paging" class="pagination">
 <?php echo $pagination;?>
 </div>

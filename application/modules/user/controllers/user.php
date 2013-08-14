@@ -17,9 +17,18 @@ class user extends Public_Controller
 		$data['urlpage']="user";
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('admin');
-			$condition = "";
+			$condition = " 1=1 ";
+			if(@$_GET['section_id'] !=''){
+				$condition .= " AND sectionid = '".$_GET['section_id']."' ";
+			}
+			if(@$_GET['name_search'] !=''){
+				$condition .= " AND ( name LIKE '%".$_GET['name_search']."%' OR
+								     username LIKE '%".$_GET['name_search']."%' OR
+								     email LIKE '%".$_GET['name_search']."%' ) ";
+			}
+
 			$data['result'] = $this->users->where($condition)->order_by('id','desc')->get();
-			$data['pagination'] = $this->users->pagination();					
+			$data['pagination'] = $this->users->pagination();				
 			$this->template->build('index',$data);
 		}
 		else{
