@@ -78,22 +78,46 @@ class user extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('admin_user');
+			if(permission($menu_id, 'canedit')=='')redirect('user');
 			$action='Update';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
+			if(permission($menu_id, 'canadd')=='')redirect('user');	
 			$action='Add';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
 			save_log($menu_id,$action,$description);
 		}
-		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : md5($_POST['password']);
+		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : $_POST['password'];
 		$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");
 		$id = $this->users->save($_POST);		
 		//set_notify('success', lang('save_data_complete'));
 		redirect('user');
 	} 
+	
+	public function user_profile_save(){
+		//$this->db->debug = true;
+		$menu_id=2;		
+		$menu_name = GetMenuProperty($menu_id,'title');
+		if($_POST['id']!='')
+		{
+			if(permission($menu_id, 'canedit')=='')redirect('user');
+			$action='Update';
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			save_log($menu_id,$action,$description);
+		}else{
+			if(permission($menu_id, 'canadd')=='')redirect('user');	
+			$action='Add';
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			save_log($menu_id,$action,$description);
+		}
+		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : $_POST['password'];
+		$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");
+		$id = $this->users->save($_POST);		
+		//set_notify('success', lang('save_data_complete'));
+		redirect('user');
+	} 
+	
 	function delete($id=FALSE){
 		$menu_id=2;
 		$menu_name = GetMenuProperty($menu_id,'title');		
@@ -104,6 +128,34 @@ class user extends Public_Controller
 		save_log($menu_id,$action,$description);
 		$this->users->delete($id);
 		redirect('user');
+	}
+	
+	public function check_email(){
+		
+		$emails=trim($_GET["email"]);
+		$chk_email = $this->db->getone("select count(*) from users where email ='".$emails."'");
+		if($chk_email > 0)
+		{			
+			echo 'false';	
+		}
+		else
+		{
+			echo 'true';
+		}
+	}
+	
+	public function check_username(){
+		
+		$username=trim($_GET["username"]);
+		$chk_username = $this->db->getone("select count(*) from users where username ='".$username."'");
+		if($chk_username > 0)
+		{			
+			echo 'false';	
+		}
+		else
+		{
+			echo 'true';
+		}
 	}
 }
 ?>

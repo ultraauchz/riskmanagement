@@ -27,13 +27,13 @@ $(function(){
 		email: 
 		{ 
 			required: true,
-			remote: "admin_user/check_email"
+			remote: "user/check_email"
 		},
 		
 		username:
 		{
 			required: true,
-			remote: "admin_user/check_username"
+			remote: "user/check_username"
 		}
 		<? endif ?>
 		
