@@ -26,8 +26,7 @@ $(function(){
 		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
-			required: true,
-			remote: "admin_user/check_email"
+			required: true
 		}
 		<? endif ?>
 		
@@ -48,8 +47,7 @@ $(function(){
 		},
 		email:
 		{
-			required: " กรุณากรอก Email ",
-			remote: " email ซ้ำกรุณากรอกใหม่"
+			required: " กรุณากรอก Email "
 		}
 		
 	}
@@ -58,7 +56,7 @@ $(function(){
 </script>
 <h3>จัดการข้อมูลผู้ใช้ [เพิ่ม / แก้ไข]</h3>
 <div></div>
-<form enctype="multipart/form-data" method="post" action="user/save" class="commentForm">
+<form enctype="multipart/form-data" method="post" action="user/user_profile_save" class="commentForm">
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
   <td colspan="2" style="padding:10px;" class="ui-state-error"><strong>ข้อมูลผู้ใช้งาน
