@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/admin/jquery.validate.min.js"></script>
 <script language="javascript">
 $(function(){
-	
+	var user_id = $('input[name=id]').val();
 	$(".commentForm").validate({
 	rules: 
 	{
@@ -23,19 +23,13 @@ $(function(){
 		{
 			equalTo: "#password"
 		},
-		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
 			required: true,
-			remote: "admin_user/check_email"
-		},
-		
-		username:
-		{
-			required: true,
-			remote: "admin_user/check_username"
+			email: true,
+			remote: "user/check_email/"+user_id
 		}
-		<? endif ?>
+
 		
 	},
 	messages:
@@ -55,12 +49,8 @@ $(function(){
 		email:
 		{
 			required: " กรุณากรอก Email ",
+			email: "กรุณากรอกอีเมล์ให้ถูกต้อง",
 			remote: " email ซ้ำกรุณากรอกใหม่"
-		},
-		username:
-		{
-			required: " กรุณากรอก Username ",
-			remote: " Username ซ้ำกรุณากรอกใหม่"
 		}
 		
 	}
@@ -74,25 +64,13 @@ $(function(){
   <tr>
   <td colspan="2" style="padding:10px;" class="ui-state-error"><strong>ข้อมูลผู้ใช้งาน
   (เพิ่ม/แก้ไข)</strong></td>
-  </tr>
-		<tr>
-			<td><strong>กลุ่มผู้ใช้งาน</strong></td>
-			<td>
-				<? echo form_dropdown('usertype',get_option('id','name','usertype'),@$rs['usertype'],'','-- เลือกกลุ่มผู้ใช้งาน --');?>
-			</td>
-		</tr>				
-		<tr>
-			<td><strong>ภาควิชา</strong></td>
-			<td>
-				<? echo form_dropdown('sectionid',get_option('id','title','section'),@$rs['sectionid'],'','-- เลือกภาควิชา --');?>
-			</td>
-		</tr>		
+  </tr>		
 		<tr>
 			<td><strong>ชื่อ - นามสกุล</strong></td>
 			<!-- <th align="left"><? if($lang=='th')echo LBL_REGISTER_MEMBER_NAME_TH;else echo LBL_REGISTER_MEMBER_NAME_EN;?></th> -->
 			<td>
 			  <input type="hidden" name="id" value="<?=@$rs['id'];?>" />
-            	<input type="hidden" name="registerdate" value="<?=@$rs['registerdate'];?>" />            	
+            	<input type="hidden" name="updatedate" value="<?=@$rs['updatedate'];?>" />            	
 				<span><input name="name" id="name" type="text" value="<?=@$rs['name'];?>" size="50" class="" /></span>
 				<span class="status">*</span>
 			</td>
@@ -110,12 +88,6 @@ $(function(){
 			<span class="status">*</span>
 	    	</td>
 	  </tr>
-	  <tr>
-	  	<td><strong>Username</strong></td>
-	  	<td>
-	  		<input name="username" type="text" id="username" value="<?=@$rs['username'];?>" size="50"/>
-		</td>
-	  </tr>	  
 	  <tr>
 		  <td><strong>Password</strong></td>
 		  <td><input type="password" name="password" id="password" value="" /><input type="hidden" name="current_password" value="<?=@$rs['password'];?>" /><?if(@$rs['id']<1){?><span class="status"> *</span><?} ?> </td>

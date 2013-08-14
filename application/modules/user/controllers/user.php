@@ -69,31 +69,35 @@ class user extends Public_Controller
 			}
 		}
 		else{			
-			redirect('home');	
+			redirect('front');	
 		}
 	}
+	
+
 	public function save(){
 		//$this->db->debug = true;
 		$menu_id=2;		
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('user');
+			if(permission($menu_id, 'canedit')=='')redirect('front');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];	
+			$_POST['updatedate'] =  date("Y-m-d H:i:s");	
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('user');	
+			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];	
+			$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");	
 			save_log($menu_id,$action,$description);
 		}
 		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : $_POST['password'];
-		$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");
+		
 		$id = $this->users->save($_POST);		
 		//set_notify('success', lang('save_data_complete'));
 		redirect('user');
-	} 
+	}
 	
 	public function user_profile_save(){
 		//$this->db->debug = true;
@@ -101,27 +105,28 @@ class user extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('user');
+			if(permission($menu_id, 'canedit')=='')redirect('front');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];
+			$_POST['updatedate'] =  date("Y-m-d H:i:s");
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('user');	
+			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];
+			$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");	
 			save_log($menu_id,$action,$description);
 		}
 		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : $_POST['password'];
-		$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");
 		$id = $this->users->save($_POST);		
-		//set_notify('success', lang('save_data_complete'));
+		set_notify('success', lang('save_data_complete'));
 		redirect('user');
 	} 
-	
+	 
 	function delete($id=FALSE){
 		$menu_id=2;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('admin_user');		
+		if(permission($menu_id, 'candelete')=='')redirect('front');		
 		$users = $this->users->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$users['name'];		
@@ -130,32 +135,43 @@ class user extends Public_Controller
 		redirect('user');
 	}
 	
-	public function check_email(){
-		
-		$emails=trim($_GET["email"]);
-		$chk_email = $this->db->getone("select count(*) from users where email ='".$emails."'");
-		if($chk_email > 0)
-		{			
-			echo 'false';	
-		}
-		else
-		{
+	function check_email($id=false)
+	{
+		$user = $this->users->where("email = '".$_GET['email']."'")->get_row();
+		// ถ้ามี  email ใน db
+		if(@$user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if(@$id){
+				$emailfromid = $this->users->get_row($id);
+				// เทียบ email ในช่อง input กับ email จาก id ที่ส่งมา
+				if($emailfromid['email'] == $user['email']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
 			echo 'true';
 		}
 	}
-	
-	public function check_username(){
-		
-		$username=trim($_GET["username"]);
-		$chk_username = $this->db->getone("select count(*) from users where username ='".$username."'");
-		if($chk_username > 0)
-		{			
-			echo 'false';	
-		}
-		else
-		{
+
+	function check_username($id=false){
+		$user = $this->users->where("username = '".$_GET['username']."'")->get_row();
+		// ถ้ามี  username ใน db
+		if($user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if($id){
+				$userfromid = $this->users->get_row($id);
+				// เทียบ username ในช่อง input กับ username จาก id ที่ส่งมา
+				if($userfromid['username'] == $user['username']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
 			echo 'true';
 		}
-	}
+    }
 }
 ?>

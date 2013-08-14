@@ -6,16 +6,24 @@
 <script type="text/javascript" src="js/admin/jquery.validate.min.js"></script>
 <script language="javascript">
 $(function(){
-	
+	var user_id = $('input[name=id]').val();
 	$(".commentForm").validate({
 	rules: 
 	{
+		usertype: 
+		{
+			required: true,		
+		},
 		name: 
 		{
 			required: true,		
 		},
+		
 		password: 
 		{
+			<?php if(empty($rs['password'])): ?>
+			required: true,
+			<? endif ?>
 			minlength: 6,
 			maxlength: 20
 		},
@@ -23,29 +31,36 @@ $(function(){
 		{
 			equalTo: "#password"
 		},
+		
 		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
 			required: true,
-			remote: "user/check_email"
+			email: true,
+			remote: "user/check_email/"+user_id
 		},
 		
 		username:
 		{
 			required: true,
-			remote: "user/check_username"
+			remote: "user/check_username/"+user_id
 		}
 		<? endif ?>
 		
 	},
 	messages:
 	{
+		usertype: 
+		{
+			required: " กรุณาเลือกกลุ่มผู้ใช้งาน",
+		},
 		name: 
 		{
 			required: " กรุณากรอกชื่อและนามสกุล",
 		},
 		password:
 		{
+			required: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
 			minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
 		},
 		confirm_password:
@@ -55,6 +70,7 @@ $(function(){
 		email:
 		{
 			required: " กรุณากรอก Email ",
+			email: "กรุณากรอกอีเมล์ให้ถูกต้อง",
 			remote: " email ซ้ำกรุณากรอกใหม่"
 		},
 		username:
@@ -78,7 +94,7 @@ $(function(){
 		<tr>
 			<td><strong>กลุ่มผู้ใช้งาน</strong></td>
 			<td>
-				<? echo form_dropdown('usertype',get_option('id','name','usertype'),@$rs['usertype'],'','-- เลือกกลุ่มผู้ใช้งาน --');?>
+				<? echo form_dropdown('usertype',get_option('id','name','usertype'),@$rs['usertype'],'','-- เลือกกลุ่มผู้ใช้งาน --');?> <span class="status">*</span>
 			</td>
 		</tr>				
 		<tr>
@@ -100,7 +116,7 @@ $(function(){
 		<tr>
 			<td><strong>เบอร์โทรศัพท์ที่ติดต่อได้สะดวก</strong></td>
 			<td>
-				<input name="tel" type="text" id="tel" value="<?=$rs['tel'];?>" size="20"/>
+				<input name="tel" type="text" id="tel" value="<?=$rs['tel'];?>" size="20" />
 			</td>
 		</tr>		
 		<tr>
