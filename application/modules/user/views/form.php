@@ -18,10 +18,12 @@ $(function(){
 		{
 			required: true,		
 		},
-		<?php if(empty($rs['password'])): ?>
+		
 		password: 
 		{
+			<?php if(empty($rs['password'])): ?>
 			required: true,
+			<? endif ?>
 			minlength: 6,
 			maxlength: 20
 		},
@@ -29,7 +31,7 @@ $(function(){
 		{
 			equalTo: "#password"
 		},
-		<? endif ?>
+		
 		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
