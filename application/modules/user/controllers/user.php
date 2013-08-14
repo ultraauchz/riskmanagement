@@ -52,6 +52,26 @@ class user extends Public_Controller
 			redirect('front');	
 		}
 	}
+	
+	function user_profile(){		
+		$menu_id=2;		
+		$data['menu_id'] = $menu_id;
+		$menu_name = GetMenuProperty($menu_id,'title');		
+		if(is_login()){
+			$id = login_data('id');
+			$data['id']=$id;
+			$data['rs'] = @$this->users->where($condition)->get_row($id);								
+			$this->template->build('user_profile',$data);
+			if($id>0){
+			$action='View';
+			$description = $action.' '.$menu_name.' : '.$data['rs']['name'];		
+			save_log($menu_id,$action,$description);
+			}
+		}
+		else{			
+			redirect('home');	
+		}
+	}
 	public function save(){
 		//$this->db->debug = true;
 		$menu_id=2;		

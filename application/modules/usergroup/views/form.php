@@ -65,6 +65,12 @@ $(document).ready(function(){
 			    <span id="UnCheckAll" style="cursor:pointer"><font color="red">[UnChecked All]</font></span>
 			</td>
 		</tr>
+		<tr>
+			<th width="">เข้าถึงข้อมูลทุกหน่วยงาน</th>
+			<td>
+            	<input type="checkbox" name="can_access_all" value="on" class="checkbox" value="on" <? if(@$permission['can_access_all']=='on')echo "checked";?>  /> 
+            &nbsp;</td>
+		</tr>
 <? 
 $admin_system = $this->admin_menu->where('pid=0')->order_by('order_no','asc')->get();
 foreach($admin_system as $sitem): 
