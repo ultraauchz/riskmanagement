@@ -52,32 +52,58 @@ class user extends Public_Controller
 			redirect('front');	
 		}
 	}
+	
+	function user_form($id=false)
+	{
+		$menu_id=2;		
+		$data['menu_id'] = $menu_id;
+		$menu_name = GetMenuProperty($menu_id,'title');		
+		$data['id']=$id;
+		$data['lang']='en';
+		if(is_login()){
+			$data['usertype'] = $this->usertype->get(FALSE,TRUE);	
+			if(permission($menu_id, 'canview')=='')redirect('front');			
+			$data['rs'] = @$this->users->where($condition)->get_row($id);								
+			$this->template->build('user_form',$data);
+			
+			if($id>0){
+			$action='View';
+			$description = $action.' '.$menu_name.' : '.$data['rs']['name'];		
+			save_log($menu_id,$action,$description);
+			}
+		}
+		else{			
+			redirect('front');	
+		}
+	}
+	
 	public function save(){
 		//$this->db->debug = true;
 		$menu_id=2;		
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('admin_user');
+			if(permission($menu_id, 'canedit')=='')redirect('front');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];
+			$_POST['updatedate'] =  date("Y-m-d H:i:s");
 			save_log($menu_id,$action,$description);
 		}else{
 			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['name'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['name'];
+			$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");	
 			save_log($menu_id,$action,$description);
 		}
-		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : md5($_POST['password']);
-		$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");
+		$_POST['password'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['current_password'] : $_POST['password'];
 		$id = $this->users->save($_POST);		
-		//set_notify('success', lang('save_data_complete'));
+		set_notify('success', lang('save_data_complete'));
 		redirect('user');
 	} 
 	function delete($id=FALSE){
 		$menu_id=2;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('admin_user');		
+		if(permission($menu_id, 'candelete')=='')redirect('front');		
 		$users = $this->users->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$users['name'];		
