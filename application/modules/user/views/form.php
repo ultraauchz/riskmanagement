@@ -18,6 +18,7 @@ $(function(){
 		{
 			required: true,		
 		},
+		<?php if(empty($rs['password'])): ?>
 		password: 
 		{
 			required: true,
@@ -28,6 +29,7 @@ $(function(){
 		{
 			equalTo: "#password"
 		},
+		<? endif ?>
 		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
