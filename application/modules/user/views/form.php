@@ -10,6 +10,10 @@ $(function(){
 	$(".commentForm").validate({
 	rules: 
 	{
+		usertype: 
+		{
+			required: true,		
+		},
 		name: 
 		{
 			required: true,		
@@ -42,6 +46,10 @@ $(function(){
 	},
 	messages:
 	{
+		usertype: 
+		{
+			required: " กรุณาเลือกกลุ่มผู้ใช้งาน",
+		},
 		name: 
 		{
 			required: " กรุณากรอกชื่อและนามสกุล",
@@ -82,7 +90,7 @@ $(function(){
 		<tr>
 			<td><strong>กลุ่มผู้ใช้งาน</strong></td>
 			<td>
-				<? echo form_dropdown('usertype',get_option('id','name','usertype'),@$rs['usertype'],'','-- เลือกกลุ่มผู้ใช้งาน --');?>
+				<? echo form_dropdown('usertype',get_option('id','name','usertype'),@$rs['usertype'],'','-- เลือกกลุ่มผู้ใช้งาน --');?> <span class="status">*</span>
 			</td>
 		</tr>				
 		<tr>
@@ -104,7 +112,7 @@ $(function(){
 		<tr>
 			<td><strong>เบอร์โทรศัพท์ที่ติดต่อได้สะดวก</strong></td>
 			<td>
-				<input name="tel" type="text" id="tel" value="<?=$rs['tel'];?>" size="20"/>
+				<input name="tel" type="text" id="tel" value="<?=$rs['tel'];?>" size="20" />
 			</td>
 		</tr>		
 		<tr>
