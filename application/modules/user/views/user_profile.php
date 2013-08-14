@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/admin/jquery.validate.min.js"></script>
 <script language="javascript">
 $(function(){
-	
+	var user_id = $('input[name=id]').val();
 	$(".commentForm").validate({
 	rules: 
 	{
@@ -23,12 +23,13 @@ $(function(){
 		{
 			equalTo: "#password"
 		},
-		<?php if(empty($rs['email'])): ?>
 		email: 
 		{ 
-			required: true
+			required: true,
+			email: true,
+			remote: "user/check_email/"+user_id
 		}
-		<? endif ?>
+
 		
 	},
 	messages:
@@ -47,7 +48,9 @@ $(function(){
 		},
 		email:
 		{
-			required: " กรุณากรอก Email "
+			required: " กรุณากรอก Email ",
+			email: "กรุณากรอกอีเมล์ให้ถูกต้อง",
+			remote: " email ซ้ำกรุณากรอกใหม่"
 		}
 		
 	}

@@ -132,5 +132,44 @@ class user extends Public_Controller
 		$this->users->delete($id);
 		redirect('user');
 	}
+	
+	function check_email($id=false)
+	{
+		$user = $this->users->where("email = '".$_GET['email']."'")->get_row();
+		// ถ้ามี  email ใน db
+		if(@$user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if(@$id){
+				$emailfromid = $this->users->get_row($id);
+				// เทียบ email ในช่อง input กับ email จาก id ที่ส่งมา
+				if($emailfromid['email'] == $user['email']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
+			echo 'true';
+		}
+	}
+
+	function check_username($id=false){
+		$user = $this->users->where("username = '".$_GET['username']."'")->get_row();
+		// ถ้ามี  username ใน db
+		if($user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if($id){
+				$userfromid = $this->users->get_row($id);
+				// เทียบ username ในช่อง input กับ username จาก id ที่ส่งมา
+				if($userfromid['username'] == $user['username']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
+			echo 'true';
+		}
+    }
 }
 ?>

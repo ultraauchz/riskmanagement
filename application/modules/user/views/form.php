@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/admin/jquery.validate.min.js"></script>
 <script language="javascript">
 $(function(){
-	
+	var user_id = $('input[name=id]').val();
 	$(".commentForm").validate({
 	rules: 
 	{
@@ -16,6 +16,7 @@ $(function(){
 		},
 		password: 
 		{
+			required: true,
 			minlength: 6,
 			maxlength: 20
 		},
@@ -27,13 +28,14 @@ $(function(){
 		email: 
 		{ 
 			required: true,
-			remote: "admin_user/check_email"
+			email: true,
+			remote: "user/check_email/"+user_id
 		},
 		
 		username:
 		{
 			required: true,
-			remote: "admin_user/check_username"
+			remote: "user/check_username/"+user_id
 		}
 		<? endif ?>
 		
@@ -46,6 +48,7 @@ $(function(){
 		},
 		password:
 		{
+			required: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
 			minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
 		},
 		confirm_password:
@@ -55,6 +58,7 @@ $(function(){
 		email:
 		{
 			required: " กรุณากรอก Email ",
+			email: "กรุณากรอกอีเมล์ให้ถูกต้อง",
 			remote: " email ซ้ำกรุณากรอกใหม่"
 		},
 		username:
