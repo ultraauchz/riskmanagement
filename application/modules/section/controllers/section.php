@@ -89,7 +89,9 @@ class section extends Public_Controller
 		redirect('section');
 	}
 	function report_section($type = NULL){
-		$type = 'report';
+		if($_GET['q'] != ''){
+		  	$type = 'report';
+		  }
 		$text = ($type == 'report') ? '--แสดงภาควิชาทั้งหมด--' : '--กรุณาเลือกกลุ่มวิชา--';
 			
 		$result = $this->db->GetArray('select id,title as text from section where divisionid = ? order by title',$_GET['q']);
