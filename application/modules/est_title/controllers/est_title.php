@@ -9,7 +9,7 @@ class est_title extends Public_Controller
 	}
 	public $menu_id = 54;
 	public $urlpage = 'est_title';
-	public function index()
+	public function index($pid=0)
 	{
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
@@ -17,6 +17,23 @@ class est_title extends Public_Controller
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = "";
+			$condition = " pid = ".$pid;
+			if(@$pid > 0){
+				$data['main'] = @$this->est_title->get_row($pid);				
+				if($data['main']['pid'] == 0){
+				$data['main'] = @$this->est_title->get_row($pid);
+				
+				}else if($data['main']['pid'] != 0 ){
+				$condition1 = "pid = 0 AND id = ". $data['main']['pid'];
+				$data['main'] = @$this->est_title->where($condition1)->get_row();
+				$condition2 = "id =". @$pid;
+				$data['main2'] = @$this->est_title->where($condition2)->get_row();
+				}
+				
+			}else{
+				$data['main'] = @$this->est_title->get_row($pid);	
+			}
+			$data['pid'] = $pid;
 			$data['result'] = $this->est_title->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->est_title->pagination();					
 			$this->template->build('index',$data);
@@ -26,7 +43,7 @@ class est_title extends Public_Controller
 			redirect('front');	
 		}
 	}	
-	function form($id=false)
+	function form($pid=0,$id=false)
 	{
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
@@ -34,7 +51,9 @@ class est_title extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		$data['id']=$id;
 		if(is_login()){
-			if(permission($menu_id, 'canview')=='')redirect('front');			
+			if(permission($menu_id, 'canview')=='')redirect('front');		
+			$data['pid'] = $pid;
+			$data['main'] = @$this->est_title->get_row($pid);
 			$data['rs'] = @$this->est_title->get_row($id);								
 			$this->template->build('form',$data);
 			
@@ -54,19 +73,19 @@ class est_title extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('mission');
+			if(permission($menu_id, 'canedit')=='')redirect('est_title');
 			$action='Update';
 			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('mission');	
+			if(permission($menu_id, 'canadd')=='')redirect('est_title');	
 			$action='Add';
 			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
 			save_log($menu_id,$action,$description);
 		}
-		$id = $this->mission->save($_POST);		
-		set_notify('mission', lang('save_data_complete'));
-		redirect('mission');
+		$id = $this->est_title->save($_POST);		
+		set_notify('est_title', lang('save_data_complete'));
+		redirect('est_title/index/'.$_POST['pid']);
 	} 
 	function delete($id=FALSE){
 		$menu_id=$this->menu_id;

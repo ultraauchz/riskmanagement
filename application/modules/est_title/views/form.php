@@ -20,7 +20,7 @@ $(function(){
 	{
 		title:
 		{
-			required: " กรุณากรอกชื่อภารกิจ"
+			required: " กรุณารายละเอียด"
 		}
 	}
 	});
@@ -30,14 +30,22 @@ $(function(){
 <div></div>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save" class="commentForm">
 <table class="table table-form table-bordered table-striped table-horizontal"> 
-			<td width="150px"><strong>ชื่อถารกิจ</strong></td>
+	<? if($pid > 0 ): ?>
+	<tr>
+		<td>หัวข้อหลัก</td>
+		<td><?=$main['title'];?></td>
+	</tr>
+	<? endif;?>
+	<tr>
+			<td width="150px"><strong>รายละเอียด</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
-            	<input type="text" name="title" value="<?=@$rs['title'];?>" size="150" /> <span class="status">*</span>
+            	<textarea  name="title" class="" rows="4" style="width:700px"><?=@$rs['title'];?></textarea><span class="status">*</span>
             &nbsp;</td>
 		</tr>		        
 	</table>
 	<div align="center">
+		        <input type="hidden" name="pid" value="<?=$pid;?>">
 				<input type="submit" value="Save" class="btn btn-primary"> 
 				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
 	</div>
