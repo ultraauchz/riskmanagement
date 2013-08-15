@@ -100,7 +100,7 @@ $(function(){
 		<tr>
 			<td><strong>ภาควิชา</strong></td>
 			<td>
-				<? echo form_dropdown('sectionid',get_option('id','title','section'),@$rs['sectionid'],'','-- เลือกภาควิชา --');?>
+				<? echo form_dropdown('sectionid',get_option('id','title','section'),@$rs['sectionid'],'style="width:370px"','-- เลือกภาควิชา --');?>
 			</td>
 		</tr>		
 		<tr>

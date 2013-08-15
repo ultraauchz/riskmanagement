@@ -1,6 +1,6 @@
 <?
 class risk_opr_model extends MY_Model{
-	public $table = ' risk_opr ';
+	public $table = 'risk_opr';
     public $join =  ' join risk_est on risk_est.id = risk_opr.risk_est_id
     				  join division on risk_est.divisionid = division.id 
 	                  join section on risk_est.sectionid = section.id 

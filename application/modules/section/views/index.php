@@ -1,3 +1,8 @@
+<script>
+    	$(function(){
+        	$('[name=section_id]').chainedSelect({parent: '[name=division_id]',url: 'section/report_section',value: 'id',label: 'text'});
+    	});
+</script>
 <h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา</h3>
 <form enctype="multipart/form-data" method="get" action="">
 <div id="search">

@@ -12,3 +12,4 @@
 <script type="text/javascript" src="media/js/jquery.datepick/jquery.datepick-th.js"></script>
 <script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="themes/front/js/myscript.js"></script>
+<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>

@@ -39,8 +39,8 @@ function is_login($usertype = FALSE)
 
 function permission($menu_id,$action)
 {
-	$sql = 'SELECT  *
-	FROM usertype_detail 
+	$sql = 'SELECT  usertype_detail.*, usertype.can_access_all
+	FROM usertype_detail left join usertype on usertype_detail.usertype_id = usertype.id
 	WHERE usertype_id= '.login_data('usertype').' 
 	AND menu_id ='.$menu_id;
 	$CI =& get_instance();

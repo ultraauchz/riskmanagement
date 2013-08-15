@@ -10,7 +10,7 @@ class division extends Public_Controller
 	
 	public function index()
 	{
-		$menu_id=2;
+		$menu_id=48;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage']="division";
 		if(is_login()){
@@ -27,7 +27,7 @@ class division extends Public_Controller
 	}	
 	function form($id=false)
 	{
-		$menu_id=2;		
+		$menu_id=48;		
 		$data['menu_id'] = $menu_id;
 		$data['urlpage']="divisioin";
 		$menu_name = GetMenuProperty($menu_id,'title');		
@@ -49,7 +49,7 @@ class division extends Public_Controller
 	}
 	public function save(){
 		//$this->db->debug = true;
-		$menu_id=2;		
+		$menu_id=48;		
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
@@ -68,7 +68,7 @@ class division extends Public_Controller
 		redirect('division');
 	} 
 	function delete($id=FALSE){
-		$menu_id=2;
+		$menu_id=48;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('admin_user');		
 		$users = $this->users->get_row($id);

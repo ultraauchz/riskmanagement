@@ -3,13 +3,24 @@
 <div id="search">
   <div id="searchBox">
 		<h4>ค้นหา</h4>
-		<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-		<?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
-		<?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>				
+		<? if(@$rs['permis']=='on'){ ?>
+		<script>
+    	$(function(){
+        	$('[name=section_id]').chainedSelect({parent: '[name=division_id]',url: 'risk_est/report_section',value: 'id',label: 'text'});
+    	});
+		</script>
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
+			<?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
+			<?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+		<? }else{ ?>	
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
+			<?=form_dropdown('division_id',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$_GET['division_id'],'style="width:320px"','');?>
+			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$_GET['section_id'],'style="width:370px"');?>
+		<? } ?>		
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
-</form>
+</fo  rm>
 <div id="btnBox">
 <a href="risk_est/form" class="btn btn-primary">เพิ่มรายการ</a>
 </div>

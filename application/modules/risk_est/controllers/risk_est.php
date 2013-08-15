@@ -7,31 +7,45 @@ class risk_est extends Public_Controller
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('risk_est_model','risk');
 		$this->load->model('risk_opr_model','risk_opr');
+		$this->load->model('section_model','section');
 	}
 	public $menu_id = 52;
 	public function index()
 	{
-		$menu_id = $this->menu_id;
-		$data='';		
+		$menu_id = $this->menu_id;		
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
-			$condition = " 1=1 ";
-			if(@$_GET['section_id'] !='')
-			{
-				$condition .= "AND risk_est.sectionid ='".$_GET['section_id']."'  ";
+			#$this->db->debug=true;
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] == 'on'){
+				$condition = " 1=1 ";
+				if(@$_GET['section_id'] !='')
+				{
+					$condition .= "AND risk_est.sectionid ='".$_GET['section_id']."'  ";
+				}
+				if(@$_GET['division_id'] !='')
+				{
+					$condition .= "AND risk_est.divisionid ='".$_GET['division_id']."' ";
+				}
+				if(@$_GET['year_data'] !=''){
+					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
+				}
+				
+			}else{
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+				$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
+				if(@$_GET['year_data'] !=''){
+				$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
+				}
+				
 			}
-			if(@$_GET['division_id'] !='')
-			{
-				$condition .= "AND risk_est.divisionid ='".$_GET['division_id']."' ";
-			}
-			if(@$_GET['year_data'] !=''){
-				$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
-			}
-			$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get();
-			$data['pagination'] = $this->risk->pagination();					
-			$this->template->build('index',$data);
+				$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get();
+				$data['pagination'] = $this->risk->pagination();					
+				$this->template->build('index',$data);
+			
 		}
 		else{
 			
@@ -222,6 +236,17 @@ class risk_est extends Public_Controller
 			echo 'true';
 		}
 	}
+	function report_section($type = NULL){
+			$type = 'report';
+			$text = ($type == 'report') ? '--แสดงภาควิชาทั้งหมด--' : '--กรุณาเลือกกลุ่มวิชา--';
+			
+		$result = $this->db->GetArray('select id,title as text from section where divisionid = ? order by title',$_GET['q']);
+	    dbConvert($result);
+	    if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
+		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';
+		
+	}
+	
 
 }
 ?>	

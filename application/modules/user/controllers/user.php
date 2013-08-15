@@ -16,7 +16,7 @@ class user extends Public_Controller
 		$data['menu_id'] = $menu_id;
 		$data['urlpage']="user";
 		if(is_login()){
-			if(permission($menu_id, 'canview')!='on')redirect('admin');
+			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = " 1=1 ";
 			if(@$_GET['section_id'] !=''){
 				$condition .= " AND sectionid = '".$_GET['section_id']."' ";

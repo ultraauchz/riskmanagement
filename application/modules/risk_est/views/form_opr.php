@@ -51,7 +51,7 @@ $(function(){
 
 <h3>ข้อมูลแผนการปฏิบัติการและรายงานผล</h3>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save_opr" class="commentForm">
-	<input type="hidden" name="id" value="<?=@$rs['risk_opr.id'];?>" />
+	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
 	<input type="hidden" name="risk_est_id" value="<?=@$rs['risk_est_id'];?>" />
 <div id="btnBox">
 </div>

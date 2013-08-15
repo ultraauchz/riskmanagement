@@ -1,6 +1,8 @@
 <script type="text/javascript">
 $(function(){
-	
+	$(function(){
+        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'risk_est/report_section',value: 'id',label: 'text'});
+    });
 	$(".commentForm").validate({
 	rules: 
 	{
