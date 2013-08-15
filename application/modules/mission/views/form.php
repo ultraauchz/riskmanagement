@@ -30,7 +30,9 @@ $(function(){
 <div></div>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save" class="commentForm">
 <table class="table table-form table-bordered table-striped table-horizontal"> 
-			<td width="150px"><strong>ชื่อถารกิจ</strong></td>
+	
+	<tr>
+			<td width="150px"><strong>ชื่อภารกิจ</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
             	<input type="text" name="title" value="<?=@$rs['title'];?>" size="150" /> <span class="status">*</span>
