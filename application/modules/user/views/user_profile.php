@@ -64,7 +64,25 @@ $(function(){
   <tr>
   <td colspan="2" style="padding:10px;" class="ui-state-error"><strong>ข้อมูลผู้ใช้งาน
   (เพิ่ม/แก้ไข)</strong></td>
-  </tr>		
+  </tr>	
+  	<tr>
+			<td><strong>กลุ่มผู้ใช้งาน</strong></td>
+			<td>
+				<? echo @$rs['usertype_name'];?>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>กลุ่มวิชา</strong></td>
+			<td>
+				<? if(@$result['division_title'] == ''){ echo "-"; }else{echo @$result['division_title'];}?>
+			</td>
+		</tr>				
+		<tr>
+			<td><strong>ภาควิชา</strong></td>
+			<td>
+				<? if(@$result['title'] == ''){echo "-";}else{echo @$result['title'];}?>
+			</td>
+		</tr>			
 		<tr>
 			<td><strong>ชื่อ - นามสกุล</strong></td>
 			<!-- <th align="left"><? if($lang=='th')echo LBL_REGISTER_MEMBER_NAME_TH;else echo LBL_REGISTER_MEMBER_NAME_EN;?></th> -->
@@ -78,7 +96,7 @@ $(function(){
 		<tr>
 			<td><strong>เบอร์โทรศัพท์ที่ติดต่อได้สะดวก</strong></td>
 			<td>
-				<input name="tel" type="text" id="tel" value="<?=$rs['tel'];?>" size="20"/>
+				<input name="tel" type="text" id="tel" value="<?=@$rs['tel'];?>" size="20" />
 			</td>
 		</tr>		
 		<tr>

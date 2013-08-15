@@ -8,6 +8,7 @@ class user extends Public_Controller
 		$this->load->model('users_model','users');
 		$this->load->model('usertype_model','usertype');
 		$this->load->model('usertype_detail_model','usertype_detail');
+		$this->load->model('section_model','section');
 	}
 	
 	public function index()
@@ -69,7 +70,9 @@ class user extends Public_Controller
 		if(is_login()){
 			$id = login_data('id');
 			$data['id']=$id;
-			$data['rs'] = @$this->users->where($condition)->get_row($id);								
+			$data['rs'] = @$this->users->where($condition)->get_row($id);
+			$condition_1 = "section.id = ".login_data('sectionid');
+			$data['result'] = @$this->section->where($condition_1)->get_row();								
 			$this->template->build('user_profile',$data);
 			if($id>0){
 			$action='View';
@@ -182,5 +185,17 @@ class user extends Public_Controller
 			echo 'true';
 		}
     }
+	function report_section($type = NULL){
+		  if($_GET['q'] != ''){
+		  	$type = 'report';
+		  }
+			$text = ($type == 'report') ? '--แสดงภาควิชาทั้งหมด--' : '--กรุณาเลือกกลุ่มวิชา--';
+			
+		$result = $this->db->GetArray('select id,title as text from section where divisionid = ? order by title',$_GET['q']);
+	    dbConvert($result);
+	    if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
+		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';
+		
+	}
 }
 ?>
