@@ -228,14 +228,6 @@ class risk_est extends Public_Controller
 		$this->risk->delete($id);
 		redirect('risk_est');
 	}
-	
-	function check_date(){
-		if($_GET['plot_start_date1'] !='' && $_GET['plot_end_date1'] ==''){
-			echo 'false';
-		}else{
-			echo 'true';
-		}
-	}
 	function report_section($type = NULL){
 		  if($_GET['q'] != ''){
 		  	$type = 'report';
