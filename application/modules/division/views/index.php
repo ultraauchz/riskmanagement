@@ -10,8 +10,10 @@
 		<tr class="head">
 					<th>ลำดับ</th>
 					<th>กลุ่มวิชา</th>
-					<th>English Name</th>                    
+					<th>English Name</th>
+					<? if(@$rs['permis']=='on'){ ?>                    
 					<th>จัดการข้อมูล</th>
+					<? } ?>
 		</tr>
 		<?php 
 		  $rowStyle = '';
@@ -22,7 +24,8 @@
 		<tr>
 		  <td><?=$i;?></td>
 		  <td align="left" ><?=$row['title'];?></td>	  
-		  <td align="left" ><?=$row['title_en'];?></td>		  
+		  <td align="left" ><?=$row['title_en'];?></td>
+		  <? if(@$rs['permis']=='on'){ ?>		  
 		  <td>
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
@@ -31,6 +34,7 @@
 		  	<a href="<?=$urlpage;?>/delete/<?php echo $row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
 		  	<? } ?> 
 		  </td>
+		  <? } ?>
 		  </tr>
 		<tr>
 		<? 

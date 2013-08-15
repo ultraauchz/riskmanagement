@@ -26,8 +26,10 @@
 					<th>ลำดับ</th>
 					<th>ชื่อภาควิชา (ไทย)</th>
 					<th>ชื่อภาควิชา (อังกฤษ)</th> 
-					<th>กลุ่มวิชา</th>                    
+					<th>กลุ่มวิชา</th>
+					<? if(@$rs['permis']=='on'){ ?>                     
 					<th>จัดการข้อมูล</th>
+					<? } ?>
 		</tr>
 		<?php 
 		  $rowStyle = '';
@@ -39,7 +41,8 @@
 		  <td><?=$i;?></td>
 		  <td align="left" ><?=$row['title'];?></td>	  
 		  <td align="left" ><?=$row['title_en'];?></td>	
-		  <td align="left" ><?=$row['division_title'];?></td>		  
+		  <td align="left" ><?=$row['division_title'];?></td>
+		  <? if(@$rs['permis']=='on'){ ?> 		  
 		  <td>
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
@@ -48,6 +51,7 @@
 		  	<a href="<?=$urlpage;?>/delete/<?php echo $row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
 		  	<? } ?> 
 		  </td>
+		  <? }?>
 		  </tr>
 		<tr>
 		<? 

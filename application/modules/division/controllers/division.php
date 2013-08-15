@@ -15,6 +15,7 @@ class division extends Public_Controller
 		$data['urlpage']="division";
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('admin');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			$condition = "";
 			$data['result'] = $this->division->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->division->pagination();					

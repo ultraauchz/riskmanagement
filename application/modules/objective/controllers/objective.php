@@ -17,6 +17,7 @@ class objective extends Public_Controller
 		$data['urlpage']="objective";
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			$condition = "";
 			$data['objective_type']=@$_GET['objective_type'];
 			if($data['objective_type'] != '')
