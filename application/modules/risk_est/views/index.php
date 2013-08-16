@@ -20,7 +20,7 @@
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
-</fo  rm>
+</form>
 <div id="btnBox">
 <a href="risk_est/form" class="btn btn-primary">เพิ่มรายการ</a>
 </div>

@@ -21,13 +21,27 @@ class est_checklist extends Public_Controller
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			if($data['rs']['permis'] == 'on'){
-				$condition = "";
-			}else{
-				$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
-				$condition1 = " section.id ='". login_data('sectionid')."' ";
-				$data['result1'] = $this->section->where($condition1)->get_row();
-			}
-			
+				$condition = " 1=1 ";
+				if(@$_GET['sectionid'] !='')
+				{
+					$condition .= "AND est_checklist.sectionid ='".$_GET['sectionid']."'  ";
+				}
+				if(@$_GET['divisionid'] !='')
+				{
+					$condition .= "AND est_checklist.divisionid ='".$_GET['divisionid']."' ";
+				}
+				if(@$_GET['year_data'] !=''){
+					$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";
+				}
+				
+				}else{
+					$condition1 = " section.id ='". login_data('sectionid')."' ";
+					$data['result1'] = $this->section->where($condition1)->get_row();
+					$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
+					if(@$_GET['year_data'] !=''){
+						$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";	
+						}
+				}
 			$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->estchecklist->pagination();					
 			$this->template->build('index',$data);
