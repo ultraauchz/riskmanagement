@@ -53,7 +53,21 @@ class est_title extends Public_Controller
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');		
 			$data['pid'] = $pid;
-			$data['main'] = @$this->est_title->get_row($pid);
+			if(@$pid > 0){
+				$data['main'] = @$this->est_title->get_row($pid);				
+				if($data['main']['pid'] == 0){
+				$data['main'] = @$this->est_title->get_row($pid);
+				
+				}else if($data['main']['pid'] != 0 ){
+				$condition1 = "pid = 0 AND id = ". $data['main']['pid'];
+				$data['main'] = @$this->est_title->where($condition1)->get_row();
+				$condition2 = "id =". @$pid;
+				$data['main2'] = @$this->est_title->where($condition2)->get_row();
+				}
+				
+			}else{
+				$data['main'] = @$this->est_title->get_row($pid);	
+			}
 			$data['rs'] = @$this->est_title->get_row($id);								
 			$this->template->build('form',$data);
 			
