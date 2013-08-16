@@ -4,7 +4,6 @@
 		<h4><a href="est_title/index/0">หัวข้อหลัก</a> > <a href="est_title/index/<?=@$main['id'];?>"><?=@$main['title'];?></a> <?if(@$main2['title'] != '' ){?> <a href="est_title/index/<?=$main2['id'];?>"><?echo " > ".@$main2['title'];}?></a></h4>
 	
 	<? endif;?>
-	<tr>
 <div id="btnBox">
 <? if(permission($menu_id, 'canadd')!=''){ ?> <div><a class="btn btn-primary" href="<?=$urlpage;?>/form/<?=$pid;?>">เพิ่มรายการ</a></div><? } ?>
 </div>   

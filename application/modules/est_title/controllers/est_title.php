@@ -105,12 +105,12 @@ class est_title extends Public_Controller
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('mission');		
-		$mission = $this->mission->get_row($id);
+		$mission = $this->est_title->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$mission['title'];		
 		save_log($menu_id,$action,$description);
-		$this->mission->delete($id);
-		redirect('mission');
+		$this->est_title->delete($id);
+		redirect('est_title');
 	}
 }
 ?>

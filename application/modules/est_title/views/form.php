@@ -42,9 +42,7 @@ $(function(){
 		<td>ปีงบประมาณ</td>
 		<td><?=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','แสดงทุกปี');?></td>
 		</tr>
-		<? }else{?>
-			<input type="hidden" name="year_data" value="<?=@$main['year_data'];?>" />
-		<?}?>
+		<? } ?>
 		<tr>
 			<td width="150px"><strong>รายละเอียด</strong></td>
 			<td>
