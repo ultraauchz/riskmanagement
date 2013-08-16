@@ -6,7 +6,9 @@ class est_checklist extends Public_Controller
 		parent::__construct();
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('est_checklist_model','estchecklist');
+		$this->load->model('est_checklist_detail_model','est_detail');
 		$this->load->model('est_title_model','est_title');
+		$this->load->model('section_model','section');
 	}
 	public $menu_id = 55;
 	public $urlpage = 'est_checklist';
@@ -17,7 +19,15 @@ class est_checklist extends Public_Controller
 		$data['urlpage'] = $this->urlpage;
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
-			$condition = "";
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] == 'on'){
+				$condition = "";
+			}else{
+				$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+			}
+			
 			$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get();
 			$data['pagination'] = $this->estchecklist->pagination();					
 			$this->template->build('index',$data);
@@ -34,9 +44,17 @@ class est_checklist extends Public_Controller
 		$data['urlpage'] = $this->urlpage;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		$data['id']=$id;
+		
 		if(is_login()){
-			if(permission($menu_id, 'canview')=='')redirect('front');		
-			$data['rs'] = @$this->estchecklist->get_row($id);								
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			if(permission($menu_id, 'can_access_all') == 'on'){
+				$condition = "";
+			}else{
+				//$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+			}	
+			$data['rs'] = @$this->estchecklist->where($condition)->get_row($id);								
 			$this->template->build('form',$data);
 			
 			if($id>0){
@@ -57,15 +75,31 @@ class est_checklist extends Public_Controller
 		{
 			if(permission($menu_id, 'canedit')=='')redirect('est_checklist');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];
+			$_POST['est_date'] = date("Y-m-d h:i:s");		
 			save_log($menu_id,$action,$description);
 		}else{
 			if(permission($menu_id, 'canadd')=='')redirect('est_checklist');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
+			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];
+			$_POST['est_date']= date("Y-m-d h:i:s");			
 			save_log($menu_id,$action,$description);
 		}
-		$id = $this->estchecklist->save($_POST);		
+		$id = $this->estchecklist->save($_POST);
+		//est_title_id คือ hidden ที่เก็บไอดี ของแต่ล่ะข้อ
+		//check_value คือ checkbox
+			if(isset($_POST['est_title_id'])){
+   				foreach($_POST['est_title_id'] as $key=>$_POST['num_i']){
+   				 	if($_POST['est_title_id'][$key]){
+    					$data['pid'] = $id;
+						$_POST['check_value'][$key] == '' ? n :  $_POST['check_value'][$key];	
+    					$data['est_title_id'] = $_POST['est_title_id'][$key];
+    					$data['check_value'] = $_POST['check_value'][$key];
+						$data['id'] = $_POST['detail_id'][$key];
+    					$this->est_detail->save($data);
+    					}
+   					} 
+  			 }
 		set_notify('est_title', lang('save_data_complete'));
 		redirect('est_checklist');
 	} 
@@ -81,12 +115,13 @@ class est_checklist extends Public_Controller
 		redirect('est_checklist');
 	}
 	
-	function load_est_detail_form(){
+	function load_est_detail_form($id=false){
 		$year_data = @$_POST['year_data'];
 		$data['year_data'] = $year_data;
 		if($year_data != ''){
 		$data['main_title'] = $this->est_title->where('pid=0 and year_data='.$year_data)->get(false,true);
 		}
+		$data['id']=$id;
 		$this->load->view('est_detail_form',$data);
 		
 	}

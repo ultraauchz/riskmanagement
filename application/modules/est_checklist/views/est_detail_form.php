@@ -1,6 +1,7 @@
 	
 	<? 
 	if($year_data != ''){
+		$i = 1;
 	foreach($main_title as $main_item):?>
 	<fieldset>
 		<legend><?=$main_item['title'];?></legend>
@@ -29,17 +30,23 @@
 					<td style="width:250px;" rowspan="<?=$nrow;?>"><?=$second_item['title'];?></td>
 					<?
 						}
+					@$check_detail = $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row();
+					
+					$i++
 					?>
 					<td class="third_title" ><?=$third_item['title'];?></td>
 					<td style="width:60px;text-align:center;">
-						<input type="hidden" name="est_title_id" value="<?=$third_item['id'];?>">
-						<input type="checkbox" name="cbexist[]" value="y">						
+						<input type="hidden" name="est_title_id[<?=$i?>]" value="<?=$third_item['id'];?>">
+						<input type="hidden" name="detail_id[<?=$i?>]" value="<?=@$check_detail['id'];?>">
+						<input type="checkbox" name="check_value[<?=$i?>]" value="y" <? if(@$check_detail['check_value'] == 'y'){ ?> checked="checked" <? } ?> >						
 					</td>
 				</tr>
 			<? endforeach;?>
 		<?  endforeach;?>
 		</table>
 		</fieldset>
-	<? endforeach; }else{
+	<? endforeach; ?>
+		<input type="hidden" name="num_i" value="<?=@$i;?>">
+	<? }else{
 		echo "กรุณาเลือกปีงบประมาณ";
 	}?>

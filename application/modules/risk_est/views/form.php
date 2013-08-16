@@ -1,8 +1,5 @@
 <script type="text/javascript">
 $(function(){
-        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'risk_est/report_section',value: 'id',label: 'text'});
-    });
-$(function(){
     var start = $('input[name=start_date]').val();
 	$(".commentForm").validate({
 	rules: 
@@ -72,6 +69,18 @@ $(function(){
 	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
 <div id="btnBox">
 </div>
+		<? if(permission($menu_id, 'can_access_all')=='on'){ ?>
+		<script>
+    	$(function(){
+        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'risk_est/report_section',value: 'id',label: 'text'});
+    	});
+		</script>
+			<? $division = form_dropdown('divisionid',get_option('id','title','division order by title'),@$rs['divisionid'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
+			<? $section = form_dropdown('sectionid',get_option('id','title','section order by title'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+		<? }else{ ?>	
+			<? $division=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
+			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
+		<? } ?>	
 <table class="table table-form table-bordered table-striped table-horizontal">	
 	<tr>
 		<th width="400px">ปีงบประมาณ</th>
@@ -79,11 +88,11 @@ $(function(){
 	</tr>
 	<tr>
 		<th width="400px">กลุ่มวิชา</th>
-		<td><?=form_dropdown('divisionid',get_option('id','title','division order by title '),@$rs['divisionid'],'style="width:350px"','--เลือกกลุ่มวิชา--');?></td>
+		<td><?=$division;?></td>
 	</tr>
 	<tr>
 	  <th width="400px">ภาควิชา</th>
-	  <td><?=form_dropdown('sectionid',get_option('id','title','section order by title '),@$rs['sectionid'],'style="width:370px"','--เลือกภาควิชา--');?></td>
+	  <td><?=$section;?></td>
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</th>

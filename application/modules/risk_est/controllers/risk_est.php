@@ -61,7 +61,12 @@ class risk_est extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');	
 		$data['id']=$id;
 		if(is_login()){
-			if(permission($menu_id, 'canview')=='')redirect('front');			
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+				}			
 			$data['rs'] = @$this->risk->get_row($id);
 			if($id != ''){
 			$start_date = explode('-',$data['rs']['start_date']);
