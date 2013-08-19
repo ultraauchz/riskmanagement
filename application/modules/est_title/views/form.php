@@ -33,10 +33,17 @@ $(function(){
 	<? if($pid > 0 ): ?>
 	<tr>
 		<td>หัวข้อหลัก</td>
-		<td><?=$main['title'];?></td>
+		<td><?=@$main['title']; if(@$main2['title'] != '' ){echo " > ".@$main2['title'];}?></td>
 	</tr>
 	<? endif;?>
-	<tr>
+	
+		<? if($pid == 0 ){?>
+		<tr>
+		<td>ปีงบประมาณ</td>
+		<td><?=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','แสดงทุกปี');?></td>
+		</tr>
+		<? } ?>
+		<tr>
 			<td width="150px"><strong>รายละเอียด</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
