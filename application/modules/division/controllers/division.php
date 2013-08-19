@@ -14,7 +14,7 @@ class division extends Public_Controller
 		$data['menu_id'] = $menu_id;
 		$data['urlpage']="division";
 		if(is_login()){
-			if(permission($menu_id, 'canview')!='on')redirect('admin');
+			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			$condition = "";
 			$data['result'] = $this->division->where($condition)->order_by('id','desc')->get();
@@ -59,7 +59,7 @@ class division extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
+			if(permission($menu_id, 'canadd')=='')redirect('division');	
 			$action='Add';
 			$description = $action.' '.$menu_name.' : '.$_POST['title'];		
 			save_log($menu_id,$action,$description);
@@ -71,7 +71,7 @@ class division extends Public_Controller
 	function delete($id=FALSE){
 		$menu_id=48;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('admin_user');		
+		if(permission($menu_id, 'candelete')=='')redirect('division');		
 		$division = $this->division->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$division['title'];		

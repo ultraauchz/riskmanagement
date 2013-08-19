@@ -129,7 +129,7 @@ class est_checklist extends Public_Controller
 	function delete($id=FALSE){
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('mission');		
+		if(permission($menu_id, 'candelete')=='')redirect('est_checklist');		
 		$estchecklist = $this->estchecklist->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$estchecklist['est_name'];		

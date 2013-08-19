@@ -48,7 +48,7 @@ class user extends Public_Controller
 			$data['usertype'] = $this->usertype->get(FALSE,TRUE);
 			$data['province'] = $this->db->getarray("SELECT * from province ORDER BY name_".$data['lang']);
 			$data['country'] = $this->db->getarray("SELECT * from country ORDER BY name");	
-			if(permission($menu_id, 'canview')=='')redirect('admin');			
+			if(permission($menu_id, 'canview')=='')redirect('front');			
 			$data['rs'] = @$this->users->where($condition)->get_row($id);								
 			$this->template->build('form',$data);
 			
@@ -92,13 +92,13 @@ class user extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('front');
+			if(permission($menu_id, 'canedit')=='')redirect('user');
 			$action='Update';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];	
 			$_POST['updatedate'] =  date("Y-m-d H:i:s");	
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
+			if(permission($menu_id, 'canadd')=='')redirect('user');	
 			$action='Add';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];	
 			$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");	
@@ -117,13 +117,13 @@ class user extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('front');
+			if(permission($menu_id, 'canedit')=='')redirect('user');
 			$action='Update';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];
 			$_POST['updatedate'] =  date("Y-m-d H:i:s");
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('admin_user');	
+			if(permission($menu_id, 'canadd')=='')redirect('user');	
 			$action='Add';
 			$description = $action.' '.$menu_name.' : '.$_POST['name'];
 			$_POST['registerdate'] =  $_POST['id']!='' && $_POST['password']=='' ? $_POST['registerdate'] : date("Y-m-d H:i:s");	
@@ -138,7 +138,7 @@ class user extends Public_Controller
 	function delete($id=FALSE){
 		$menu_id=2;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('front');		
+		if(permission($menu_id, 'candelete')=='')redirect('user');		
 		$users = $this->users->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$users['name'];		

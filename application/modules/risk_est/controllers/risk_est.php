@@ -177,7 +177,7 @@ class risk_est extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('section');
+			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
 			$action='Update';
 			$start_date = explode('-',$_POST['start_date']);
 			$_POST['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
@@ -186,7 +186,7 @@ class risk_est extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk'];	
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('section');	
+			if(permission($menu_id, 'canadd')=='')redirect('risk_est');	
 			$action='Add';
 			$start_date = explode('-',$_POST['start_date']);
 			$_POST['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
@@ -206,7 +206,7 @@ class risk_est extends Public_Controller
 		$menu_name = GetMenuProperty($menu_id,'title');
 		if($_POST['id']!='')
 		{
-			if(permission($menu_id, 'canedit')=='')redirect('section');
+			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
 			$action='Update';
 			for($i=1;$i<=4;$i++){
 			$start_date = explode('-',$_POST['plot_start_date'.$i]);
@@ -223,7 +223,7 @@ class risk_est extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
 			save_log($menu_id,$action,$description);
 		}else{
-			if(permission($menu_id, 'canadd')=='')redirect('section');	
+			if(permission($menu_id, 'canadd')=='')redirect('risk_est');	
 			$action='Add';
 			for($i=1;$i<=4;$i++){
 			$start_date = explode('-',$_POST['plot_start_date'.$i]);
@@ -247,7 +247,7 @@ class risk_est extends Public_Controller
 	function delete($id=FALSE){
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('process');		
+		if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
 		$risk_est = $this->risk->get_row($id);
 		$action='Delete';
 		$description = $action.' '.$menu_name.' : '.$risk_est['event_risk'];		

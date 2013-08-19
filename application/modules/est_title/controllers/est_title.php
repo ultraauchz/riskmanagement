@@ -104,7 +104,7 @@ class est_title extends Public_Controller
 	function delete($pid=false,$id=false){
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('mission');		
+		if(permission($menu_id, 'candelete')=='')redirect('est_title');		
 		$est_title = $this->est_title->get_row($id);
 			$condition1 = "pid = ".$id;
 		$est_title_1 = $this->est_title->where($condition1)->get();
