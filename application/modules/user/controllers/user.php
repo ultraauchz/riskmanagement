@@ -20,12 +20,12 @@ class user extends Public_Controller
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$condition = " 1=1 ";
 			if(@$_GET['section_id'] !=''){
-				$condition .= " AND sectionid = '".$_GET['section_id']."' ";
+				$condition .= " AND users.sectionid = '".$_GET['section_id']."' ";
 			}
 			if(@$_GET['name_search'] !=''){
-				$condition .= " AND ( name LIKE '%".$_GET['name_search']."%' OR
-								     username LIKE '%".$_GET['name_search']."%' OR
-								     email LIKE '%".$_GET['name_search']."%' ) ";
+				$condition .= " AND ( users.name LIKE '%".$_GET['name_search']."%' OR
+								     users.username LIKE '%".$_GET['name_search']."%' OR
+								     users.email LIKE '%".$_GET['name_search']."%' ) ";
 			}
 
 			$data['result'] = $this->users->where($condition)->order_by('id','desc')->get();
