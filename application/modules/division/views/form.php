@@ -14,6 +14,9 @@ $(function(){
 		title: 
 		{ 
 			required: true
+		},
+		title_en:{
+			required: true
 		}
 	},
 	messages:
@@ -21,6 +24,9 @@ $(function(){
 		title:
 		{
 			required: " กรุณากรอกชื่อกลุ่มวิชา"
+		},
+		title_en:{
+			required: " กรุณากรอกชื่อกลุ่มวิชา ภาษาอังกฤษ"
 		}
 	}
 	});

@@ -72,12 +72,12 @@ class division extends Public_Controller
 		$menu_id=48;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('admin_user');		
-		$users = $this->users->get_row($id);
+		$division = $this->division->get_row($id);
 		$action='Delete';
-		$description = $action.' '.$menu_name.' : '.$users['name'];		
+		$description = $action.' '.$menu_name.' : '.$division['title'];		
 		save_log($menu_id,$action,$description);
-		$this->users->delete($id);
-		redirect('user');
+		$this->division->delete($id);
+		redirect('division');
 	}
 }
 ?>

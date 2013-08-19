@@ -253,6 +253,7 @@ class risk_est extends Public_Controller
 		$description = $action.' '.$menu_name.' : '.$risk_est['event_risk'];		
 		save_log($menu_id,$action,$description);
 		$this->risk->delete($id);
+		$this->db->Execute('delete from risk_opr where risk_est_id = ?',$id);
 		redirect('risk_est');
 	}
 	function report_section($type = NULL){

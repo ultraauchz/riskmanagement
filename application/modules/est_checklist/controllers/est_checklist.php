@@ -130,11 +130,13 @@ class est_checklist extends Public_Controller
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('mission');		
-		$mission = $this->estchecklist->get_row($id);
+		$estchecklist = $this->estchecklist->get_row($id);
 		$action='Delete';
-		$description = $action.' '.$menu_name.' : '.$mission['est_name'];		
+		$description = $action.' '.$menu_name.' : '.$estchecklist['est_name'];		
 		save_log($menu_id,$action,$description);
 		$this->estchecklist->delete($id);
+		$condition = "pid = '".$id."'";
+		$this->db->Execute('delete from est_checklist_detail where pid = ?',$id);
 		redirect('est_checklist');
 	}
 	
