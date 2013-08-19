@@ -63,14 +63,23 @@ class est_checklist extends Public_Controller
 			if(permission($menu_id, 'canview')=='')redirect('front');
 			if(permission($menu_id, 'can_access_all') == 'on'){
 				$condition = "";
+				$data['rs'] = @$this->estchecklist->where($condition)->get_row($id);								
+				$this->template->build('form',$data);
 			}else{
-				//$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
+				$condition = " sectionid ='". login_data('sectionid')."' AND est_checklist.id = '".$id."' ";
 				$condition1 = " section.id ='". login_data('sectionid')."' ";
 				$data['result1'] = $this->section->where($condition1)->get_row();
+				$data['rs'] = @$this->estchecklist->where($condition)->get_row();
+				if($id != ''){
+					if($data['rs']['id'] != ''){								
+						$this->template->build('form',$data);
+					}else{
+						redirect('est_checklist');
+					}
+				}else{
+					$this->template->build('form',$data);
+				}
 			}	
-			$data['rs'] = @$this->estchecklist->where($condition)->get_row($id);								
-			$this->template->build('form',$data);
-			
 			if($id>0){
 			$action='View';
 			$description = $action.' '.$menu_name.' : '.$data['rs']['est_name'];		

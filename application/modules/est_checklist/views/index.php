@@ -14,8 +14,8 @@
 			<?=form_dropdown('sectionid',get_option('id','title','section order by title'),@$_GET['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
 		<? }else{ ?>	
 			<?=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$_GET['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
-			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$_GET['sectionid'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
+			<?=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
+			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>

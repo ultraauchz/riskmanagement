@@ -64,18 +64,31 @@ class risk_est extends Public_Controller
 			if(permission($menu_id, 'canview')=='')redirect('front');
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			if($data['rs']['permis'] != 'on'){
+				$condition = " sectionid ='". login_data('sectionid')."' AND risk_est.id = '".$id."' ";
 				$condition1 = " section.id ='". login_data('sectionid')."' ";
 				$data['result1'] = $this->section->where($condition1)->get_row();
-				}			
-			$data['rs'] = @$this->risk->get_row($id);
-			if($id != ''){
-			$start_date = explode('-',$data['rs']['start_date']);
-			$data['rs']['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
-			$end_date = explode('-',$data['rs']['end_date']);
-			$data['rs']['end_date'] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
-			}								
-			$this->template->build('form',$data);
-			
+				$data['rs'] = @$this->risk->where($condition)->get_row();
+			}else{
+				$data['rs'] = @$this->risk->get_row($id);
+			}		
+				if($id != ''){
+					$start_date = explode('-',$data['rs']['start_date']);
+					$data['rs']['start_date'] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+					$end_date = explode('-',$data['rs']['end_date']);
+					$data['rs']['end_date'] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+					if(permission($menu_id, 'can_access_all') != 'on'){
+						if($data['rs']['id'] !=''){
+						$this->template->build('form',$data);
+						}else{
+						redirect('risk_est');
+						}
+					}else{
+						$this->template->build('form',$data);
+					}	
+				}else{
+					$this->template->build('form',$data);
+				}		
+					
 			if($id>0){
 			$action='View';
 			$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk'];	
@@ -134,7 +147,16 @@ class risk_est extends Public_Controller
 				}	
 			}	
 										
-			$this->template->build('form_opr',$data);
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				if($data['rs']['sectionid'] == login_data('sectionid')){
+					$this->template->build('form_opr',$data);	
+				}else{
+					redirect('risk_est');
+				}						
+			}else{
+				$this->template->build('form_opr',$data);
+			}
 			
 			if($id>0){
 			if(@$data['rs']['event_risk_opr'] != ''){
