@@ -1,6 +1,5 @@
 <script type="text/javascript">
 $(function(){
-    var start = $('input[name=start_date]').val();
 	$(".commentForm").validate({
 	rules: 
 	{
@@ -58,7 +57,7 @@ $(function(){
 		manage_risk:{ required: "กรุณาระบุแนวทางการจัดการ"},
 		owner_risk:{ required: "กรุณาระบุผู้รับผิดชอบ"},
 		start_date:{ required: "กรุณาระบุวันที่เริ่มดำเนินการ"},
-		end_date:{ required: "กรุณาระบุวันที่เสร็จสิ้น"+start}
+		end_date:{ required: "กรุณาระบุวันที่เสร็จสิ้น"}
 	}
 	});
 });
