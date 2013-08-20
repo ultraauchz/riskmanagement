@@ -24,8 +24,8 @@
 	<table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
 					<th>ลำดับ</th>
-					<th>ชื่อภาควิชา (ไทย)</th>
-					<th>ชื่อภาควิชา (อังกฤษ)</th> 
+					<th>ชื่อภาควิชา/หน่วยงาน (ไทย)</th>
+					<th>ชื่อภาควิชา/หน่วยงาน (อังกฤษ)</th> 
 					<th>ประเภท</th>
 					<? if(@$rs['permis']=='on'){ ?>                     
 					<th>จัดการข้อมูล</th>

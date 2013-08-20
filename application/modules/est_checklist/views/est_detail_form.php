@@ -4,13 +4,15 @@
 		$i = 1;
 	foreach($main_title as $main_item):?>
 	<fieldset>
-		<legend><?=$main_item['title'];?></legend>
 		<table class="table table-form table-bordered table-striped table-horizontal">
 			<tr>
 		 		<td colspan="2" style="text-align:center;">รายการประเมิน</td>
 		 		<td style="width:60px;text-align:center;">มี</td>
 		 		<td style="width:60px;text-align:center;">ไม่มี</td>
 		 	</tr>
+		 	<tr>
+				<td colspan="4"><?=$main_item['title'];?></td>
+			</tr>
 		<? 
 			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
 			foreach($second_title as $second_item):			
