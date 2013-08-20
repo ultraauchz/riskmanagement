@@ -39,7 +39,8 @@ $active_record = TRUE;
 
 #$db['default']['hostname'] = '192.168.1.204';
 #$db['default']['hostname'] = '27.254.33.52';
-$db['default']['hostname'] = '192.168.1.34';
+$db['default']['hostname'] = '192.168.1.64';
+#$db['default']['hostname'] = 'localhost';
 
 $db['default']['username'] = 'root';
 $db['default']['password'] = '1234';
