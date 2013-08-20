@@ -26,9 +26,9 @@ class est_checklist extends Public_Controller
 				{
 					$condition .= "AND est_checklist.sectionid ='".$_GET['sectionid']."'  ";
 				}
-				if(@$_GET['divisionid'] !='')
+				if(@$_GET['section_type_id'] !='')
 				{
-					$condition .= "AND est_checklist.divisionid ='".$_GET['divisionid']."' ";
+					$condition .= "AND est_checklist.section_type_id ='".$_GET['section_type_id']."' ";
 				}
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";
@@ -115,7 +115,7 @@ class est_checklist extends Public_Controller
    				foreach($_POST['est_title_id'] as $key=>$_POST['num_i']){
    				 	if($_POST['est_title_id'][$key]){
     					$data['pid'] = $id;
-						$_POST['check_value'][$key] == '' ? n :  $_POST['check_value'][$key];	
+						$_POST['check_value'][$key] == '' ? 0 :  $_POST['check_value'][$key];	
     					$data['est_title_id'] = $_POST['est_title_id'][$key];
     					$data['check_value'] = $_POST['check_value'][$key];
 						$data['id'] = $_POST['detail_id'][$key];
@@ -154,9 +154,9 @@ class est_checklist extends Public_Controller
 		  if($_GET['q'] != ''){
 		  	$type = 'report';
 		  }
-			$text = ($type == 'report') ? '--แสดงภาควิชาทั้งหมด--' : '--กรุณาเลือกกลุ่มวิชา--';
+			$text = ($type == 'report') ? '--แสดงภาควิชา/หน่วยงาน--' : '--กรุณาเลือกกลุ่มวิชา/หน่วยงาน--';
 			
-		$result = $this->db->GetArray('select id,title as text from section where divisionid = ? order by title',$_GET['q']);
+		$result = $this->db->GetArray('select id,title as text from section where section_type_id = ? order by title',$_GET['q']);
 	    dbConvert($result);
 	    if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
 		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';

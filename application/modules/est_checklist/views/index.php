@@ -6,15 +6,15 @@
 		<? if(permission($menu_id, 'can_access_all')=='on'){ ?>
 		<script>
     	$(function(){
-        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
+        	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
     	});
 		</script>
 			<?=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('divisionid',get_option('id','title','division order by title'),@$_GET['divisionid'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
+			<?=form_dropdown('section_type_id',get_option('id','title','section_type order by title'),@$_GET['section_type_id'],'style="width:320px"','แสดงประเภททั้งหมด');?>
 			<?=form_dropdown('sectionid',get_option('id','title','section order by title'),@$_GET['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
 		<? }else{ ?>	
 			<?=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
+			<?=form_dropdown('section_type_id',get_option('id','title','section_type where id = "'.@$result1['section_type_id'].'" order by title '),@$rs['section_type_id'],'style="width:320px"','');?>
 			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
@@ -32,8 +32,8 @@
 		<tr class="head">
 					<th>ลำดับ</th>
 					<th>ปีงบประมาณ</th> 
-					<th>กลุ่มวิชา</th>
-					<th>ภาควิชา</th> 
+					<th>ประเภท</th>
+					<th>ภาควิชา/หน่วยงาน</th> 
 					<th><div align="center">จัดการข้อมูล</div></th>
 		</tr>
 		<?php 
@@ -45,8 +45,8 @@
 		<tr>
 		  <td width="5%"><?=$i;?></td>
 		  <td align="left" width="10%" ><?=$row['year_data'];?></td>
-		  <td width="35%"><?=$row['division_title'];?></td>
-		  <td width="35%"><?=$row['section_title'];?></td>
+		  <td width="10%"><?=$row['section_type_title'];?></td>
+		  <td width="45%"><?=$row['section_title'];?></td>
 		  <td width="15%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>

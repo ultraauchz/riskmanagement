@@ -189,9 +189,9 @@ class user extends Public_Controller
 		  if($_GET['q'] != ''){
 		  	$type = 'report';
 		  }
-			$text = ($type == 'report') ? '--แสดงภาควิชาทั้งหมด--' : '--กรุณาเลือกกลุ่มวิชา--';
+			$text = ($type == 'report') ? '--แสดงภาควิชา/หน่วยงาน--' : '--กรุณาเลือกกลุ่มวิชา/หน่วยงาน--';
 			
-		$result = $this->db->GetArray('select id,title as text from section where divisionid = ? order by title',$_GET['q']);
+		$result = $this->db->GetArray('select id,title as text from section where section_type_id = ? order by title',$_GET['q']);
 	    dbConvert($result);
 	    if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
 		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';

@@ -34,7 +34,7 @@
 <?php echo $pagination;?>
 </div>
 
-	<table class="tblist2">
+	<table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
 			<th></th>
 			<th>Name</th>
@@ -53,7 +53,7 @@
 		<tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?> >
 		  <td><?=$i;?></td>
 		  <td >
-		  	<?=$row['user_name'];?>
+		  	<?=$row['username'];?>
 		  </td>		  
 		  <td>
 		  	<?

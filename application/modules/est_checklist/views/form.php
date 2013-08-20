@@ -42,6 +42,10 @@ $(function(){
 		est_name: 
 		{ 
 			required: true
+		},
+		check_value: 
+		{ 
+			required: true
 		}
 	},
 	messages:
@@ -52,7 +56,7 @@ $(function(){
 		},
 		divisionid: 
 		{ 
-			required: " กรุณาเลือกกลุ่มวิชา"
+			required: " กรุณาประเภท"
 		},
 		sectionid: 
 		{ 
@@ -61,10 +65,17 @@ $(function(){
 		est_name: 
 		{ 
 			required: " กรุณาระบุชื่อผู้ประเมิน"
+		},
+		check_value: 
+		{ 
+			required: " กรุณาระบุชื่อผู้ประเมิน"
 		}
 	}
 	});
 	
+	jQuery.extend(jQuery.validator.messages, {
+    	required: "กรุณาเลือก"
+	});
 	 
 });
 </script>
@@ -75,15 +86,13 @@ $(function(){
 		<? if(permission($menu_id, 'can_access_all')=='on'){ ?>
 		<script>
     	$(function(){
-        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
+        	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
     	});
 		</script>
 			<? $year = form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$rs['year_data'],'','แสดงทุกปี');?>
-			<? $division = form_dropdown('divisionid',get_option('id','title','division order by title'),@$rs['divisionid'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
-			<? $section = form_dropdown('sectionid',get_option('id','title','section order by title'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชา/หน่วยงาน');?>
 		<? }else{ ?>	
 			<? $year=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$rs['year_data'],'','แสดงทุกปี');?>
-			<? $division=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
 			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<tr>
@@ -91,11 +100,7 @@ $(function(){
 		<td><?=$year?></td>
 		</tr>
 		<tr>
-		<th width="400px">กลุ่มวิชา</th>
-		<td><?=$division?></td>
-		</tr>
-		<tr>
-	  	<th width="400px">ภาควิชา</th>
+	  	<th width="400px">ภาควิชา/หน่วยงาน</th>
 	  	<td><?=$section?></td>
   		</tr>	
     	<tr>

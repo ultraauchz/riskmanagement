@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/admin/jquery.validate.min.js"></script>
 <script language="javascript">
 $(function(){
-        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'user/report_section',value: 'id',label: 'text'});
+        	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'user/report_section',value: 'id',label: 'text'});
     });
 $(function(){
 	var user_id = $('input[name=id]').val();
@@ -101,21 +101,15 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<td><strong>กลุ่มวิชา</strong></td>
+			<td><strong>ประเภท</strong></td>
 			<td>
-				<?=form_dropdown('divisionid',get_option('id','title','division order by title '),@$rs['divisionid'],'style="width:350px"','--เลือกกลุ่มวิชา--');?>
+				<?=form_dropdown('section_type_id',get_option('id','title','section_type order by title asc '),@$rs['section_type_id'],'style="width:350px"','--เลือกประเภท--');?>
 			</td>
 		</tr>				
 		<tr>
-			<td><strong>ภาควิชา</strong></td>
+			<td><strong>ภาควิชา/หน่วยงาน</strong></td>
 			<td>
-				<? if(@$rs['sectionid'] == ''){
-					 echo form_dropdown('sectionid',get_option('id','title','section where divisionid = 0 order by title'),@$rs['sectionid'],'style="width:370px"','-- กรุณาเลือกกลุ่มวิชา --');
-					 }else{
-					 echo form_dropdown('sectionid',get_option('id','title','section order by title'),@$rs['sectionid'],'style="width:370px"','-- กรุณาเลือกกลุ่มวิชา --');
-					 }
-					 	?>
-				
+				<?  echo form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','-- กรุณาเลือกกลุ่มวิชา/หน่วยงาน --');?>
 			</td>
 		</tr>		
 		<tr>

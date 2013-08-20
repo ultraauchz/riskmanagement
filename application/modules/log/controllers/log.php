@@ -1,10 +1,10 @@
 <?php
-class Admin_log extends Admin_Controller
+class log extends Public_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('log/log_model','log');
+		$this->load->model('admin_log_model','log');
 	}
 	
 	public function index()
