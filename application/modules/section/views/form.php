@@ -34,25 +34,25 @@ $(function(){
 	});
 });
 </script>
-<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา[เพิ่ม / แก้ไข]</h3>
+<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ หน่วยงาน[เพิ่ม / แก้ไข]</h3>
 <div></div>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save" class="commentForm">
 <table class="table table-form table-bordered table-striped table-horizontal"> 
 		<tr>
-			<td width="150px"><strong>กลุ่มวิชา</strong></td>
+			<td width="150px"><strong>ประเภท</strong></td>
 			<td>
-            	<?=form_dropdown('divisionid',get_option('id','title','division'),@$rs['divisionid'],'style="width:350px"','--เลือกกลุ่มวิชา--');?><span class="status">*</span>
+            	<?=form_dropdown('section_type_id',get_option('id','title','section_type'),@$rs['section_type_id'],'style="width:350px"','--เลือกกลุ่มวิชา--');?><span class="status">*</span>
             &nbsp;</td>
 		</tr>
 		<tr>
-			<td width="150px"><strong>ชื่อภาควิชา (ไทย)</strong></td>
+			<td width="150px"><strong>ชื่อภาควิชา/หน่วยงาน (ไทย)</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
             	<input type="text" name="title" value="<?=@$rs['title'];?>" style="width:500px" /> <span class="status">*</span>
             &nbsp;</td>
 		</tr>		
 		<tr>
-			<td width="150px"><strong>ชื่อภาควิชา (อังกฤษ)</strong></td>
+			<td width="150px"><strong>ชื่อภาควิชา/หน่วยงาน (อังกฤษ)</strong></td>
 			<td>
             	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" style="width:500px" />
             &nbsp;</td>
