@@ -44,7 +44,7 @@ $db['default']['hostname'] = 'localhost';
 
 
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'des@gn';
+$db['default']['password'] = '1234';
 $db['default']['database'] = 'risk_management';
 
 $db['default']['dbdriver'] = "mysql";

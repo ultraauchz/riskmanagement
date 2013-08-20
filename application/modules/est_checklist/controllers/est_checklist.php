@@ -146,6 +146,10 @@ class est_checklist extends Public_Controller
 		if($year_data != ''){
 		$data['main_title'] = $this->est_title->where('pid=0 and year_data='.$year_data)->get(false,true);
 		}
+		if(@$data['main_title']['id'] == '' && $data['year_data'] != ''){
+			$data['main_title'] = $this->est_title->where('pid=0 and year_data <='.$year_data )->get(false,true);
+		}
+		
 		$data['id']=$id;
 		$this->load->view('est_detail_form',$data);
 		
