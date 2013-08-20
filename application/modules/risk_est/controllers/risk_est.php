@@ -25,10 +25,6 @@ class risk_est extends Public_Controller
 				{
 					$condition .= "AND risk_est.sectionid ='".$_GET['section_id']."'  ";
 				}
-				if(@$_GET['division_id'] !='')
-				{
-					$condition .= "AND risk_est.divisionid ='".$_GET['division_id']."' ";
-				}
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
 				}
@@ -55,6 +51,7 @@ class risk_est extends Public_Controller
 	
 	public function form($id=false)
 	{
+		//$this->db->debug = true;
 		$menu_id = $this->menu_id;	
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';

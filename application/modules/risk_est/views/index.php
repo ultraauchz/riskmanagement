@@ -10,12 +10,10 @@
     	});
 		</script>
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
-			<?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+			<?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาและหน่วยงานทั้งหมด');?>
 		<? }else{ ?>	
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('division_id',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$_GET['division_id'],'style="width:320px"','');?>
-			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$_GET['section_id'],'style="width:370px"');?>
+			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc  '),@$_GET['section_id'],'style="width:370px"');?>
 		<? } ?>		
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
@@ -32,7 +30,6 @@
 		<th >ลำดับ</th>
 		<th >เหตุการณ์ความเสี่ยง</th>
 		<th >ปีงบประมาณ</th>
-		<th >วัตถุประสงค์</th>
 		<th >ภารกิจ</th>
 		<th >กระบวนงาน</th>
 		<th>หน่วยงาน</th>
@@ -49,12 +46,9 @@
 		<td width="5%"><?=$i;?></td>
 		<td align="left" width="20%"><?=$row['event_risk'];?></td>
 		<td align="left" width="5%"><?=$row['year_data']?></td>
-		<td align="left" width="5%">
-			<img src="media/images/department_ico.png" title="วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย ::: <?=$row['objective_title1'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน ::: <?=$row['objective_title2'];?> \r\n วัตถุประสงค์ตามยุทธศาสตร์ของงาน ::: <?=$row['objective_title3'];?>">
-		</td>
 		<td align="left" width="15%"><?=$row['mission_title']?></td>
 		<td align="left" width="15%"><?=$row['process_title']?></td>
-		<td align="left" width="5%"><img src="media/images/department_ico.png" title="กลุ่มวิชา ::: <?=$row['division_title']?> \r\n  ภาควิชา ::: <?=$row['section_title']?> "></td>
+		<td align="left" width="5%"><?=$row['section_title']?></td>
 		<td align="left" width="10%">
 			<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary"><i class=" icon-pencil"></i>แผนการปฎิบัติการ</a>

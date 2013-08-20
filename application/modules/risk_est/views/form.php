@@ -69,16 +69,9 @@ $(function(){
 <div id="btnBox">
 </div>
 		<? if(permission($menu_id, 'can_access_all')=='on'){ ?>
-		<script>
-    	$(function(){
-        	$('[name=sectionid]').chainedSelect({parent: '[name=divisionid]',url: 'risk_est/report_section',value: 'id',label: 'text'});
-    	});
-		</script>
-			<? $division = form_dropdown('divisionid',get_option('id','title','division order by title'),@$rs['divisionid'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
-			<? $section = form_dropdown('sectionid',get_option('id','title','section order by title'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
 		<? }else{ ?>	
-			<? $division=form_dropdown('divisionid',get_option('id','title','division where id = "'.@$result1['divisionid'].'" order by title '),@$rs['divisionid'],'style="width:320px"','');?>
-			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
+			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 <table class="table table-form table-bordered table-striped table-horizontal">	
 	<tr>
@@ -86,11 +79,7 @@ $(function(){
 		<td><?=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','--เลือกปี--');?></td>
 	</tr>
 	<tr>
-		<th width="400px">กลุ่มวิชา</th>
-		<td><?=$division;?></td>
-	</tr>
-	<tr>
-	  <th width="400px">ภาควิชา</th>
+	  <th width="400px">ภาควิชา/หน่วยงาน</th>
 	  <td><?=$section;?></td>
   </tr>
 	<tr>
@@ -121,36 +110,14 @@ $(function(){
 	  <th width="400px">ทบทวนเหตุการณ์ความเสี่ยง</th>
 	  <td><textarea name="review_risk" class="" rows="4" style="width:700px"><?=@$rs['review_risk'];?></textarea></td>
   </tr>
+  <tr>
+  		<th width="400px">วิเคราะห์เหตุการณ์ความเสี่ยง</th>
+	  <td>
+	  		<?=form_dropdown('risk_type_id',get_option('id','title','risk_type order by id '),@$rs['risk_type_id'],'','--เลือก--');?>
+            <textarea name="risk_analyze" class="" rows="4" style="width:700px"><?=@$rs['risk_analyze'];?></textarea>
+	  </td>
+  </tr>
 </table>
-<fieldset>
-  <legend>วิเคราะห์เหตุการณ์ความเสี่ยง</legend>
-	<table class="table table-form table-bordered table-striped table-horizontal">	
-    	<tr>
-        	<th width="400px">ความเสี่ยงด้านยุทธศาสตร์</th>
-            <td>
-            	<textarea name="strategic_risk" class="" rows="4" style="width:700px"><?=@$rs['strategic_risk'];?></textarea>
-            </td>
-        </tr>
-    	<tr>
-        	<th width="400px">ความเสี่ยงด้านการเงิน</th>
-            <td>
-               	<textarea name="finance_risk" class="" rows="4" style="width:700px"><?=@$rs['finance_risk'];?></textarea>
-            </td>
-        </tr>
-            	<tr>
-        	<th width="400px">ความเสี่ยงด้านดำเนินงาน</th>
-            <td>
-               	<textarea name="operate_risk" class="" rows="4" style="width:700px"><?=@$rs['operate_risk'];?></textarea>
-            </td>
-        </tr>
-            	<tr>
-        	<th width="400px">ความเสี่ยงด้านกฎระเบียบหรือกฎหมายที่เกี่ยวข้อง</th>
-            <td>
-               	<textarea name="law_risk" class="" rows="4" style="width:700px"><?=@$rs['law_risk'];?></textarea>
-            </td>
-        </tr>        
-    </table>
-</fieldset>
 <fieldset>
 	<legend>สาเหตุ</legend>
   <table class="table table-form table-bordered table-striped table-horizontal">	
@@ -168,39 +135,85 @@ $(function(){
         </tr>        
     </table>
 </fieldset>
-<table class="table table-form table-bordered table-striped table-horizontal">
-  <tr>
-    <th width="400px">ตัวชี้วัดความเสี่ยง</th>
-    <td><input name="kri_risk" type="text" class="" value="<?=@$rs['kri_risk'];?>" /></td>
-  </tr>
-  <tr>
-    <th width="400px">การควบคุมที่มีอยู่</th>
-    <td><input name="control_risk" type="text" class="" value="<?=@$rs['control_risk'];?>" /></td>
-  </tr>
-  <tr>
-    <th width="400px">การประเมินการควบคุมที่มีอยู่</th>
-    <td><textarea name="estimate_control_risk" class="" rows="4" style="width:700px"><?=@$rs['estimate_control_risk'];?></textarea></td>
-  </tr>
-</table>
 <fieldset>
-	<legend>ความเสี่ยงที่เหลืออยู่</legend>
+	<legend>ตัวชี้วัดความเสี่ยง</legend>
+	<a href="#" class="btn btn-warning btn_add_kri"><i class="icon-plus-sign"></i> เพิ่มตัวชี้วัด </a>
+	<p>&nbsp;</p>
+	<table class="table table-form table-bordered table-striped table-horizontal">
+	  <tr>
+	    <th width="300">ตัวชี้วัดความเสี่ยง</th>
+	    <th width="">จำนวน</th>
+	    <th width="">หน่วยนับ</th>
+	    <th style="text-align:center;">ลบ</th>
+	  </tr>
+	  <tr>	    
+	    <td>
+	    	<input name="kri_risk[]" type="text" style="width:300px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    </td>
+	    <td>
+	    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    </td>
+	    <td>
+	    	<input name="kri_risk_unit[]" type="text"  style="width:150px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    </td>
+	    <td style="width:80px;text-align:center;">
+	    	<a href="#" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
+	    </td>
+	  </tr>
+	  <tr class="tr_sum_kri_risk">
+	  	<th colspan="4"></th>
+	  </tr>
+	</table>
+</fieldset>
+<fieldset>
+	<legend>การควบคุมที่มีอยู่และการประเมินการควบคุมที่มีอยู่</legend>
+	<a href="#" class="btn btn-warning btn_add_control_riskk"><i class="icon-plus-sign"></i> เพิ่มการควบคุมที่มีอยู่ </a>
+	<p>&nbsp;</p>
+	<table class="table table-form table-bordered table-striped table-horizontal">	  
+	  <tr>
+	    <th width="400px">การควบคุมที่มีอยู่</th>
+	    <th width="400px">การประเมินการควบคุมที่มีอยู่</th>
+	    <th style="text-align:center;">ลบ</th>	    
+	  </tr>
+	  <tr>
+	    <td><input name="control_risk[]" type="text" class="" value="<?=@$rs['control_risk'];?>" /></td>
+	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:700px"><?=@$rs['estimate_control_risk'];?></textarea></td>
+	    <td style="width:80px;text-align:center;">
+	    	<a href="#" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
+	    </td>
+	  </tr>
+	  <tr class="tr_sum_control_risk">
+	  	<th colspan="3"></th>
+	  </tr>
+	</table>
+</fieldset>
+<fieldset>
+	<legend>ความเสี่ยงที่เหลืออยู่</legend>	
   <table class="table table-form table-bordered table-striped table-horizontal">	
-<tr>
+		<tr>
         	<th width="400px">ระดับโอกาสเกิด</th>
             <td>
-            	<input name="remain_risk_1" type="text" class="" value="<?=@$rs['remain_risk_1'];?>" />
+            	<select name="remain_risk_1" style="width:50px;">
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['remain_risk_1']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
             </td>
         </tr>
     	<tr>
         	<th width="400px">ระดับผลกระทบ</th>
             <td>
-               	<input name="remain_risk_2" type="text" class="" value="<?=@$rs['remain_risk_2'];?>" />
+               	<select name="remain_risk_2" style="width:50px;">
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['remain_risk_2']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
             </td>
         </tr>
         <tr>
         	<th width="400px">ระดับความเสี่ยงที่เหลือ</th>
             <td>
-               	<input name="remain_risk_3" type="text" class="" value="<?=@$rs['remain_risk_3'];?>" />
+               	<input name="remain_risk_3" type="text" style="width:30px;" value="<?=(@$rs['remain_risk_1'] * @$rs['remain_risk_2']);?>" />
             </td>
         </tr>        
     </table>
@@ -215,12 +228,16 @@ $(function(){
     <td><input name="owner_risk" type="text" class="" value="<?=@$rs['owner_risk'];?>" /></td>
   </tr>
   <tr>
+    <th width="400px">ตำแหน่ง</th>
+    <td><input name="owner_risk_position" type="text" class="" value="<?=@$rs['owner_risk'];?>" /></td>
+  </tr>
+  <tr>
     <th width="400px">วันที่เริ่มดำเนินการ</th>
-    <td><input type="text" name="start_date" value="<?=@$rs['start_date'];?>" style="width:150px" class="datepicker" /></td>
+    <td><input type="text" name="start_date" value="<?=@$rs['start_date'];?>" style="width:100px" class="datepicker" /></td>
   </tr>
   <tr>
     <th width="400px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="end_date" value="<?=@$rs['end_date'];?>" style="width:150px" class="datepicker" /></td>
+    <td><input type="text" name="end_date" value="<?=@$rs['end_date'];?>" style="width:100px" class="datepicker" /></td>
   </tr>
 </table>
 <div align="center">
