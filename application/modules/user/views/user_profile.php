@@ -72,13 +72,13 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<td><strong>กลุ่มวิชา</strong></td>
+			<td><strong>ประเภท</strong></td>
 			<td>
-				<? if(@$result['division_title'] == ''){ echo "-"; }else{echo @$result['division_title'];}?>
+				<? if(@$result['section_type_title'] == ''){ echo "-"; }else{echo @$result['section_type_title'];}?>
 			</td>
 		</tr>				
 		<tr>
-			<td><strong>ภาควิชา</strong></td>
+			<td><strong>ภาควิชา/หน่วยงาน</strong></td>
 			<td>
 				<? if(@$result['title'] == ''){echo "-";}else{echo @$result['title'];}?>
 			</td>

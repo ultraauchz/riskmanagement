@@ -9,6 +9,7 @@
 			<tr>
 		 		<td colspan="2" style="text-align:center;">รายการประเมิน</td>
 		 		<td style="width:60px;text-align:center;">มี</td>
+		 		<td style="width:60px;text-align:center;">ไม่มี</td>
 		 	</tr>
 		<? 
 			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
@@ -34,11 +35,18 @@
 					
 					$i++
 					?>
-					<td class="third_title" ><?=$third_item['title'];?></td>
+					<td class="third_title" >
+						<?=$third_item['title'];?>
+						
+					</td>
 					<td style="width:60px;text-align:center;">
 						<input type="hidden" name="est_title_id[<?=$i?>]" value="<?=$third_item['id'];?>">
 						<input type="hidden" name="detail_id[<?=$i?>]" value="<?=@$check_detail['id'];?>">
-						<input type="checkbox" name="check_value[<?=$i?>]" value="y" <? if(@$check_detail['check_value'] == 'y'){ ?> checked="checked" <? } ?> >						
+						<input type="radio" name="check_value[<?=$i?>]" class="required" value="1" <? if(@$check_detail['check_value'] == '1'){ ?> checked="checked" <? } ?> >
+						
+					</td>
+					<td style="width:60px;text-align:center;">
+						<input type="radio" name="check_value[<?=$i?>]" class="required" value="0" <? if(@$check_detail['check_value'] == '0'){ ?> checked="checked" <? } ?> >					
 					</td>
 				</tr>
 			<? endforeach;?>

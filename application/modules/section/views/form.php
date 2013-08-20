@@ -41,7 +41,7 @@ $(function(){
 		<tr>
 			<td width="150px"><strong>ประเภท</strong></td>
 			<td>
-            	<?=form_dropdown('section_type_id',get_option('id','title','section_type'),@$rs['section_type_id'],'style="width:350px"','--เลือกกลุ่มวิชา--');?><span class="status">*</span>
+            	<?=form_dropdown('section_type_id',get_option('id','title','section_type'),@$rs['section_type_id'],'style="width:350px"','--เลือกประเภท--');?><span class="status">*</span>
             &nbsp;</td>
 		</tr>
 		<tr>

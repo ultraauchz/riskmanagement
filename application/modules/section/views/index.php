@@ -1,6 +1,6 @@
 <script>
     	$(function(){
-        	$('[name=section_id]').chainedSelect({parent: '[name=division_id]',url: 'section/report_section',value: 'id',label: 'text'});
+        	$('[name=section_id]').chainedSelect({parent: '[name=section_type_id]',url: 'section/report_section',value: 'id',label: 'text'});
     	});
 </script>
 <h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ หน่วยงาน</h3>
@@ -8,8 +8,8 @@
 <div id="search">
   <div id="searchBox">
   <h4>ค้นหา</h4>
-  <?=form_dropdown('division_id',get_option('id','title','division order by title '),@$_GET['division_id'],'style="width:320px"','แสดงกลุ่มวิชาทั้งหมด');?>
-  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>    
+  <?=form_dropdown('section_type_id',get_option('id','title','section_type order by title '),@$_GET['section_type_id'],'style="width:320px"','แสดงประเภททั้งหมด');?>
+  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/หน่วยงาน ทั้งหมด');?>    
   <input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
@@ -26,7 +26,7 @@
 					<th>ลำดับ</th>
 					<th>ชื่อภาควิชา (ไทย)</th>
 					<th>ชื่อภาควิชา (อังกฤษ)</th> 
-					<th>กลุ่มวิชา</th>
+					<th>ประเภท</th>
 					<? if(@$rs['permis']=='on'){ ?>                     
 					<th>จัดการข้อมูล</th>
 					<? } ?>
@@ -41,7 +41,7 @@
 		  <td><?=$i;?></td>
 		  <td align="left" ><?=$row['title'];?></td>	  
 		  <td align="left" ><?=$row['title_en'];?></td>	
-		  <td align="left" ><?=$row['division_title'];?></td>
+		  <td align="left" ><?=$row['section_type_title'];?></td>
 		  <? if(@$rs['permis']=='on'){ ?> 		  
 		  <td>
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
