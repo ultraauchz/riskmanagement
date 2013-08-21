@@ -3,7 +3,7 @@
 <div id="search">
   <div id="searchBox">
   <h4>ค้นหา</h4>
-  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+  <?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
     ชื่อ-นามสกุล/Username/E-mail <input type="text" name="name_search" value="<?=@$_GET['name_search']?>" style="width:370px" />    
   <input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>

@@ -78,7 +78,7 @@ $(function(){
 			</td>
 		</tr>				
 		<tr>
-			<td><strong>ภาควิชา/หน่วยงาน</strong></td>
+			<td><strong>ภาควิชา/งาน</strong></td>
 			<td>
 				<? if(@$result['title'] == ''){echo "-";}else{echo @$result['title'];}?>
 			</td>

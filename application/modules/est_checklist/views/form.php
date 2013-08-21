@@ -31,10 +31,6 @@ $(function(){
 		{ 
 			required: true
 		},
-		divisionid: 
-		{ 
-			required: true
-		},
 		sectionid: 
 		{ 
 			required: true
@@ -54,13 +50,9 @@ $(function(){
 		{
 			required: " กรุณาเลือกปีงบประมาณ"
 		},
-		divisionid: 
-		{ 
-			required: " กรุณาประเภท"
-		},
 		sectionid: 
 		{ 
-			required: " กรุณาเลือกภาควิชา"
+			required: " กรุณาเลือกภาควิชา/งาน"
 		},
 		est_name: 
 		{ 
@@ -89,10 +81,10 @@ $(function(){
         	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
     	});
 		</script>
-			<? $year = form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$rs['year_data'],'','แสดงทุกปี');?>
-			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชา/หน่วยงาน');?>
+			<? $year=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','--เลือกปี--');?>
+			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชา/งาน');?>
 		<? }else{ ?>	
-			<? $year=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$rs['year_data'],'','แสดงทุกปี');?>
+			<? $year=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','--เลือกปี--');?>
 			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<tr>
@@ -100,7 +92,7 @@ $(function(){
 		<td><?=$year?></td>
 		</tr>
 		<tr>
-	  	<th width="400px">ภาควิชา/หน่วยงาน</th>
+	  	<th width="400px">ภาควิชา/งาน</th>
 	  	<td><?=$section?></td>
   		</tr>	
     	<tr>

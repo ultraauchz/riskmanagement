@@ -26,10 +26,6 @@ class est_checklist extends Public_Controller
 				{
 					$condition .= "AND est_checklist.sectionid ='".$_GET['sectionid']."'  ";
 				}
-				if(@$_GET['section_type_id'] !='')
-				{
-					$condition .= "AND est_checklist.section_type_id ='".$_GET['section_type_id']."' ";
-				}
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";
 				}
@@ -146,6 +142,10 @@ class est_checklist extends Public_Controller
 		if($year_data != ''){
 		$data['main_title'] = $this->est_title->where('pid=0 and year_data='.$year_data)->get(false,true);
 		}
+		if(@$data['main_title']['id'] == '' && $data['year_data'] != ''){
+			$data['main_title'] = $this->est_title->where('pid=0 and year_data = (select max(year_data) from est_title where year_data <='.$year_data.' )')->get(false,true);
+		}
+		
 		$data['id']=$id;
 		$this->load->view('est_detail_form',$data);
 		

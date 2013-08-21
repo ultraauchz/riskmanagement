@@ -15,7 +15,7 @@ $(function(){
 		{ 
 			required: true
 		},
-		divisionid: 
+		section_type_id: 
 		{ 
 			required: true
 		}
@@ -24,17 +24,17 @@ $(function(){
 	{
 		title:
 		{
-			required: " กรุณากรอกชื่อภาควิชา"
+			required: " กรุณากรอกชื่อภาควิชา/งาน"
 		},
-		divisionid: 
+		section_type_id: 
 		{ 
-			required: " กรุณาเลือกกลุ่มวิชา"
+			required: " กรุณาเลือกประเภท"
 		}
 	}
 	});
 });
 </script>
-<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ หน่วยงาน[เพิ่ม / แก้ไข]</h3>
+<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ งาน[เพิ่ม / แก้ไข]</h3>
 <div></div>
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save" class="commentForm">
 <table class="table table-form table-bordered table-striped table-horizontal"> 
@@ -45,14 +45,14 @@ $(function(){
             &nbsp;</td>
 		</tr>
 		<tr>
-			<td width="150px"><strong>ชื่อภาควิชา/หน่วยงาน (ไทย)</strong></td>
+			<td width="150px"><strong>ชื่อภาควิชา/งาน (ไทย)</strong></td>
 			<td>
             	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
             	<input type="text" name="title" value="<?=@$rs['title'];?>" style="width:500px" /> <span class="status">*</span>
             &nbsp;</td>
 		</tr>		
 		<tr>
-			<td width="150px"><strong>ชื่อภาควิชา/หน่วยงาน (อังกฤษ)</strong></td>
+			<td width="150px"><strong>ชื่อภาควิชา/งาน (อังกฤษ)</strong></td>
 			<td>
             	<input type="text" name="title_en" value="<?=@$rs['title_en'];?>" style="width:500px" />
             &nbsp;</td>

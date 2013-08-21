@@ -47,7 +47,6 @@ $(function(){
 	rules: 
 	{
 		year_data:{ required: true},
-		divisionid:{ required: true},
 		sectionid:{ required: true},
 		missionid:{ required: true},
 		objectiveid_1:{ required: true},
@@ -76,8 +75,7 @@ $(function(){
 	messages:
 	{
 		year_data:{required: " กรุณาเลือกปี"},
-		divisionid:{required: " กรุณาเลือกกลุ่มวิชา"},
-		sectionid:{ required: " กรุณาเลือกภาควิชา"},
+		sectionid:{ required: " กรุณาเลือกภาควิชา/งาน"},
 		objectiveid_1:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย"},
 		objectiveid_2:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน"},
 		objectiveid_3:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน"},
@@ -112,7 +110,7 @@ $(function(){
 <div id="btnBox">
 </div>
 		<? if(permission($menu_id, 'can_access_all')=='on'){ ?>
-			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+			<? $section = form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
 		<? }else{ ?>	
 			<? $section=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
@@ -122,7 +120,7 @@ $(function(){
 		<td><?=form_dropdown('year_data',get_year_option(),@$rs['year_data'],'','--เลือกปี--');?></td>
 	</tr>
 	<tr>
-	  <th width="400px">ภาควิชา/หน่วยงาน</th>
+	  <th width="400px">ภาควิชา/งาน</th>
 	  <td><?=$section;?></td>
   </tr>
 	<tr>
