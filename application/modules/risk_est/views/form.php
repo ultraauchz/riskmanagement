@@ -1,63 +1,109 @@
 <script type="text/javascript">
+
 $(function(){
-	$(".commentForm").validate({
-	rules: 
-	{
-		year_data:{ required: true},
-		sectionid:{ required: true},
-		missionid:{ required: true},
-		objectiveid_1:{ required: true},
-		objectiveid_2:{ required: true},
-		objectiveid_3:{ required: true},
-		processid:{ required: true},
-		event_risk:{ required: true},
-		review_risk:{ required: true},
-		strategic_risk:{ required: true},
-		finance_risk:{ required: true},
-		operate_risk:{ required: true},
-		law_risk:{ required: true},
-		cause_in_risk:{ required: true},
-		cause_out_risk:{ required: true},
-		kpi_risk:{ required: true},
-		control_risk:{ required: true},
-		estimate_control_risk:{ required: true},
-		remain_risk_1:{ required: true ,number: true},
-		remain_risk_2:{ required: true ,number: true},
-		remain_risk_3:{ required: true ,number: true},
-		manage_risk:{ required: true},
-		owner_risk:{ required: true},
-		start_date:{ required: true},
-		end_date:{ required: true}
-	},
-	messages:
-	{
-		year_data:{required: " กรุณาเลือกปี"},
-		sectionid:{ required: " กรุณาเลือกภาควิชา/งาน"},
-		objectiveid_1:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย"},
-		objectiveid_2:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน"},
-		objectiveid_3:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน"},
-		missionid:{ required: " กรุณาเลือกภารกิจ"},
-		processid:{ required: " กรุณาเลือกกระบวนงาน"},
-		event_risk:{ required: " กรุณาระบุเหตุการณ์ความเสี่ยง"},
-		review_risk:{ required: " กรุณาระบุทบทวนเหตุการณ์ความเสี่ยง"},
-		strategic_risk:{ required: " กรุณาระบุความเสี่ยงด้านยุทธศาสตร์"},
-		finance_risk:{ required: " กรุณาระบุความเสี่ยงด้านการเงิน"},
-		operate_risk:{ required: " กรุณาระบุความเสี่ยงด้านดำเนินงาน"},
-		law_risk:{ required: "กรุณาระบุความเสี่ยงด้านกฎระเบียบหรือกฎหมายที่เกี่ยวข้อง"},
-		cause_in_risk:{ required: "กรุณาระบุปัจจัยภายใน"},
-		cause_out_risk:{ required: "กรุณาระบุปัจจัยภายนอก"},
-		kpi_risk:{ required: "กรุณาระบุตัวชี้วัดความเสี่ยง"},
-		control_risk:{ required: "กรุณาระบุการควบคุมที่มีอยู่"},
-		estimate_control_risk:{ required: "กรุณาระบุการประเมินการควบคุมที่มีอยู่"},
-		remain_risk_1:{ required: "กรุณาระบุระดับโอกาสเกิด" ,number: "กรุณาระบุเป็นตัวเลข"},
-		remain_risk_2:{ required: "กรุณาระบุระดับผลกระทบ" ,number: "กรุณาระบุเป็นตัวเลข"},
-		remain_risk_3:{ required: "กรุณาระบุระดับความเสี่ยงที่เหลือ" ,number: "กรุณาระบุเป็นตัวเลข"},
-		manage_risk:{ required: "กรุณาระบุแนวทางการจัดการ"},
-		owner_risk:{ required: "กรุณาระบุผู้รับผิดชอบ"},
-		start_date:{ required: "กรุณาระบุวันที่เริ่มดำเนินการ"},
-		end_date:{ required: "กรุณาระบุวันที่เสร็จสิ้น"}
+	$(document).ready(function(){
+ 
+  		$(".number").inputmask({"mask": "99-9999999"});
+ 
+ 	})
+	
+	function validate_form(){
+		$(".commentForm").validate({
+			rules: 
+			{
+				year_data:{ required: true},
+				sectionid:{ required: true},
+				missionid:{ required: true},
+				objectiveid_1:{ required: true},
+				objectiveid_2:{ required: true},
+				objectiveid_3:{ required: true},
+				processid:{ required: true},
+				event_risk:{ required: true},
+				review_risk:{ required: true},
+				risk_type_id:{	required: true},
+				risk_analyze:{	required: true},
+				cause_in_risk:{ required: true},
+				cause_out_risk:{ required: true},
+				remain_risk_1:{ required: true ,number: true},
+				remain_risk_2:{ required: true ,number: true},
+				remain_risk_3:{ required: true ,number: true},
+				manage_risk:{ required: true},
+				owner_risk:{ required: true},
+				owner_risk_position:{ required: true},
+				start_date:{ required: true},
+				end_date:{ required: true}
+			},
+			messages:
+			{
+				year_data:{required: " กรุณาเลือกปี"},
+				sectionid:{ required: " กรุณาเลือกภาควิชา/งาน"},
+				objectiveid_1:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย"},
+				objectiveid_2:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน"},
+				objectiveid_3:{ required: " กรุณาเลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน"},
+				missionid:{ required: " กรุณาเลือกภารกิจ"},
+				processid:{ required: " กรุณาเลือกกระบวนงาน"},
+				event_risk:{ required: " กรุณาระบุเหตุการณ์ความเสี่ยง"},
+				review_risk:{ required: " กรุณาระบุทบทวนเหตุการณ์ความเสี่ยง"},
+				risk_type_id:{	required: " กรุณาเลือกวิเคราะห์เหตุการณ์ความเสี่ยง"},
+				risk_analyze:{	required: " กรุณาระบุรายละเอียดวิเคราะห์เหตุการณ์ความเสี่ยง"},
+				cause_in_risk:{ required: "กรุณาระบุปัจจัยภายใน"},
+				cause_out_risk:{ required: "กรุณาระบุปัจจัยภายนอก"},
+				remain_risk_1:{ required: "กรุณาระบุระดับโอกาสเกิด" ,number: "กรุณาระบุเป็นตัวเลข"},
+				remain_risk_2:{ required: "กรุณาระบุระดับผลกระทบ" ,number: "กรุณาระบุเป็นตัวเลข"},
+				remain_risk_3:{ required: "กรุณาระบุระดับความเสี่ยงที่เหลือ" ,number: "กรุณาระบุเป็นตัวเลข"},
+				manage_risk:{ required: "กรุณาระบุแนวทางการจัดการ"},
+				owner_risk:{ required: "กรุณาระบุผู้รับผิดชอบ"},
+				owner_risk_position:{ required: "กรุณาระบุตำแหน่ง"},
+				start_date:{ required: "กรุณาระบุวันที่เริ่มดำเนินการ"},
+				end_date:{ required: "กรุณาระบุวันที่เสร็จสิ้น"}
+			}
+			});
 	}
-	});
+	
+	$(".btn_add_control_risk").click(function(){
+			
+		var newrow = '<tr>';
+	    newrow +='<td><input name="control_risk[]" type="text" class="" value="" style="width:300px;" /></td>';
+	    newrow +='<td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"></textarea></td>';
+	    newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>';
+	    newrow +='</td>';
+	    newrow +='</tr>';
+	    		
+		$('.tr_sum_control_risk').before(newrow);
+	})
+	
+	$(".btn_add_kri_risk").click(function(){
+		  var newrow ='<tr>';	    
+		  newrow +='<td><input name="kri_risk[]"  type="text" style="width:300px;" value="" class="required" /></td>';
+		  newrow +='<td><input name="kri_risk_count[]"  type="text" style="width:100px;" value="" class="number required" /></td>';
+		  newrow +='<td><input name="kri_risk_unit[]" type="text"  style="width:150px;" value="" class="required" /></td>';
+		  newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a></td>';
+		  newrow +='</tr>';
+	    		
+		$('.tr_sum_kri_risk').before(newrow);
+		validate_form();
+	})
+	
+	$(".remain_risk").change(function(){		
+		var r1 = $("[name=remain_risk_1]").val();
+		var r2 = $("[name=remain_risk_2]").val();
+		var r3 = parseInt(r1) * parseInt(r2);
+		$("[name=remain_risk_3]").val(r3);	
+	})
+	
+	$(".btn_delete_control_risk").live("click",function(){
+		if(confirm('ลบรายการนี้ ?')){
+		  	  $(this).closest("tr").remove();
+		}
+	})
+	
+	$(".btn_delete_kri_risk").live("click",function(){
+		  if(confirm('ลบรายการนี้ ?')){
+		  	  $(this).closest("tr").remove();
+		  }		
+	})
+	
+	validate_form();
 });
 </script>
 
@@ -111,7 +157,7 @@ $(function(){
   <tr>
   		<th width="400px">วิเคราะห์เหตุการณ์ความเสี่ยง</th>
 	  <td>
-	  		<?=form_dropdown('risk_type_id',get_option('id','title','risk_type order by id '),@$rs['risk_type_id'],'','--เลือก--');?>
+	  		<?=form_dropdown('risk_type_id',get_option('id','title','risk_type order by id '),@$rs['risk_type_id'],'','--เลือก--');?><br />
             <textarea name="risk_analyze" class="" rows="4" style="width:700px"><?=@$rs['risk_analyze'];?></textarea>
 	  </td>
   </tr>
@@ -135,7 +181,7 @@ $(function(){
 </fieldset>
 <fieldset>
 	<legend>ตัวชี้วัดความเสี่ยง</legend>
-	<a href="#" class="btn btn-warning btn_add_kri"><i class="icon-plus-sign"></i> เพิ่มตัวชี้วัด </a>
+	<a href="#" onclick="return false;" class="btn btn-warning btn_add_kri_risk"><i class="icon-plus-sign"></i> เพิ่มตัวชี้วัด </a>
 	<p>&nbsp;</p>
 	<table class="table table-form table-bordered table-striped table-horizontal">
 	  <tr>
@@ -144,20 +190,41 @@ $(function(){
 	    <th width="">หน่วยนับ</th>
 	    <th style="text-align:center;">ลบ</th>
 	  </tr>
+	   <?  if(@$id != '' ){
+	  	  	$risk_kri = $this->risk_kri->where('risk_est_id='.@$id)->get();
+	      	foreach ($risk_kri as $kri) {
+	   ?>
+			  <tr>	    
+			    <td>
+			    	<input name="kri_risk[]" id="kri_risk" type="text" style="width:300px;" value="<?=$kri['kri_risk']?>" class="required" />	    	
+			    </td>
+			    <td>
+			    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="<?=$kri['kri_risk_count']?>" class="number required" />	    	
+			    </td>
+			    <td>
+			    	<input name="kri_risk_unit[]" type="text" style="width:150px;" value="<?=$kri['kri_risk_unit']?>" class="required" />	    	
+			    </td>
+			    <td style="width:80px;text-align:center;">
+			    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
+			    </td>
+			  </tr>
+	  <? 	} 
+			}else{?>
 	  <tr>	    
 	    <td>
-	    	<input name="kri_risk[]" type="text" style="width:300px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    	<input name="kri_risk[]" type="text" style="width:300px;" value="" class="required" />	    	
 	    </td>
 	    <td>
-	    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="" class="number required" />	    	
 	    </td>
 	    <td>
-	    	<input name="kri_risk_unit[]" type="text"  style="width:150px;" value="<?=@$rs['kri_risk'];?>" />	    	
+	    	<input name="kri_risk_unit[]" type="text"  style="width:150px;" value="" class="required" />	    	
 	    </td>
 	    <td style="width:80px;text-align:center;">
-	    	<a href="#" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
+	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
+	  <? } ?>
 	  <tr class="tr_sum_kri_risk">
 	  	<th colspan="4"></th>
 	  </tr>
@@ -165,21 +232,35 @@ $(function(){
 </fieldset>
 <fieldset>
 	<legend>การควบคุมที่มีอยู่และการประเมินการควบคุมที่มีอยู่</legend>
-	<a href="#" class="btn btn-warning btn_add_control_riskk"><i class="icon-plus-sign"></i> เพิ่มการควบคุมที่มีอยู่ </a>
+	<a href="#" onclick="return false;" class="btn btn-warning btn_add_control_risk"><i class="icon-plus-sign"></i> เพิ่มการควบคุมที่มีอยู่ </a>
 	<p>&nbsp;</p>
 	<table class="table table-form table-bordered table-striped table-horizontal">	  
 	  <tr>
 	    <th width="400px">การควบคุมที่มีอยู่</th>
-	    <th width="400px">การประเมินการควบคุมที่มีอยู่</th>
-	    <th style="text-align:center;">ลบ</th>	    
+	    <th >การประเมินการควบคุมที่มีอยู่</th>
+	    <th style="text-align:center;width:80px;">ลบ</th>	    
 	  </tr>
+	  <?  if(@$id != '' ){
+	  	  	$control_risk = $this->risk_control->where('risk_est_id='.@$id)->get();
+	      	foreach ($control_risk as $com_risk) {
+	   ?>
+	  		<tr>
+	   		 <td><input name="control_risk[]" style="width:300px;" type="text" class="" value="<?=@$com_risk['control_risk']?>" /></td>
+	   		 <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"><?=@$com_risk['estimate_control_risk']?></textarea></td>
+	    	 <td style="width:80px;text-align:center;">
+	    		<a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
+	       	 </td>
+	 	   </tr>
+	  <? 	} 
+	  	  }else{ ?>
 	  <tr>
-	    <td><input name="control_risk[]" type="text" class="" value="<?=@$rs['control_risk'];?>" /></td>
-	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:700px"><?=@$rs['estimate_control_risk'];?></textarea></td>
+	    <td><input name="control_risk[]" style="width:300px;" type="text" class="" value="" /></td>
+	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"></textarea></td>
 	    <td style="width:80px;text-align:center;">
-	    	<a href="#" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
+	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
+	  <? } ?>
 	  <tr class="tr_sum_control_risk">
 	  	<th colspan="3"></th>
 	  </tr>
@@ -191,7 +272,8 @@ $(function(){
 		<tr>
         	<th width="400px">ระดับโอกาสเกิด</th>
             <td>
-            	<select name="remain_risk_1" style="width:50px;">
+            	<select name="remain_risk_1" class="remain_risk" style="width:50px;">
+            		<option value="" <? if(@$rs['remain_risk_1']=='')echo 'selected="selected"';?>>--</option>
             		<? for($i=1;$i<=5;$i++): ?>
             		<option value="<?=$i;?>" <? if(@$rs['remain_risk_1']==$i)echo 'selected="selected"';?>><?=$i;?></option>
             		<? endfor;?>
@@ -201,7 +283,8 @@ $(function(){
     	<tr>
         	<th width="400px">ระดับผลกระทบ</th>
             <td>
-               	<select name="remain_risk_2" style="width:50px;">
+               	<select name="remain_risk_2" class="remain_risk"  style="width:50px;">
+               		<option value="" <? if(@$rs['remain_risk_2']=='')echo 'selected="selected"';?>>--</option>
             		<? for($i=1;$i<=5;$i++): ?>
             		<option value="<?=$i;?>" <? if(@$rs['remain_risk_2']==$i)echo 'selected="selected"';?>><?=$i;?></option>
             		<? endfor;?>
@@ -211,7 +294,7 @@ $(function(){
         <tr>
         	<th width="400px">ระดับความเสี่ยงที่เหลือ</th>
             <td>
-               	<input name="remain_risk_3" type="text" style="width:30px;" value="<?=(@$rs['remain_risk_1'] * @$rs['remain_risk_2']);?>" />
+               	<input name="remain_risk_3" type="text" style="width:30px;" disabled="disabled" value="<?=(@$rs['remain_risk_1'] * @$rs['remain_risk_2']);?>" />
             </td>
         </tr>        
     </table>
@@ -227,7 +310,7 @@ $(function(){
   </tr>
   <tr>
     <th width="400px">ตำแหน่ง</th>
-    <td><input name="owner_risk_position" type="text" class="" value="<?=@$rs['owner_risk'];?>" /></td>
+    <td><input name="owner_risk_position" type="text" class="" value="<?=@$rs['owner_risk_position'];?>" /></td>
   </tr>
   <tr>
     <th width="400px">วันที่เริ่มดำเนินการ</th>

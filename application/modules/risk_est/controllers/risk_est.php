@@ -7,6 +7,8 @@ class risk_est extends Public_Controller
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('risk_est_model','risk');
 		$this->load->model('risk_opr_model','risk_opr');
+		$this->load->model('risk_est_control_model','risk_control');
+		$this->load->model('risk_est_kri_model','risk_kri');
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 52;
@@ -192,7 +194,35 @@ class risk_est extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk'];		
 			save_log($menu_id,$action,$description);
 		}
-		$id = $this->risk->save($_POST);		
+		$pid = $this->risk->save($_POST);
+		/////save risk_control		
+		$this->db->Execute('delete from risk_est_control where risk_est_id ='.$pid);
+		if(isset($_POST['control_risk'])){
+		   foreach($_POST['control_risk'] as $key=>$item){
+		    if($_POST['control_risk'][$key]){
+		    $i++;
+		    $data['risk_est_id'] = $pid;
+		    $data['control_risk'] = $_POST['control_risk'][$key];
+		    $data['estimate_control_risk'] = $_POST['estimate_control_risk'][$key];
+		    $this->risk_control->save($data);
+		    }
+		   } 
+		  }
+		/////save rick_kri
+		$this->db->Execute('delete from risk_est_kri where risk_est_id ='.$pid);
+		if(isset($_POST['kri_risk'])){
+		   foreach($_POST['kri_risk'] as $key=>$item){
+		    if($_POST['kri_risk'][$key]){
+		    $i++;
+		    $data['risk_est_id'] = $pid;
+		    $data['kri_risk'] = $_POST['kri_risk'][$key];
+		    $data['kri_risk_count'] = $_POST['kri_risk_count'][$key];
+			$data['kri_risk_unit'] = $_POST['kri_risk_unit'][$key];
+		    $this->risk_kri->save($data);
+		    }
+		   } 
+		  }
+		
 		set_notify('risk_est', lang('save_data_complete'));
 		redirect('risk_est');
 	}
