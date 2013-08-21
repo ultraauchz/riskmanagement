@@ -1,5 +1,48 @@
 <script type="text/javascript">
 $(function(){
+		
+	$(".btn_add_control_risk").click(function(){
+					
+		var newrow = '<tr>';
+	    newrow +='<td><input name="control_risk[]" type="text" class="" value="" style="width:300px;" /></td>';
+	    newrow +='<td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"></textarea></td>';
+	    newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>';
+	    newrow +='</td>';
+	    newrow +='</tr>';
+	    		
+		$('.tr_sum_control_risk').before(newrow);
+	})
+	
+	$(".btn_add_kri_risk").click(function(){
+		  var newrow ='<tr>';	    
+		  newrow +='<td><input name="kri_risk[]" type="text" style="width:300px;" value="" /></td>';
+		  newrow +='<td><input name="kri_risk_count[]"  type="text" style="width:100px;" value="" /></td>';
+		  newrow +='<td><input name="kri_risk_unit[]" type="text"  style="width:150px;" value="" /></td>';
+		  newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a></td>';
+		  newrow +='</tr>';
+	    		
+		$('.tr_sum_kri_risk').before(newrow);
+	})
+	
+	$(".remain_risk").change(function(){		
+		var r1 = $("[name=remain_risk_1]").val();
+		var r2 = $("[name=remain_risk_2]").val();
+		var r3 = parseInt(r1) * parseInt(r2);
+		$("[name=remain_risk_3]").val(r3);	
+	})
+	
+	$(".btn_delete_control_risk").live("click",function(){
+		if(confirm('ลบรายการนี้ ?')){
+		  	  $(this).closest("tr").remove();
+		}
+	})
+	
+	$(".btn_delete_kri_risk").live("click",function(){
+		  if(confirm('ลบรายการนี้ ?')){
+		  	  $(this).closest("tr").remove();
+		  }		
+	})
+	
 	$(".commentForm").validate({
 	rules: 
 	{
@@ -137,7 +180,7 @@ $(function(){
 </fieldset>
 <fieldset>
 	<legend>ตัวชี้วัดความเสี่ยง</legend>
-	<a href="#" class="btn btn-warning btn_add_kri"><i class="icon-plus-sign"></i> เพิ่มตัวชี้วัด </a>
+	<a href="#" onclick="return false;" class="btn btn-warning btn_add_kri_risk"><i class="icon-plus-sign"></i> เพิ่มตัวชี้วัด </a>
 	<p>&nbsp;</p>
 	<table class="table table-form table-bordered table-striped table-horizontal">
 	  <tr>
@@ -157,7 +200,7 @@ $(function(){
 	    	<input name="kri_risk_unit[]" type="text"  style="width:150px;" value="<?=@$rs['kri_risk'];?>" />	    	
 	    </td>
 	    <td style="width:80px;text-align:center;">
-	    	<a href="#" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
+	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
 	  <tr class="tr_sum_kri_risk">
@@ -167,19 +210,19 @@ $(function(){
 </fieldset>
 <fieldset>
 	<legend>การควบคุมที่มีอยู่และการประเมินการควบคุมที่มีอยู่</legend>
-	<a href="#" class="btn btn-warning btn_add_control_riskk"><i class="icon-plus-sign"></i> เพิ่มการควบคุมที่มีอยู่ </a>
+	<a href="#" onclick="return false;" class="btn btn-warning btn_add_control_risk"><i class="icon-plus-sign"></i> เพิ่มการควบคุมที่มีอยู่ </a>
 	<p>&nbsp;</p>
 	<table class="table table-form table-bordered table-striped table-horizontal">	  
 	  <tr>
 	    <th width="400px">การควบคุมที่มีอยู่</th>
-	    <th width="400px">การประเมินการควบคุมที่มีอยู่</th>
-	    <th style="text-align:center;">ลบ</th>	    
+	    <th >การประเมินการควบคุมที่มีอยู่</th>
+	    <th style="text-align:center;width:80px;">ลบ</th>	    
 	  </tr>
 	  <tr>
-	    <td><input name="control_risk[]" type="text" class="" value="<?=@$rs['control_risk'];?>" /></td>
-	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:700px"><?=@$rs['estimate_control_risk'];?></textarea></td>
+	    <td><input name="control_risk[]" style="width:300px;" type="text" class="" value="<?=@$rs['control_risk'];?>" /></td>
+	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"><?=@$rs['estimate_control_risk'];?></textarea></td>
 	    <td style="width:80px;text-align:center;">
-	    	<a href="#" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
+	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
 	  <tr class="tr_sum_control_risk">
@@ -193,7 +236,7 @@ $(function(){
 		<tr>
         	<th width="400px">ระดับโอกาสเกิด</th>
             <td>
-            	<select name="remain_risk_1" style="width:50px;">
+            	<select name="remain_risk_1" class="remain_risk" style="width:50px;">
             		<? for($i=1;$i<=5;$i++): ?>
             		<option value="<?=$i;?>" <? if(@$rs['remain_risk_1']==$i)echo 'selected="selected"';?>><?=$i;?></option>
             		<? endfor;?>
@@ -203,7 +246,7 @@ $(function(){
     	<tr>
         	<th width="400px">ระดับผลกระทบ</th>
             <td>
-               	<select name="remain_risk_2" style="width:50px;">
+               	<select name="remain_risk_2" class="remain_risk"  style="width:50px;">
             		<? for($i=1;$i<=5;$i++): ?>
             		<option value="<?=$i;?>" <? if(@$rs['remain_risk_2']==$i)echo 'selected="selected"';?>><?=$i;?></option>
             		<? endfor;?>

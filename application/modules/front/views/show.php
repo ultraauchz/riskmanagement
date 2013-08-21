@@ -8,7 +8,7 @@
 <h3>รายงานภาควิชาทั้งหมด</h3>
 <div id="search">
 	<div id="searchBox">
-		เลือกปีงบประมาณ <?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?>
+		เลือกปีงบประมาณ <?=form_dropdown('year_data',get_year_option(),@$year,'','--เลือกปี--');?>
 	</div>
 </div>
 <img src='media/images/ok.gif' width='25' height='25' /> คือภาควิชา/หน่วยงานที่ ส่งแบบฟอร์มแล้ว <br />

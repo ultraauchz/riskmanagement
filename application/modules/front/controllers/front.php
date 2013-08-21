@@ -10,8 +10,8 @@ Class front extends  Public_Controller{
 			if(permission($menu_id, 'can_access_all') == 'on'){
 				
 				$month = date('m');
-				if($_GET['year_data'] != ''){
-					$year=$_GET['year_data'];
+				if(@$_GET['year_data'] != ''){
+					$year=@$_GET['year_data'];
 				}else{
 					if($month > '09'){
 						$year = date('Y')+543+1;
