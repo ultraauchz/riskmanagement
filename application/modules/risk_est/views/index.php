@@ -10,7 +10,7 @@
     	});
 		</script>
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชาและหน่วยงานทั้งหมด');?>
+			<?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
 		<? }else{ ?>	
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
 			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc  '),@$_GET['section_id'],'style="width:370px"');?>

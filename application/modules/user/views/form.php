@@ -103,13 +103,13 @@ $(function(){
 		<tr>
 			<td><strong>ประเภท</strong></td>
 			<td>
-				<?=form_dropdown('section_type_id',get_option('id','title','section_type order by title asc '),@$rs['section_type_id'],'style="width:350px"','--เลือกประเภท--');?>
+				<?=form_dropdown('section_type_id',get_option('id','title','section_type order by id asc '),@$rs['section_type_id'],'style="width:350px"','--เลือกประเภท--');?>
 			</td>
 		</tr>				
 		<tr>
-			<td><strong>ภาควิชา/หน่วยงาน</strong></td>
+			<td><strong>ภาควิชา/งาน</strong></td>
 			<td>
-				<?  echo form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','-- กรุณาเลือกกลุ่มวิชา/หน่วยงาน --');?>
+				<?  echo form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$rs['sectionid'],'style="width:370px"','-- กรุณาเลือกกลุ่มวิชา/งาน --');?>
 			</td>
 		</tr>		
 		<tr>

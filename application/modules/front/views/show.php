@@ -14,8 +14,8 @@
 		เลือกปีงบประมาณ <?=form_dropdown('year_data',get_year_option(),$_GET['year_data'],'','--เลือกปี--');?>
 	</div>
 </div>
-<img src='media/images/ok.gif' width='25' height='25' /> ภาควิชา/หน่วยงานที่ ส่งแบบฟอร์มแล้ว <br />
-<img src='media/images/no.gif' width='25' height='25' /> ภาควิชา/หน่วยงานที่ ที่ยังไม่ได้ส่งแบบฟอร์มแล้ว
+<img src='media/images/ok.gif' width='25' height='25' /> หมายถึง ภาควิชา/หน่วยงานที่ ส่งแบบฟอร์มแล้ว <br />
+<img src='media/images/no.gif' width='25' height='25' /> หมายถึง ภาควิชา/หน่วยงานที่ ที่ยังไม่ได้ส่งแบบฟอร์มแล้ว
 <table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
 					<th>ลำดับ</th>

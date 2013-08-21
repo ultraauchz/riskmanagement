@@ -9,13 +9,11 @@
         	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
     	});
 		</script>
-			<?=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('section_type_id',get_option('id','title','section_type order by title'),@$_GET['section_type_id'],'style="width:320px"','แสดงประเภททั้งหมด');?>
-			<?=form_dropdown('sectionid',get_option('id','title','section order by title'),@$_GET['sectionid'],'style="width:370px"','แสดงภาควิชาทั้งหมด');?>
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?>
+			<?=form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$_GET['sectionid'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
 		<? }else{ ?>	
-			<?=form_dropdown('year_data',get_option('year_data','year_data as year','est_title where year_data != " "'),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<?=form_dropdown('section_type_id',get_option('id','title','section_type where id = "'.@$result1['section_type_id'].'" order by title '),@$rs['section_type_id'],'style="width:320px"','');?>
-			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?>
+			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
@@ -33,7 +31,7 @@
 					<th>ลำดับ</th>
 					<th>ปีงบประมาณ</th> 
 					<th>ประเภท</th>
-					<th>ภาควิชา/หน่วยงาน</th> 
+					<th>ภาควิชา/งาน</th> 
 					<th><div align="center">จัดการข้อมูล</div></th>
 		</tr>
 		<?php 

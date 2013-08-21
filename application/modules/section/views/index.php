@@ -3,13 +3,13 @@
         	$('[name=section_id]').chainedSelect({parent: '[name=section_type_id]',url: 'section/report_section',value: 'id',label: 'text'});
     	});
 </script>
-<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ หน่วยงาน</h3>
+<h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภาควิชา และ งาน</h3>
 <form enctype="multipart/form-data" method="get" action="">
 <div id="search">
   <div id="searchBox">
   <h4>ค้นหา</h4>
-  <?=form_dropdown('section_type_id',get_option('id','title','section_type order by title '),@$_GET['section_type_id'],'style="width:320px"','แสดงประเภททั้งหมด');?>
-  <?=form_dropdown('section_id',get_option('id','title','section order by title '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/หน่วยงาน ทั้งหมด');?>    
+  <?=form_dropdown('section_type_id',get_option('id','title','section_type order by id '),@$_GET['section_type_id'],'style="width:320px"','แสดงประเภททั้งหมด');?>
+  <?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>    
   <input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
@@ -24,8 +24,8 @@
 	<table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
 					<th>ลำดับ</th>
-					<th>ชื่อภาควิชา/หน่วยงาน (ไทย)</th>
-					<th>ชื่อภาควิชา/หน่วยงาน (อังกฤษ)</th> 
+					<th>ชื่อภาควิชา/งาน (ไทย)</th>
+					<th>ชื่อภาควิชา/งาน (อังกฤษ)</th> 
 					<th>ประเภท</th>
 					<? if(@$rs['permis']=='on'){ ?>                     
 					<th>จัดการข้อมูล</th>
