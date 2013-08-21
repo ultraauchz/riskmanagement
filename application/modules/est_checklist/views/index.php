@@ -9,10 +9,10 @@
         	$('[name=sectionid]').chainedSelect({parent: '[name=section_type_id]',url: 'est_checklist/report_section',value: 'id',label: 'text'});
     	});
 		</script>
-			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?>
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
 			<?=form_dropdown('sectionid',get_option('id','title','section order by section_type_id asc, title asc'),@$_GET['sectionid'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
 		<? }else{ ?>	
-			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','--เลือกปี--');?>
+			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
 			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
