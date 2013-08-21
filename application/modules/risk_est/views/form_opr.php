@@ -60,9 +60,6 @@ $(function(){
 		<th width="400px">ปีงบประมาณ</th><td><?=@$rs['year_data']?></td>
 	</tr>
 	<tr>
-		<th width="400px">กลุ่มวิชา</th><td><?=@$rs['division_title'];?></td>
-	</tr>
-	<tr>
 	  <th width="400px">ภาควิชา</th><td><?=@$rs['section_title'];?></td>
   </tr>
 	<tr>
@@ -82,6 +79,10 @@ $(function(){
   </tr>
 	<tr>
 	  <th width="400px">เหตุการณ์ความเสี่ยง</th><td><?=@$rs['event_risk'];?></td>
+  </tr>
+  <tr>
+    <th width="400px">แนวทางการจัดการ</th>
+    <td><?=@$rs['manage_risk'];?></td>
   </tr>
   <tr>
     <th width="400px">กิจกรรมการดำเนินงาน</th>
@@ -112,6 +113,10 @@ $(function(){
     <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date1" id="results_end_date1" value="<?=@$rs['results_end_date1'];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
+  <tr>
+  	<th width="100px">ผลลัพธ์ที่ได้</th>
+  	<td colspan="2"><textarea name="outcome_1" rows="4" style="width:700px"><?=@$rs['outcome_1'];?></textarea></td>
+  </tr>
 </table>
 
 <table class="table table-form table-bordered table-striped table-horizontal">
@@ -135,6 +140,10 @@ $(function(){
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date2" id="results_end_date2" value="<?=@$rs['results_end_date2'];?>" style="width:150px" class="datepicker_2" /></td>
+  </tr>
+   <tr>
+  	<th width="100px">ผลลัพธ์ที่ได้</th>
+  	<td colspan="2"><textarea name="outcome_2" rows="4" style="width:700px"><?=@$rs['outcome_2'];?></textarea></td>
   </tr>
 </table>
 
@@ -160,6 +169,10 @@ $(function(){
     <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date3" id="results_end_date3" value="<?=@$rs['results_end_date3'];?>" style="width:150px" class="datepicker_3" /></td>
   </tr>
+   <tr>
+  	<th width="100px">ผลลัพธ์ที่ได้</th>
+  	<td colspan="2"><textarea name="outcome_3" rows="4" style="width:700px"><?=@$rs['outcome_3'];?></textarea></td>
+  </tr>
 </table>
 
 <table class="table table-form table-bordered table-striped table-horizontal">
@@ -184,12 +197,9 @@ $(function(){
     <th width="280px">วันที่เสร็จสิ้น</th>
     <td><input type="text" name="results_end_date4" id="results_end_date4" value="<?=@$rs['results_end_date4'];?>" style="width:150px" class="datepicker_4" /></td>
   </tr>
-</table>
-
-<table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-  	<th width="400px">ผลลัพธ์ที่ได้</th>
-  	<td><textarea name="outcome" rows="4" style="width:700px"><?=@$rs['outcome'];?></textarea></td>
+  	<th width="100px">ผลลัพธ์ที่ได้</th>
+  	<td colspan="2"><textarea name="outcome_4" rows="4" style="width:700px"><?=@$rs['outcome_4'];?></textarea></td>
   </tr>
 </table>
 <div align="center">

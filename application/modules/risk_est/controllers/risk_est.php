@@ -110,7 +110,6 @@ class risk_est extends Public_Controller
 			if(permission($menu_id, 'canview')=='')redirect('front');
 			$condition = "risk_opr.risk_est_id = ".$id;			
 			$data['rs'] = @$this->risk_opr->where($condition)->get_row($id);
-			
 			if(@$data['rs']['id'] == ''){
 			$data['rs'] = @$this->risk->get_row($id);
 			$data['rs']['risk_est_id']=$id;

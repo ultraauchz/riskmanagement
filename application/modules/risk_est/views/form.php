@@ -1,11 +1,6 @@
 <script type="text/javascript">
 
 $(function(){
-	$(document).ready(function(){
- 
-  		$(".number").inputmask({"mask": "99-9999999"});
- 
- 	})
 	
 	function validate_form(){
 		$(".commentForm").validate({
