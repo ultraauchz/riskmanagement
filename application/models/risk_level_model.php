@@ -1,6 +1,6 @@
 <?
-class objective_type_model extends MY_Model{
-	public $table = 'objective_type';
+class risk_level_model extends MY_Model{
+	public $table = 'risk_level';
 	
     function __construct()
     {

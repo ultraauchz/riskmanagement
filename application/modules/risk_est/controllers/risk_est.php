@@ -9,6 +9,7 @@ class risk_est extends Public_Controller
 		$this->load->model('risk_opr_model','risk_opr');
 		$this->load->model('risk_est_control_model','risk_control');
 		$this->load->model('risk_est_kri_model','risk_kri');
+		$this->load->model('risk_level_model','risk_level');
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 52;

@@ -41,20 +41,22 @@
 		  $page = (isset($_GET['page']))? $_GET['page']:1;
 		  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 12)+1:1;
 		  foreach($result as $row):
+			$condition_level = " risk_remain_1_val = ".$row['remain_risk_1'] . " AND risk_remain_2_val = ".$row['remain_risk_2'];
+			$level = $this->risk_level->where($condition_level)->get_row();
 		?>  	
 	<tr>
-		<td width="5%"><?=$i;?></td>
-		<td align="left" width="20%"><?=$row['event_risk'];?></td>
-		<td align="left" width="5%"><?=$row['year_data']?></td>
-		<td align="left" width="15%"><?=$row['mission_title']?></td>
-		<td align="left" width="15%"><?=$row['process_title']?></td>
-		<td align="left" width="5%"><?=$row['section_title']?></td>
-		<td align="left" width="10%">
+		<td width="5%" style="background:<?=$level['level_color']?>"><?=$i;?></td>
+		<td align="left" width="20%" style="background:<?=$level['level_color']?>"><?=$row['event_risk'];?></td>
+		<td align="left" width="5%"  style="background:<?=$level['level_color']?>"><?=$row['year_data']?></td>
+		<td align="left" width="15%" style="background:<?=$level['level_color']?>"><?=$row['mission_title']?></td>
+		<td align="left" width="15%" style="background:<?=$level['level_color']?>"><?=$row['process_title']?></td>
+		<td align="left" width="5%"  style="background:<?=$level['level_color']?>"><?=$row['section_title']?></td>
+		<td align="left" width="10%" style="background:<?=$level['level_color']?>">
 			<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary"><i class=" icon-pencil"></i>แผนการปฎิบัติการ</a>
 		  	<? } ?>
 		</td>
-		<td align="left" width="12%">
+		<td align="left" width="12%" style="background:<?=$level['level_color']?>">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
 		  	<? } ?>
