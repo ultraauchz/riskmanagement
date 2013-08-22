@@ -8,12 +8,28 @@
 <script type="text/javascript">
 $(function(){
 	$("select[name=year_data]").change(function(){
-	 	var year_data = $(this).val();
+	 	var year_data = $("select[name=year_data]").val();
+	 	var section_id = $("select[name=sectionid]").val();
+	 	if(year_data != '' && section_id != ''){
 		 $.post('est_checklist/load_est_detail_form/<?=$id?>',{
-		   	'year_data': year_data
+		   	'year_data': year_data,
+		   	'sectionid': section_id
 		  },function(data){
 		   	$("#est_form_detail").html(data);
 		  });
+		 }
+	})
+	$("select[name=sectionid]").change(function(){
+	 	var year_data = $("select[name=year_data]").val();
+	 	var section_id = $("select[name=sectionid]").val();
+	 	if(year_data != '' && section_id != ''){
+		 $.post('est_checklist/load_est_detail_form/<?=$id?>',{
+		   	'year_data': year_data,
+		   	'sectionid': section_id
+		  },function(data){
+		   	$("#est_form_detail").html(data);
+		  });
+		 }
 	})
 	$(function(){
 	 	var year_data = $('select[name=year_data]').val();
@@ -39,7 +55,7 @@ $(function(){
 		{ 
 			required: true
 		},
-		check_value: 
+		est_date: 
 		{ 
 			required: true
 		}
@@ -58,9 +74,9 @@ $(function(){
 		{ 
 			required: " กรุณาระบุชื่อผู้ประเมิน"
 		},
-		check_value: 
+		est_date: 
 		{ 
-			required: " กรุณาระบุชื่อผู้ประเมิน"
+			required: " กรุณาระบุวันที่ประเมิน"
 		}
 	}
 	});
@@ -94,18 +110,9 @@ $(function(){
 		<tr>
 	  	<th width="400px">ภาควิชา/งาน</th>
 	  	<td><?=$section?></td>
-  		</tr>	
-    	<tr>
-	  <th width="400px">ชื่อผู้ประเมิน</th>
-	  <td><input type="text" name="est_name" value="<?=@$rs['est_name']?>" style="width:370px" /></td>
-    </tr>	         
+  		</tr>		         
 	</table>
-<div id="est_form_detail">
-	กรุณาเลือกปีงบประมาณ	
+<div id="est_form_detail">	
 </div>
-	<div align="center">
-		        <input type="hidden" name="id" value="<?=$id;?>">
-				<input type="submit" value="Save" class="btn btn-primary"> 
-				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
-	</div>
+
 </form>

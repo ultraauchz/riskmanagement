@@ -11,9 +11,10 @@ class checklist extends Public_Controller
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 55;
-	public $urlpage = 'est_checklist';
-	public function index($pid=0)
+	public $urlpage = 'report/checklist';
+	public function index($mode=false)
 	{
+		$pid=0;
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
@@ -25,10 +26,6 @@ class checklist extends Public_Controller
 				if(@$_GET['sectionid'] !='')
 				{
 					$condition .= "AND est_checklist.sectionid ='".$_GET['sectionid']."'  ";
-				}
-				if(@$_GET['section_type_id'] !='')
-				{
-					$condition .= "AND est_checklist.section_type_id ='".$_GET['section_type_id']."' ";
 				}
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";
@@ -42,9 +39,26 @@ class checklist extends Public_Controller
 						$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";	
 						}
 				}
-			$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get();
-			$data['pagination'] = $this->estchecklist->pagination();					
-			$this->template->build('index',$data);
+			if(@$_GET['sectionid'] !='' && @$_GET['sectionid'] !=''){
+				$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get_row();					
+			}else{
+				$data['result']['id'] = '';
+			}
+			
+		switch($mode){
+			case 'export':
+				$this->load->view('checklist/export',$data);
+			break;
+			case 'print':
+				$this->load->view('checklist/print',$data);
+			break;
+			default:
+				$this->template->build('checklist/index',$data);
+			break;
+		}
+		
+		
+			
 		}
 		else{
 			

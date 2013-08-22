@@ -67,7 +67,7 @@ class est_checklist extends Public_Controller
 				$data['result1'] = $this->section->where($condition1)->get_row();
 				$data['rs'] = @$this->estchecklist->where($condition)->get_row();
 				if($id != ''){
-					if($data['rs']['id'] != ''){								
+					if($data['rs']['id'] != ''){							
 						$this->template->build('form',$data);
 					}else{
 						redirect('est_checklist');
@@ -94,16 +94,16 @@ class est_checklist extends Public_Controller
 		{
 			if(permission($menu_id, 'canedit')=='')redirect('est_checklist');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];
-			$_POST['est_date'] = date("Y-m-d h:i:s");		
+			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];		
 			save_log($menu_id,$action,$description);
 		}else{
 			if(permission($menu_id, 'canadd')=='')redirect('est_checklist');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];
-			$_POST['est_date']= date("Y-m-d h:i:s");			
+			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];		
 			save_log($menu_id,$action,$description);
 		}
+		$est_date = explode('-',$_POST['est_date']);
+		$_POST['est_date'] = $est_date[2]."-".$est_date[1]."-".$est_date[0];
 		$id = $this->estchecklist->save($_POST);
 		//est_title_id คือ hidden ที่เก็บไอดี ของแต่ล่ะข้อ
 		//check_value คือ checkbox
@@ -137,6 +137,7 @@ class est_checklist extends Public_Controller
 	}
 	
 	function load_est_detail_form($id=false){
+		#$this->db->debug=true;
 		$year_data = @$_POST['year_data'];
 		$data['year_data'] = $year_data;
 		if($year_data != ''){
@@ -146,7 +147,16 @@ class est_checklist extends Public_Controller
 			$data['main_title'] = $this->est_title->where('pid=0 and year_data = (select max(year_data) from est_title where year_data <='.$year_data.' )')->get(false,true);
 		}
 		
-		$data['id']=$id;
+		if(@$_POST['year_data']>0 && @$_POST['sectionid'] > 0){
+			$rs = @$this->estchecklist->where(' year_data='.$_POST['year_data']." AND sectionid=".$_POST['sectionid'])->get_row();
+			@$id = $rs['id'];
+			
+		}else if($id > 0){
+			$rs = @$this->estchecklist->get_row($id);
+		}
+		
+		$data['id']=@$id;
+		$data['rs']=@$rs;
 		$this->load->view('est_detail_form',$data);
 		
 	}

@@ -1,4 +1,8 @@
-	
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.datepicker').datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'});
+	});
+</script>
 	<? 
 	if($year_data != ''){
 		$i = 1;
@@ -33,7 +37,7 @@
 					<td style="width:250px;" rowspan="<?=$nrow;?>"><?=$second_item['title'];?></td>
 					<?
 						}
-					@$check_detail = $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row();
+					@$check_detail = $id > 0 ? $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row() : '';
 					
 					$i++
 					?>
@@ -56,7 +60,29 @@
 		</table>
 		</fieldset>
 	<? endforeach; ?>
-		<input type="hidden" name="num_i" value="<?=@$i;?>">
-	<? }else{
-		echo "กรุณาเลือกปีงบประมาณ";
-	}?>
+		<table class="table table-form table-bordered table-striped table-horizontal">
+		<tr>
+		  <th width="400px">ชื่อผู้ประเมิน</th>
+		  <input type="hidden" name="id" value="<?=@$id;?>">
+		  <input type="hidden" name="num_i" value="<?=@$i;?>">
+		  <td><input type="text" name="est_name" value="<?=@$rs['est_name']?>" style="width:370px" /></td>
+	    </tr>
+	    <tr>
+		  <th width="400px">วันที่ประเมิน</th>
+		  <?	if(@$rs['est_date'] != ''){
+		  			$est_date = explode('-',@$rs['est_date']);
+					@$rs['est_date'] = $est_date[2]."-".$est_date[1]."-".$est_date[0];
+		  		} ?>
+		  <td><input type="text" name="est_date" class="datepicker" value="<?=@$rs['est_date']?>" style="width:100px" /></td>
+	    </tr>	         
+		</table>
+	<div align="center">
+        
+		<input type="submit" value="Save" class="btn btn-primary"> 
+		<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
+	</div>
+	<? }else{ ?>
+		<div align="center" style="margin:0 auto;width:90%;height:30px;vertical-align:middle;text-align:middle;background:#FFFCCC;">กรุณาเลือกปีงบประมาณ และ ภาควิชา/งาน</div>
+	<? }?>
+	
+	
