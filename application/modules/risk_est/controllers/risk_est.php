@@ -11,6 +11,7 @@ class risk_est extends Public_Controller
 		$this->load->model('risk_est_kri_model','risk_kri');
 		$this->load->model('risk_level_model','risk_level');
 		$this->load->model('section_model','section');
+		$this->load->model('file_upload_model','file_upload');
 	}
 	public $menu_id = 52;
 	public function index()
@@ -109,8 +110,9 @@ class risk_est extends Public_Controller
 		$data['risk_est_id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');
+			$this->db->debug = true;
 			$condition = "risk_opr.risk_est_id = ".$id;			
-			$data['rs'] = @$this->risk_opr->where($condition)->get_row($id);
+			$data['rs'] = @$this->risk_opr->where($condition)->get_row();
 			if(@$data['rs']['id'] == ''){
 			$data['rs'] = @$this->risk->get_row($id);
 			$data['rs']['risk_est_id']=$id;
@@ -228,9 +230,28 @@ class risk_est extends Public_Controller
 	}
 
 	public function save_opr(){
-		//$this->db->debug = true;
+		#$this->db->debug = true;
 		$menu_id=53;
 		$menu_name = GetMenuProperty($menu_id,'title');
+		
+		for($i=1;$i<=4;$i++){
+			if($_FILES['fl_import'.$i]['name']!=''){
+				$ext = pathinfo($_FILES['fl_import'.$i]['name'], PATHINFO_EXTENSION);
+				$data['risk_est_id']=$_POST['risk_est_id'];			
+				$file_name = 'risk_est'."_(".$data['risk_est_id'].")_".date("Y_m_d_H_i_s")."_($i)".'.'.$ext;
+				$data['fl_import'] = $file_name;
+				$data['fl_name']=$_FILES['fl_import'.$i]['name'];
+				$data['quarter'] = $i;
+				/*---for insert value to info table ---*/
+				$_POST['fl_upload_id'.$i] =$this->file_upload->save($data);
+				/*--end--*/
+				$uploaddir = 'import_file/risk_est/';
+				$fpicname = $uploaddir.$file_name;
+				move_uploaded_file($_FILES['fl_import'.$i]['tmp_name'], $fpicname);
+			}
+		}
+		
+		
 		if($_POST['id']!='')
 		{
 			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
@@ -266,6 +287,10 @@ class risk_est extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
 			save_log($menu_id,$action,$description);
 		}
+		
+		
+			
+		
 		$id = $this->risk_opr->save($_POST);		
 		set_notify('risk_est', lang('save_data_complete'));
 		redirect('risk_est');
