@@ -89,12 +89,12 @@
 						<input type="hidden" name="est_title_id[<?=$i?>]" value="<?=$third_item['id'];?>">
 						<input type="hidden" name="detail_id[<?=$i?>]" value="<?=@$check_detail['id'];?>">
 						<? if(@$check_detail['check_value'] == '1'){ ?>
-						<img src="themes/front/images/ico_checkbox.png">
+						X
 						<? } ?>
 					</td>
 					<td style="width:60px;text-align:center;">
 						<? if(@$check_detail['check_value'] == '0'){ ?> 
-						<img src="themes/front/images/ico_checkbox.png">
+						X
 						<? } ?>				
 					</td>
 				</tr>

@@ -198,7 +198,7 @@ class risk_est extends Public_Controller
 		/////save risk_control		
 		$this->db->Execute('delete from risk_est_control where risk_est_id ='.$pid);
 		if(isset($_POST['control_risk'])){
-		   foreach($_POST['control_risk'] as $key=>$item){
+		   foreach($_POST['control_risk'] as $key=>$_POST['i']){
 		    if($_POST['control_risk'][$key]){
 		    $i++;
 		    $data['risk_est_id'] = $pid;
@@ -211,7 +211,7 @@ class risk_est extends Public_Controller
 		/////save rick_kri
 		$this->db->Execute('delete from risk_est_kri where risk_est_id ='.$pid);
 		if(isset($_POST['kri_risk'])){
-		   foreach($_POST['kri_risk'] as $key=>$item){
+		   foreach($_POST['kri_risk'] as $key=>$_POST['control_i']){
 		    if($_POST['kri_risk'][$key]){
 		    $i++;
 		    $data['risk_est_id'] = $pid;

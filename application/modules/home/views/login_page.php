@@ -3,7 +3,7 @@
 <head>
 	<base href="<?php echo base_url(); ?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>ระบบบริหารความเสี่ยง คณะสาธารณะสุขศาสตร์ มหาวิทยาลัยมหิดล</title>
+	<title>ระบบบริหารความเสี่ยง คณะสาธารณสุขศาสตร์ มหาวิทยาลัยมหิดล</title>
 	<?php include "themes/front/_css.php";?>
 </head>
 <body>
@@ -36,7 +36,7 @@
     </style>
     
 <div class="container">
-	<center><h1>ระบบบริหารความเสี่ยง <br>คณะสาธารณะสุขศาสตร์ มหาวิทยาลัยมหิดล</h1></center>
+	<center><h1>ระบบบริหารความเสี่ยง <br>คณะสาธารณสุขศาสตร์ มหาวิทยาลัยมหิดล</h1></center>
       <form class="form-signin" method="post" action="home/signin">
         <h2 class="form-signin-heading">กรุณาเข้าสู่ระบบ</h2>
         <input type="text" class="input-block-level" placeholder="Username" name="username">

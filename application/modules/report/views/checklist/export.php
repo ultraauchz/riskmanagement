@@ -84,7 +84,7 @@ header("Content-Disposition: attachment; filename=".$filename);
 		</table>
 	<? endforeach; ?>
 	    <br />
-		<div align="right" id="print">
+		<div id="print" align="right">
 			<div style="padding-left:700px;">ลงชื่อผู้ประเมิน<label style="width:500px; text-align:center;">&nbsp</label></div>
 			<div style="padding-left:700px;">(<label style="width:500px; text-align:center;"><?=$result['est_name'];?></label>)</div>
 			<?

@@ -83,12 +83,12 @@ table th{
 					</td>
 					<td style="width:60px;text-align:center;">
 						<? if(@$check_detail['check_value'] == '1'){ ?>
-						<img src="/riskmanagement/themes/front/images/ico_checkbox.png">
+						X
 						<? } ?>
 					</td>
 					<td style="width:60px;text-align:center;">
 						<? if(@$check_detail['check_value'] == '0'){ ?> 
-						<img src="/riskmanagement/themes/front/images/ico_checkbox.png">
+						X
 						<? } ?>				
 					</td>
 				</tr>

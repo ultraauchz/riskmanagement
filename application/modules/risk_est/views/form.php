@@ -1,7 +1,5 @@
 <script type="text/javascript">
-
 $(function(){
-	
 	function validate_form(){
 		$(".commentForm").validate({
 			rules: 
@@ -56,26 +54,37 @@ $(function(){
 	}
 	
 	$(".btn_add_control_risk").click(function(){
-			
+		var i = $('input[name=control_i ]').val();
+		var num =  parseInt(i)+1;
 		var newrow = '<tr>';
-	    newrow +='<td><input name="control_risk[]" type="text" class="" value="" style="width:300px;" /></td>';
-	    newrow +='<td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"></textarea></td>';
+	    newrow +='<td><input name="control_risk['+num+']" type="text" class="" value="" style="width:300px;" /></td>';
+	    newrow +='<td><textarea name="estimate_control_risk['+num+']" class="" rows="4" style="width:700px"></textarea></td>';
 	    newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>';
 	    newrow +='</td>';
 	    newrow +='</tr>';
 	    		
 		$('.tr_sum_control_risk').before(newrow);
+		$("[name=control_risk["+num+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการควบคุมที่มีอยู่"}});
+		$("[name=estimate_control_risk["+num+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการประเมินการควบคุมที่มีอยู่"}});
+		$('input[name=control_i]').val(num);
+		validate_form();
 	})
 	
 	$(".btn_add_kri_risk").click(function(){
-		  var newrow ='<tr>';	    
-		  newrow +='<td><input name="kri_risk[]"  type="text" style="width:300px;" value="" class="required" /></td>';
-		  newrow +='<td><input name="kri_risk_count[]"  type="text" style="width:100px;" value="" class="number required" /></td>';
-		  newrow +='<td><input name="kri_risk_unit[]" type="text"  style="width:150px;" value="" class="required" /></td>';
+		  var i = $('input[name=i]').val();
+		  var num =  parseInt(i)+1;
+		  var newrow ='<tr>';
+		  	    
+		  newrow +='<td><input name="kri_risk['+num+']"  type="text" style="width:300px;" value="" class="required" /></td>';
+		  newrow +='<td><input name="kri_risk_count['+num+']"  type="text" style="width:100px;" onKeyPress="return double(event)" value="" class="required double" /></td>';
+		  newrow +='<td><input name="kri_risk_unit['+num+']" type="text"  style="width:150px;" value="" class="required" /></td>';
 		  newrow +='<td style="width:80px;text-align:center;"><a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a></td>';
-		  newrow +='</tr>';
-	    		
+		  newrow +='</tr>';	
 		$('.tr_sum_kri_risk').before(newrow);
+		$("[name=kri_risk["+num+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุตัวชี้วัดความเสี่ยง"}});
+		$("[name=kri_risk_count["+num+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุจำนวน"}});
+		$("[name=kri_risk_unit["+num+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุหน่วยนับ"}});
+		$('input[name=i]').val(num);
 		validate_form();
 	})
 	
@@ -100,6 +109,27 @@ $(function(){
 	
 	validate_form();
 });
+$(document).ready(function(){
+		 var i = $('input[name=num_i]').val();
+		 if(i != 1){
+		 	i = parseInt(i)-1;
+		 }
+		 for(j=1;j<=i;j++){
+		 	$("[name=kri_risk_count["+j+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุตัวชี้วัดความเสี่ยง"}});
+			$("[name=kri_risk_count["+j+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุจำนวน"}});
+			$("[name=kri_risk_unit["+j+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุหน่วยนับ"}});
+		}
+		
+		var ii = $('input[name=num_i]').val();
+		 if(ii != 1){
+		 	ii = parseInt(i)-1;
+		 }
+		 for(jj=1;jj<=ii;jj++){
+		 	$("[name=control_risk["+jj+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการควบคุมที่มีอยู่"}});
+		$("[name=estimate_control_risk["+jj+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการประเมินการควบคุมที่มีอยู่"}});
+		}
+});
+	
 </script>
 
 <h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง (เพิ่ม/แก้ไข)</h3>
@@ -185,41 +215,46 @@ $(function(){
 	    <th width="">หน่วยนับ</th>
 	    <th style="text-align:center;">ลบ</th>
 	  </tr>
-	   <?  if(@$id != '' ){
+	   <? $i = 1;
+	     if(@$id != '' ){
 	  	  	$risk_kri = $this->risk_kri->where('risk_est_id='.@$id)->get();
 	      	foreach ($risk_kri as $kri) {
 	   ?>
 			  <tr>	    
 			    <td>
-			    	<input name="kri_risk[]" id="kri_risk" type="text" style="width:300px;" value="<?=$kri['kri_risk']?>" class="required" />	    	
+			    	<input name="kri_risk[<?=$i?>]" id="kri_risk" type="text" style="width:300px;" value="<?=$kri['kri_risk']?>" class="required" />	    	
 			    </td>
 			    <td>
-			    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="<?=$kri['kri_risk_count']?>" class="number required" />	    	
+			    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" value="<?=$kri['kri_risk_count']?>" class="required double" />	    	
 			    </td>
 			    <td>
-			    	<input name="kri_risk_unit[]" type="text" style="width:150px;" value="<?=$kri['kri_risk_unit']?>" class="required" />	    	
+			    	<input name="kri_risk_unit[<?=$i?>]" type="text" style="width:150px;" value="<?=$kri['kri_risk_unit']?>" class="required" />	    	
 			    </td>
 			    <td style="width:80px;text-align:center;">
 			    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
 			    </td>
 			  </tr>
-	  <? 	} 
-			}else{?>
+			
+	  <? 	$i++;}
+		 }else{?>
 	  <tr>	    
 	    <td>
-	    	<input name="kri_risk[]" type="text" style="width:300px;" value="" class="required" />	    	
+	    	<input name="kri_risk[<?=$i?>]" type="text" style="width:300px;" value="" class="required" />	    	
 	    </td>
 	    <td>
-	    	<input name="kri_risk_count[]"  type="text" style="width:100px;" value="" class="number required" />	    	
+	    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" value="" class="required double" />	    	
 	    </td>
 	    <td>
-	    	<input name="kri_risk_unit[]" type="text"  style="width:150px;" value="" class="required" />	    	
+	    	<input name="kri_risk_unit[<?=$i?>]" type="text"  style="width:150px;" value="" class="required" />	    	
 	    </td>
 	    <td style="width:80px;text-align:center;">
 	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_kri_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
+	  	
 	  <? } ?>
+	  <input type="hidden" name="num_i" value="<?=$i?>" />
+	  <input type="hidden" name="i" value="<?=$i?>"/>
 	  <tr class="tr_sum_kri_risk">
 	  	<th colspan="4"></th>
 	  </tr>
@@ -235,27 +270,30 @@ $(function(){
 	    <th >การประเมินการควบคุมที่มีอยู่</th>
 	    <th style="text-align:center;width:80px;">ลบ</th>	    
 	  </tr>
-	  <?  if(@$id != '' ){
+	  <?   $control_i = 1;
+	  	if(@$id != '' ){
 	  	  	$control_risk = $this->risk_control->where('risk_est_id='.@$id)->get();
 	      	foreach ($control_risk as $com_risk) {
 	   ?>
 	  		<tr>
-	   		 <td><input name="control_risk[]" style="width:300px;" type="text" class="" value="<?=@$com_risk['control_risk']?>" /></td>
-	   		 <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"><?=@$com_risk['estimate_control_risk']?></textarea></td>
+	   		 <td><input name="control_risk[<?=$control_i?>]" style="width:300px;" type="text" class="" value="<?=@$com_risk['control_risk']?>" /></td>
+	   		 <td><textarea name="estimate_control_risk[<?=$control_i?>]" class="" rows="4" style="width:700px"><?=@$com_risk['estimate_control_risk']?></textarea></td>
 	    	 <td style="width:80px;text-align:center;">
 	    		<a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
 	       	 </td>
 	 	   </tr>
-	  <? 	} 
+	  <? $control_i++;	} 
 	  	  }else{ ?>
 	  <tr>
-	    <td><input name="control_risk[]" style="width:300px;" type="text" class="" value="" /></td>
-	    <td><textarea name="estimate_control_risk[]" class="" rows="4" style="width:400px"></textarea></td>
+	    <td><input name="control_risk[<?=$control_i?>]" style="width:300px;" type="text" class="" value="" /></td>
+	    <td><textarea name="estimate_control_risk[<?=$control_i?>]" class="" rows="4" style="width:700px"></textarea></td>
 	    <td style="width:80px;text-align:center;">
 	    	<a href="#" onclick="return false;" class="btn btn-danger btn_delete_control_risk"><i class="icon-trash"></i> ลบ </a>
 	    </td>
 	  </tr>
 	  <? } ?>
+	  <input type="hidden" name="num_c" value="<?=$control_i?>" />
+	  <input type="hidden" name="control_i" value="<?=$control_i?>"/>
 	  <tr class="tr_sum_control_risk">
 	  	<th colspan="3"></th>
 	  </tr>
