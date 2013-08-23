@@ -94,7 +94,7 @@ $(function(){
 <? for($i=1;$i<=4;$i++): ?>	
   <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-  	<th colspan="4"><div align="center">ไตรมาสที่ <?=$i;?></div></th>
+  	<th colspan="5"><div align="center">ไตรมาสที่ <?=$i;?></div></th>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
@@ -119,7 +119,10 @@ $(function(){
   	<td>
   		<textarea name="result<?=$i;?>" style="width:450px;height:150px;"><?=@$rs['result'.$i];?></textarea>
   	</td>
-  </tr>
+  	<th>Uploadfile</th>
+  	<td>
+  	
+  	</tr>
 </table>
 <? endfor;?>
 <div align="center">

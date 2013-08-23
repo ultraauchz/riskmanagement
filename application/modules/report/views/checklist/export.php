@@ -6,25 +6,25 @@ $filename= "checklisk_data_".date("Y-m-d_H_i_s").".xls";
 header("Content-Disposition: attachment; filename=".$filename);
 ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style>
-#print label {
-    border-bottom: 1px dashed #333333;
-    display: inline-block;
-    overflow: hidden;
-    padding: 2px 10px;
-    text-align: left;
-}
-</style>
 	</head>
 <body>
-<div align="center">
-	<B>ศูนย์บริหารจัดการความเสี่ยง มหาวิทยาลัยมหิดล <br />
-	แบบ Checklist การประเมินองค์ประกอบของการควบคุมภายใน <br />
-	ภาควิชา/งาน  <?=$result['section_title'];?>
-	</B><br />
-	แบบ Checklist ใช้สำหรับประเมินความเพียงพอเหมาะสมของระบบการควบคุมภายในที่มหาวิทยาลัยและส่วนงานได้ออกแบบ <br />
-	ไว้ตามองค์ประกอบ 5 ด้านของระเบียบคณะกรรมการตรวจเงินแผ่นดินว่าด้วยการกำหนดมาตรฐานการควบคุมภายใน พ.ศ. <?=$result['year_data']?>
-</div><br />
+<table width="100%">
+	<tr>
+		<td colspan="6" align="center"><B>ศูนย์บริหารจัดการความเสี่ยง มหาวิทยาลัยมหิดล </B></td>
+	</tr>
+	<tr>
+		<td colspan="6" align="center"><B>แบบ Checklist การประเมินองค์ประกอบของการควบคุมภายใน </B></td>
+	</tr>
+	<tr>
+		<td colspan="6" align="center"><B>ภาควิชา/งาน  <?=$result['section_title'];?></B></td>
+	</tr>
+	<tr>
+		<td colspan="6" align="center">แบบ Checklist ใช้สำหรับประเมินความเพียงพอเหมาะสมของระบบการควบคุมภายในที่มหาวิทยาลัยและส่วนงานได้ออกแบบ</td>
+	</tr>
+	<tr>
+		<td colspan="6" align="center">ไว้ตามองค์ประกอบ 5 ด้านของระเบียบคณะกรรมการตรวจเงินแผ่นดินว่าด้วยการกำหนดมาตรฐานการควบคุมภายใน พ.ศ. <?=$result['year_data']?></td>
+	</tr>
+</table><br />
 <?
 		$i = 1;
 		$num = 1;
@@ -34,12 +34,12 @@ header("Content-Disposition: attachment; filename=".$filename);
 	foreach($main_title as $main_item):?>
 		<table border="1" width="100%">
 			<tr>
-		 		<td colspan="2" style="text-align:center;">รายการประเมิน</td>
-		 		<td style="width:150px;text-align:center;">มี</td>
-		 		<td style="width:150px;text-align:center;">ไม่มี</td>
+		 		<td colspan="2" style="width:500px;text-align:center;">รายการประเมิน</td>
+		 		<td colspan="2" style="width:50px;text-align:center;">มี</td>
+		 		<td colspan="2" style="width:50px;text-align:center;">ไม่มี</td>
 		 	</tr>
 		 	<tr>
-				<td colspan="4"><?=$num. ". " . $main_item['title'];?></td>
+				<td colspan="6"><?=$num. ". " . $main_item['title'];?></td>
 			</tr>
 		<? 
 			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
@@ -56,7 +56,7 @@ header("Content-Disposition: attachment; filename=".$filename);
 						if($check_id!= $third_item['pid']){
 							$check_id = $third_item['pid'];
 					?>
-					<td style="width:100px;" valign="top" rowspan="<?=$nrow;?>"><?="$num.$num_second " .$second_item['title'];?></td>
+					<td valign="top" rowspan="<?=$nrow;?>"><?="$num.$num_second " .$second_item['title'];?></td>
 					<? 
 						}
 					@$check_detail = $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row();				
@@ -64,12 +64,12 @@ header("Content-Disposition: attachment; filename=".$filename);
 					<td class="third_title" >
 						<?="$num.$num_second.$num_third " .$third_item['title'];?>					
 					</td>
-					<td style="width:70px;text-align:center;">
+					<td colspan="2" style="width:70px;text-align:center;">
 						<? if(@$check_detail['check_value'] == '1'){ ?>
 						X
 						<? } ?>
 					</td>
-					<td style="width:70px;text-align:center;">
+					<td colspan="2" style="width:70px;text-align:center;">
 						<? if(@$check_detail['check_value'] == '0'){ ?> 
 						X
 						<? } ?>				
@@ -84,14 +84,25 @@ header("Content-Disposition: attachment; filename=".$filename);
 		</table>
 	<? endforeach; ?>
 	    <br />
-		<div id="print" align="right">
-			<div style="padding-left:700px;">ลงชื่อผู้ประเมิน<label style="width:500px; text-align:center;">&nbsp</label></div>
-			<div style="padding-left:700px;">(<label style="width:500px; text-align:center;"><?=$result['est_name'];?></label>)</div>
+		<table width="100%">
+			<tr>
+				<td></td>
+				<td align="right">ลงชื่อผู้ประเมิน</td>
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td colspan="2"></td>
+				<td colspan="4" align="center">(  <?=$result['est_name'];?>  )</td>
+			</tr>
 			<?
 					$est_date = explode('-',@$result['est_date']);
-					@$result['est_date'] = $est_date[2]."/".$est_date[1]."/".$est_date[0];
+					@$result['est_date'] = $est_date[2]." / ".$est_date[1]." / ".$est_date[0];
 			?>
-			<div style="padding-left:700px;">วันที่<label style="width:500px; text-align:center;"><?=$result['est_date'];?></label></div>
-		</div>
+			<tr>
+				<td></td>
+				<td align="right">วันที่</td>
+				<td colspan="4" align="center"><?=$result['est_date'];?></td>
+			</tr>
+		</table>
 	</body>
 </html>
