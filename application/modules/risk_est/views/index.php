@@ -2,7 +2,6 @@
 <form enctype="multipart/form-data" method="get">
 <div id="search">
   <div id="searchBox">
-		<h4>ค้นหา</h4>
 		<? if(@$rs['permis']=='on'){ ?>
 		<script>
     	$(function(){
@@ -29,9 +28,9 @@
 	<tr>
 		<th >ลำดับ</th>
 		<th >เหตุการณ์ความเสี่ยง</th>
+		<th >ระดับความเสี่ยง</th>
 		<th >ปีงบประมาณ</th>
 		<th >ภารกิจ</th>
-		<th >กระบวนงาน</th>
 		<th>หน่วยงาน</th>
 		<th>แผนการปฎิบัติการและรายงานผล</th>
 		<th >จัดการข้อมูล</th>
@@ -45,18 +44,18 @@
 			$level = $this->risk_level->where($condition_level)->get_row();
 		?>  	
 	<tr>
-		<td width="5%" style="background:<?=$level['level_color']?>"><?=$i;?></td>
-		<td align="left" width="20%" style="background:<?=$level['level_color']?>"><?=$row['event_risk'];?></td>
-		<td align="left" width="5%"  style="background:<?=$level['level_color']?>"><?=$row['year_data']?></td>
-		<td align="left" width="15%" style="background:<?=$level['level_color']?>"><?=$row['mission_title']?></td>
-		<td align="left" width="15%" style="background:<?=$level['level_color']?>"><?=$row['process_title']?></td>
-		<td align="left" width="5%"  style="background:<?=$level['level_color']?>"><?=$row['section_title']?></td>
-		<td align="left" width="10%" style="background:<?=$level['level_color']?>">
+		<td style="text-align:center;width:30px;" ><?=$i;?></td>
+		<td ><?=$row['event_risk'];?></td>
+		<td align="left" width="5%" style="background:<?=$level['level_color']?>;text-align:center;font-weight:bold;"><?=$level['level_desc']?></td>
+		<td align="left" width="5%" style="text-align:center;"><?=$row['year_data']?></td>
+		<td align="left" width="15%" ><?=$row['mission_title']?></td>
+		<td align="left"  ><?=$row['section_title']?></td>
+		<td align="left" width="10%" >
 			<? if(permission($menu_id, 'canedit')!=''){ ?>
-		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary"><i class=" icon-pencil"></i>แผนการปฎิบัติการ</a>
+		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary">แผนการปฎิบัติการ</a>
 		  	<? } ?>
 		</td>
-		<td align="left" width="12%" style="background:<?=$level['level_color']?>">
+		<td align="left" width="12%" >
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
 		  	<? } ?>

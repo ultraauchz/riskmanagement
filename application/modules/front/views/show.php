@@ -7,16 +7,20 @@
 </script>
 <h3>รายงานภาควิชาทั้งหมด</h3>
 <div id="search">
-	<div id="searchBox">
-		<h4>ค้นหา</h4>
+	<div id="searchBox" align="center">
 		<?
 		if(@$_GET['year_data'] == ''){ $_GET['year_data'] = $year; }
 		?>
 		เลือกปีงบประมาณ <?=form_dropdown('year_data',get_year_option(),$_GET['year_data'],'','--เลือกปี--');?>
+		<br>
+		<img src='media/images/ok.gif' width='25' height='25' /> หมายถึง ภาควิชา/งาน ที่ส่งแบบฟอร์มแล้ว  &nbsp;&nbsp;<img src='media/images/no.gif' width='25' height='25' /> หมายถึง ภาควิชา/งาน ที่ยังไม่ได้ส่งแบบฟอร์มแล้ว
 	</div>
 </div>
-<img src='media/images/ok.gif' width='25' height='25' /> หมายถึง ภาควิชา/งาน ที่ส่งแบบฟอร์มแล้ว <br />
-<img src='media/images/no.gif' width='25' height='25' /> หมายถึง ภาควิชา/งาน ที่ยังไม่ได้ส่งแบบฟอร์มแล้ว
+<p></p>
+<div align="center">
+	
+</div>
+<p></p>	
 <table class="table table-form table-bordered table-striped table-horizontal">
 		<tr class="head">
 					<th>ลำดับ</th>
@@ -46,8 +50,8 @@ foreach($result as $row):
 	}
 ?>
 		<tr>
-			<td width="5%"><?=$i;?></td>
-			<td width="10%"><?=$year?></td>
+			<td width="5%" style="text-align:center;"><?=$i;?></td>
+			<td width="10%"  style="text-align:center;"><?=$year?></td>
 			<td width="45%"><?=$row['section_title'];?></td>
 			<td width="10%"><div align="center"><?=$nform3;?></div></td>
 			<td width="10%"><div align="center"><?=$nform4;?></div></td>

@@ -282,3 +282,10 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 .tab_content {
 	display: none;
 }
+
+th{
+	background:#AFCA90 !important;
+	text-align:center !important;
+	vertical-align: middle !important;
+	
+}
