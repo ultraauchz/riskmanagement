@@ -308,6 +308,17 @@ class risk_est extends Public_Controller
 		$this->db->Execute('delete from risk_opr where risk_est_id = ?',$id);
 		redirect('risk_est');
 	}
+	
+	function delete_fl($id=FALSE,$risk_est_id=FALES){
+		$menu_id=$this->menu_id;
+		$menu_name = GetMenuProperty($menu_id,'title');		
+		if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
+		$fl = $this->file_upload->get_row($id);
+		$action='Delete';
+		$this->file_upload->delete($id);
+		unlink("import_file/risk_est/".$fl['fl_import']);
+		redirect('risk_est/form_opr/'.$risk_est_id);
+	}
 	function report_section($type = NULL){
 		  if($_GET['q'] != ''){
 		  	$type = 'report';
