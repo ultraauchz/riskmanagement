@@ -1,13 +1,14 @@
 <?php
-class checklist extends Public_Controller
+class riskest extends Public_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('admin_menu_model','admin_menu');
-		$this->load->model('est_checklist_model','estchecklist');
-		$this->load->model('est_checklist_detail_model','est_detail');
-		$this->load->model('est_title_model','est_title');
+		$this->load->model('risk_est_model','risk');
+		$this->load->model('risk_est_control_model','risk_control');
+		$this->load->model('risk_est_kri_model','risk_kri');
+		$this->load->model('risk_level_model','risk_level');
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 55;
@@ -25,35 +26,35 @@ class checklist extends Public_Controller
 				$condition = " 1=1 ";
 				if(@$_GET['sectionid'] !='')
 				{
-					$condition .= "AND est_checklist.sectionid ='".$_GET['sectionid']."'  ";
+					$condition .= "AND risk_est.sectionid ='".$_GET['sectionid']."'  ";
 				}
 				if(@$_GET['year_data'] !=''){
-					$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";
+					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
 				}
 				
 				}else{
 					$condition1 = " section.id ='". login_data('sectionid')."' ";
 					$data['result1'] = $this->section->where($condition1)->get_row();
-					$condition = " est_checklist.sectionid ='". login_data('sectionid')."' ";
+					$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
 					if(@$_GET['year_data'] !=''){
-						$condition .= "AND est_checklist.year_data ='".$_GET['year_data']."' ";	
+						$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
 						}
 				}
 			if(@$_GET['year_data'] !='' && @$_GET['sectionid'] !=''){
-				$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get_row();					
+				$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get_row();					
 			}else{
 				$data['result']['id'] = '';
 			}
 			
 		switch($mode){
 			case 'export':
-				$this->load->view('checklist/export',$data);
+				$this->load->view('riskest/export',$data);
 			break;
 			case 'print':
-				$this->load->view('checklist/print',$data);
+				$this->load->view('riskest/print',$data);
 			break;
 			default:
-				$this->template->build('checklist/index',$data);
+				$this->template->build('riskest/index',$data);
 			break;
 		}
 		
