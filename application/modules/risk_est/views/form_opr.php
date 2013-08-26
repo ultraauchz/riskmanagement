@@ -106,7 +106,7 @@ $(function(){
     <td><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@$rs['plot_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
-  	<th rowspan="4" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
+  	<th rowspan="7" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
     <td><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@$rs['results_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
@@ -120,6 +120,20 @@ $(function(){
   		<textarea name="result<?=$i;?>" style="width:450px;height:150px;"><?=@$rs['result'.$i];?></textarea>
   	</td>
   </tr>
+  <?
+	$fl_upload = $this->file_upload->where("risk_est_id = ".@$rs['risk_est_id']." and quarter = $i")->get();
+	 foreach($fl_upload as $fl){
+	 	if($fl['id'] != ''){ ?>
+  <tr>
+  	<th>ไฟล์</th>
+  	<td>
+  		<a href="import_file/risk_est/<?=$fl['fl_import']?>"><?=$fl['fl_name']?></a>
+  	</td>
+  </tr> 		
+	 		
+  <?	 	}
+	 }
+  ?>
   <tr>
   	<th>ไฟล์</th>
   	<td>

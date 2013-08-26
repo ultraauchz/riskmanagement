@@ -110,7 +110,7 @@ class risk_est extends Public_Controller
 		$data['risk_est_id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');
-			$this->db->debug = true;
+			#$this->db->debug = true;
 			$condition = "risk_opr.risk_est_id = ".$id;			
 			$data['rs'] = @$this->risk_opr->where($condition)->get_row();
 			if(@$data['rs']['id'] == ''){
