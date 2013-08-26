@@ -32,6 +32,12 @@ class risk_est extends Public_Controller
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
 				}
+				if(@$_GET['missionid'] != ''){
+					$condition .= "AND risk_est.missionid ='".$_GET['missionid']."' ";
+				}
+				if(@$_GET['event_risk'] != ''){
+					$condition .= "AND risk_est.event_risk like '%".$_GET['event_risk']."%' ";
+				}
 				
 			}else{
 				$condition1 = " section.id ='". login_data('sectionid')."' ";
@@ -39,6 +45,12 @@ class risk_est extends Public_Controller
 				$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
 				if(@$_GET['year_data'] !=''){
 				$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
+				}
+				if(@$_GET['missionid'] != ''){
+					$condition .= "AND risk_est.missionid ='".$_GET['missionid']."' ";
+				}
+				if(@$_GET['event_risk'] != ''){
+					$condition .= "AND risk_est.event_risk like '%".$_GET['event_risk']."%' ";
 				}
 				
 			}
@@ -196,6 +208,10 @@ class risk_est extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk'];		
 			save_log($menu_id,$action,$description);
 		}
+		$condition_level = " risk_remain_1_val = ".$_POST['remain_risk_1'] . " AND risk_remain_2_val = ".$_POST['remain_risk_2'];
+		$level = $this->risk_level->where($condition_level)->get_row();
+		$_POST['risk_level'] = $level['level_desc'];
+		
 		$pid = $this->risk->save($_POST);
 		/////save risk_control		
 		$this->db->Execute('delete from risk_est_control where risk_est_id ='.$pid);
