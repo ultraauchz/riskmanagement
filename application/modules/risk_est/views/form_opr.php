@@ -94,29 +94,29 @@ $(function(){
 <? for($i=1;$i<=4;$i++): ?>	
   <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-  	<th colspan="4"><div align="center">ไตรมาสที่ <?=$i;?></div></th>
+  	<th colspan="5"><div align="center">ไตรมาสที่ <?=$i;?></div></th>
   </tr>
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@$rs['plot_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@$rs['plot_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@$rs['plot_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@$rs['plot_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
   	<th rowspan="7" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@$rs['results_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@$rs['results_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@$rs['results_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@$rs['results_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
   </tr>
   <tr>
   	<th>ผลลัพธ์ที่ได้</th>
-  	<td>
+  	<td colspan="2">
   		<textarea name="result<?=$i;?>" style="width:450px;height:150px;"><?=@$rs['result'.$i];?></textarea>
   	</td>
   </tr>
@@ -129,6 +129,9 @@ $(function(){
   	<td>
   		<a href="import_file/risk_est/<?=$fl['fl_import']?>"><?=$fl['fl_name']?></a>
   	</td>
+  	<td width="80px">
+  		<a href="<?=$urlpage;?>/delete_fl/<?php echo $fl['id']?>/<?=@$rs['risk_est_id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
+  	</td>
   </tr> 		
 	 		
   <?	 	}
@@ -136,7 +139,7 @@ $(function(){
   ?>
   <tr>
   	<th>ไฟล์</th>
-  	<td>
+  	<td colspan="2">
   		<input type="file" name="fl_import<?=$i;?>" >
   	</tr>
 </table>
