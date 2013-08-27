@@ -9,9 +9,9 @@ class risk_opr_model extends MY_Model{
 	                  join mission on risk_est.missionid = mission.id
 	                  join process on risk_est.processid = process.id ';
 					  
-	public $select = ' risk_opr.* ,risk_est.*, section.title as section_title , 
-					  obj1.title as objective_title1, obj2.title as objective_title2 , obj3.title as objective_title3 , 
-					  mission.title as mission_title , process.title as process_title ';
+	public $select = ' risk_opr.*, risk_est.year_data ,risk_est.event_risk , risk_est.manage_risk,risk_est.sectionid,
+					   section.title as section_title ,obj1.title as objective_title1, obj2.title as objective_title2 ,
+					   obj3.title as objective_title3 ,mission.title as mission_title , process.title as process_title ';
 	
     function __construct()
     {

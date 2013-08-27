@@ -15,7 +15,7 @@
 			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc  '),@$_GET['section_id'],'style="width:370px"');?>
 		<? } ?>	
 			
-			<?=form_dropdown('missionid',get_option('id','title','mission order by title '),@$_GET['missionid'],'style="width:390px"','--เลือกภารกิจ--');?>
+			<?=form_dropdown('missionid',get_option('id','title','mission order by title '),@$_GET['missionid'],'style="width:390px"','แสดงภารกิจทั้งหมด');?>
 			<br />เหตุการณ์ความเสี่ยง <input type="text" name="event_risk" value="<?=@$_GET['event_risk']?>" style="width:370px" />
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>

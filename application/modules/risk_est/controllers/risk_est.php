@@ -130,7 +130,6 @@ class risk_est extends Public_Controller
 			$data['rs']['risk_est_id']=$id;
 			$data['rs']['id']='';
 			}else{
-				
 				for($i=1;$i<=4;$i++){
 					$start_date = explode('-',$data['rs']['plot_start_date'.$i]);
 					$data['rs']['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];

@@ -2,7 +2,7 @@
 	<div id="header">		
 		
 	</div>
-	<div style="text-align:right;margin-top:-20px;">
+	<div style="text-align:right;margin-top:-20px;" id="head">
 		<?php if(is_login()):?>
 		<span>เข้าสู่ระบบโดย <a href="user/user_profile" class="link_login"><?php echo login_data('name')?> </a> </span>
 		| <a href="home/signout">ออกจากระบบ</a>
