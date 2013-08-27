@@ -5,7 +5,7 @@ $(document).ready(function(){
 </script>
 	<? 
 	if($year_data != ''){
-		$i = 1;
+		$i = 0;
 		$num = 1;
 	foreach($main_title as $main_item):?>
 	<fieldset>
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			
 			
 			<? 
-				 $nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
+				$nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
 				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
 				$check_id = 0;
 				$num_third = 1 ;
@@ -39,8 +39,8 @@ $(document).ready(function(){
 					?>
 					<td style="width:250px;" rowspan="<?=$nrow;?>"><?="$num.$num_second ".$second_item['title'];?></td>
 					<?
-						}
-					@$check_detail = $id > 0 ? $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row() : '';
+						}										
+					$check_detail = $id > 0 ? $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row() : array();
 					
 					$i++
 					?>
