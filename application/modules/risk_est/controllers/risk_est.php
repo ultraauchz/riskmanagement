@@ -270,15 +270,22 @@ class risk_est extends Public_Controller
 			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
 			$action='Update';
 			for($i=1;$i<=4;$i++){
-			$start_date = explode('-',$_POST['plot_start_date'.$i]);
-			$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
-			$end_date = explode('-',$_POST['plot_end_date'.$i]);
-			$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
-			
-			$start_date = explode('-',$_POST['results_start_date'.$i]);
-			$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
-			$end_date = explode('-',$_POST['results_end_date'.$i]);
-			$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+				if($_POST['plot_start_date'.$i] != ''){
+					$start_date = explode('-',$_POST['plot_start_date'.$i]);
+					$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+				}
+				if($_POST['plot_end_date'.$i] != ''){
+					$end_date = explode('-',$_POST['plot_end_date'.$i]);
+					$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+				}
+				if($_POST['results_start_date'.$i] != ''){
+					$start_date = explode('-',$_POST['results_start_date'.$i]);
+					$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+				}
+				if($_POST['results_end_date'.$i] != ''){
+					$end_date = explode('-',$_POST['results_end_date'.$i]);
+					$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+				}
 			}
 			
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
@@ -287,15 +294,22 @@ class risk_est extends Public_Controller
 			if(permission($menu_id, 'canadd')=='')redirect('risk_est');	
 			$action='Add';
 			for($i=1;$i<=4;$i++){
-			$start_date = explode('-',$_POST['plot_start_date'.$i]);
-			$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
-			$end_date = explode('-',$_POST['plot_end_date'.$i]);
-			$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
-			
-			$start_date = explode('-',$_POST['results_start_date'.$i]);
-			$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
-			$end_date = explode('-',$_POST['results_end_date'.$i]);
-			$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+			if($_POST['plot_start_date'.$i] != ''){
+					$start_date = explode('-',$_POST['plot_start_date'.$i]);
+					$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+				}
+				if($_POST['plot_end_date'.$i] != ''){
+					$end_date = explode('-',$_POST['plot_end_date'.$i]);
+					$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+				}
+				if($_POST['results_start_date'.$i] != ''){
+					$start_date = explode('-',$_POST['results_start_date'.$i]);
+					$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
+				}
+				if($_POST['results_end_date'.$i] != ''){
+					$end_date = explode('-',$_POST['results_end_date'.$i]);
+					$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
+				}
 			}
 			$description = $action.' '.$menu_name.' : '.$_POST['event_risk_opr'];	
 			save_log($menu_id,$action,$description);

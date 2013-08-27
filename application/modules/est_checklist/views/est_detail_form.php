@@ -6,6 +6,7 @@ $(document).ready(function(){
 	<? 
 	if($year_data != ''){
 		$i = 1;
+		$num = 1;
 	foreach($main_title as $main_item):?>
 	<fieldset>
 		<table class="table table-form table-bordered table-striped table-horizontal">
@@ -15,10 +16,11 @@ $(document).ready(function(){
 		 		<td style="width:60px;text-align:center;">ไม่มี</td>
 		 	</tr>
 		 	<tr>
-				<td colspan="4"><?=$main_item['title'];?></td>
+				<td colspan="4"><?=$num. " ." . $main_item['title'];?></td>
 			</tr>
 		<? 
 			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
+			$num_second = 1 ;
 			foreach($second_title as $second_item):			
 		?>
 			
@@ -27,6 +29,7 @@ $(document).ready(function(){
 				 $nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
 				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
 				$check_id = 0;
+				$num_third = 1 ;
 				foreach($third_title as $third_item):			
 			?>
 				<tr>
@@ -34,7 +37,7 @@ $(document).ready(function(){
 						if($check_id!= $third_item['pid']){
 							$check_id = $third_item['pid'];
 					?>
-					<td style="width:250px;" rowspan="<?=$nrow;?>"><?=$second_item['title'];?></td>
+					<td style="width:250px;" rowspan="<?=$nrow;?>"><?="$num.$num_second ".$second_item['title'];?></td>
 					<?
 						}
 					@$check_detail = $id > 0 ? $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row() : '';
@@ -42,7 +45,7 @@ $(document).ready(function(){
 					$i++
 					?>
 					<td class="third_title" >
-						<?=$third_item['title'];?>
+						<?="$num.$num_second.$num_third " .$third_item['title'];?>
 						
 					</td>
 					<td style="width:60px;text-align:center;">
@@ -55,8 +58,13 @@ $(document).ready(function(){
 						<input type="radio" name="check_value[<?=$i?>]" class="required" value="0" <? if(@$check_detail['check_value'] == '0'){ ?> checked="checked" <? } ?> >					
 					</td>
 				</tr>
-			<? endforeach;?>
-		<?  endforeach;?>
+			<? $num_third ++; 
+			endforeach;
+			$num_second++;
+			?>
+		<?  endforeach;
+		$num++;
+		?>
 		</table>
 		</fieldset>
 	<? endforeach; ?>

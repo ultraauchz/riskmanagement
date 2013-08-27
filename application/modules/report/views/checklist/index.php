@@ -55,10 +55,11 @@
 		 		<td style="width:60px;text-align:center;">ไม่มี</td>
 		 	</tr>
 		 	<tr>
-				<td colspan="4"><?=$num. " ." . $main_item['title']; $num++; ?></td>
+				<td colspan="4"><?=$num. " ." . $main_item['title']; ?></td>
 			</tr>
 		<? 
 			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
+			$num_second = 1 ;
 			foreach($second_title as $second_item):			
 		?>
 			
@@ -67,6 +68,7 @@
 				 $nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
 				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
 				$check_id = 0;
+				$num_third = 1 ;
 				foreach($third_title as $third_item):			
 			?>
 				<tr>
@@ -74,7 +76,7 @@
 						if($check_id!= $third_item['pid']){
 							$check_id = $third_item['pid'];
 					?>
-					<td style="width:250px;" rowspan="<?=$nrow;?>"><?=$second_item['title'];?></td>
+					<td style="width:250px;" rowspan="<?=$nrow;?>"><?="$num.$num_second ".$second_item['title'];?></td>
 					<?
 						}
 					@$check_detail = $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row();
@@ -82,7 +84,7 @@
 					$i++
 					?>
 					<td class="third_title" >
-						<?=$third_item['title'];?>
+						<?="$num.$num_second.$num_third " .$third_item['title'];?>
 						
 					</td>
 					<td style="width:60px;text-align:center;">
@@ -98,8 +100,12 @@
 						<? } ?>				
 					</td>
 				</tr>
-			<? endforeach;?>
-		<?  endforeach;?>
+			<? $num_third ++;
+			endforeach;?>
+		<?  $num_second++;
+		endforeach;
+		$num++;
+		?>
 		</table>
 		</fieldset>
 	<? endforeach; ?>
