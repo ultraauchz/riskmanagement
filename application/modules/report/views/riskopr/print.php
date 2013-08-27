@@ -20,7 +20,6 @@ body{
 	}
 .table td{
 	border: 1px solid #000000;
-    text-align : left;
 	padding:0.2em;
 }
 .table th{
@@ -58,13 +57,13 @@ body{
 </table>
 <b>ภารกิจ </b> : <label><?=$result['mission_title'];?></label> <br />
 <b>กระบวนงาน</b> : <label><?=$result['process_title'];?></label> <br /><br />
-<table class="table">
+<table class="table" width="100%">
 	<tr>
 		<td rowspan="3" align="center" width="150px"><b>เหตุการณ์ความเสี่ยง<b/></td>
 		<td rowspan="3" align="center" width="250px"><b>ตัวชี้วัดความเสี่ยง ( Key Risk Indicators : KRI )<b/></td>
 		<td rowspan="3" align="center" width="200px"><b>กิจกรรมดำเนินงาน<b/></td>
 		<td rowspan="3" align="center" width="50px"><b>แผน/ผล<b/></td>
-		<td colspan="12" align="center"><b>ระยะเวลาการดำเนินการ<b/></td>
+		<td colspan="12"align="center"><b>ระยะเวลาการดำเนินการ<b/></td>
 		<td rowspan="3" align="center"><b>ผลลัพธ์ที่ได้(Outcome)<b/></td>
 
 		 
@@ -116,8 +115,13 @@ body{
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-		
+			<td rowspan="2">
+				<? 
+				for($i=1;$i<=4;$i++){
+					echo $result['result'.$i]."<br />";
+				}
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td>ผล</td>
@@ -133,14 +137,6 @@ body{
 			<td></td>
 			<td></td>
 			<td></td>
-			<td>
-				<? 
-				for($i=1;$i<=4;$i++){
-					echo $result['result'.$i]."<br />";
-				}
-				?>
-			</td>
-
 		</tr>
 </table>
 <br /><br />
