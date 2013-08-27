@@ -30,7 +30,6 @@
 		<tr class="head">
 					<th>ลำดับ</th>
 					<th>ปีงบประมาณ</th> 
-					<th>ประเภท</th>
 					<th>ภาควิชา/งาน</th> 
 					<th><div align="center">จัดการข้อมูล</div></th>
 		</tr>
@@ -41,10 +40,9 @@
 		  foreach($result as $row):
 		?>  
 		<tr>
-		  <td width="5%"><?=$i;?></td>
-		  <td align="left" width="10%" ><?=$row['year_data'];?></td>
-		  <td width="10%"><?=$row['section_type_title'];?></td>
-		  <td width="45%"><?=$row['section_title'];?></td>
+		  <td style="text-align:center;width:30px;" ><?=$i;?></td>
+		  <td style="text-align:center;width:120px;" ><?=$row['year_data'];?></td>
+		  <td><?=$row['section_title'];?></td>
 		  <td width="15%">
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>

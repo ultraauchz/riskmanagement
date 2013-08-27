@@ -43,7 +43,7 @@ body {
 	  </td>
 		<td colspan="4">
 			<img src="media/images/login/logiin_07.png" width="39" height="38" alt=""></td>
-		<td colspan="4" align="left" bgcolor="#def7fd"><input name="username" class="required" placeholder="username" type="text" id="textfield" size="37"></td>
+		<td colspan="4" align="left" bgcolor="#def7fd"><input name="email" class="required" placeholder="กรอก email หรือ username" type="text" id="textfield" size="37"></td>
 		<td rowspan="5" background="media/images/login/logiin_09.png"></td>
 </tr>
 	<tr>
@@ -51,21 +51,19 @@ body {
   </tr>
 	<tr class="tr_password">
 		<td colspan="3">
-			<img src="media/images/login/logiin_11.png" width="38" height="36" alt=""></td>
-		<td colspan="5" align="left" bgcolor="#def7fd"><input name="password" class="required" placeholder="password" type="password" id="textfield2" size="37"></td>
-	</tr>
-	<tr class="tr_email" style="display:none;">
-		<td colspan="3">
-			<img src="media/images/login/logiin_11.png" width="38" height="36" alt=""></td>
-		<td colspan="5" align="left" bgcolor="#def7fd"><input name="email" class="required" type="email" id="email" size="37"></td>
-	</tr>
+			
+		</td>
+		<td colspan="5" align="left" bgcolor="#def7fd">
+			
+		</td>
+	</tr>	
 	<tr>
 		<td colspan="5" bgcolor="#e6f8fc">&nbsp;</td>
 		<td height="30" colspan="3" bgcolor="#e5f7fc">&nbsp;</td>
 	</tr>
 	<tr>
 	  	<td colspan="5" bgcolor="#e6f8fc" align="right">
-	  		<a href="home/forgot_password"><img src="media/images/login/pass.png" width="119" height="31" style="cursor:pointer; cursor:hand;" ></a>
+	  		<a href="home/index"><img src="media/images/login/pass.png" width="119" height="31" style="cursor:pointer; cursor:hand;" ></a>
 	  	</td>
 		<td colspan="3" bgcolor="#e8f8fc" align="center">			
 			<input type="image" src="media/images/login/login.png" width="132" height="31">

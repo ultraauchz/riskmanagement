@@ -53,9 +53,9 @@ foreach($result as $row):
 			<td width="5%" style="text-align:center;"><?=$i;?></td>
 			<td width="10%"  style="text-align:center;"><?=$year?></td>
 			<td width="45%"><?=$row['section_title'];?></td>
-			<td width="10%"><div align="center"><?=$nform3;?></div></td>
-			<td width="10%"><div align="center"><?=$nform4;?></div></td>
-			<td width="10%"><div align="center"><?=$nchecklist;?></td>
+			<td width="10%"><a href="risk_est?year_data=<?=@$_GET['year_data'];?>&section_id=<?=$row['id'];?>"><div align="center"><?=$nform3;?></div></a></td>
+			<td width="10%"><a href="risk_est?year_data=<?=@$_GET['year_data'];?>&section_id=<?=$row['id'];?>"><div align="center"><?=$nform4;?></div></a></td>
+			<td width="10%"><a href="est_checklist?year_data=<?=@$_GET['year_data'];?>&sectionid=<?=$row['id'];?>"><div align="center"><?=$nchecklist;?></div></a></td>
 			
 	 	</tr>
 	 
