@@ -40,7 +40,7 @@ $(document).ready(function(){
 });
 
 </script>
-<h3>รายงานข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง</h3>
+<h3>หนังสือรับรองการควบคุมภายในของผู้บริหารระดับส่วนงาน</h3>
 <form enctype="multipart/form-data" method="get">
 <div id="search" align="center">
 		<h4>ภาควิชา/งาน</h4>
