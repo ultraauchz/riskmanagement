@@ -27,7 +27,6 @@ $(document).ready(function(){
 				 $nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
 				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
 				$check_id = 0;
-				$i = 1;
 				foreach($third_title as $third_item):			
 			?>
 				<tr>
