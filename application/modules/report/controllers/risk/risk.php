@@ -40,6 +40,7 @@ class risk extends Public_Controller
 			
 		switch($mode){
 			case 'export':
+				$data['sectionid']=$_POST['sectionid'];
 				$this->load->view('risk/export',$data);
 			break;
 			case 'print':
