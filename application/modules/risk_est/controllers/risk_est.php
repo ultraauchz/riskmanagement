@@ -217,7 +217,6 @@ class risk_est extends Public_Controller
 		if(isset($_POST['control_risk'])){
 		   foreach($_POST['control_risk'] as $key=>$_POST['i']){
 		    if($_POST['control_risk'][$key]){
-		    $i++;
 		    $data['risk_est_id'] = $pid;
 		    $data['control_risk'] = $_POST['control_risk'][$key];
 		    $data['estimate_control_risk'] = $_POST['estimate_control_risk'][$key];
@@ -230,7 +229,6 @@ class risk_est extends Public_Controller
 		if(isset($_POST['kri_risk'])){
 		   foreach($_POST['kri_risk'] as $key=>$_POST['control_i']){
 		    if($_POST['kri_risk'][$key]){
-		    $i++;
 		    $data['risk_est_id'] = $pid;
 		    $data['kri_risk'] = $_POST['kri_risk'][$key];
 		    $data['kri_risk_count'] = $_POST['kri_risk_count'][$key];

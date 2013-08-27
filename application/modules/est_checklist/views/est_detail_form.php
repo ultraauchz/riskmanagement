@@ -27,6 +27,7 @@ $(document).ready(function(){
 				 $nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
 				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
 				$check_id = 0;
+				$i = 1;
 				foreach($third_title as $third_item):			
 			?>
 				<tr>
@@ -46,7 +47,7 @@ $(document).ready(function(){
 						
 					</td>
 					<td style="width:60px;text-align:center;">
-						<input type="hidden" name="est_title_id[<?=$i?>]" value="<?=$third_item['id'];?>">
+						<input type="hidden" name="est_title_id[<?=$i?>]" value="<?=@$third_item['id'];?>">
 						<input type="hidden" name="detail_id[<?=$i?>]" value="<?=@$check_detail['id'];?>">
 						<input type="radio" name="check_value[<?=$i?>]" class="required" value="1" <? if(@$check_detail['check_value'] == '1'){ ?> checked="checked" <? } ?> >
 						
