@@ -289,3 +289,11 @@ th{
 	vertical-align: middle !important;
 	
 }
+
+form th{
+	text-align:left !important;
+}
+
+.hasDatepick{
+	width:100px;
+}

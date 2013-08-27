@@ -65,7 +65,7 @@ body {
 	</tr>
 	<tr>
 	  	<td colspan="5" bgcolor="#e6f8fc" align="right">
-	  		<a href="home/forgot_password"><img src="media/images/login/pass.png" width="119" height="31" style="cursor:pointer; cursor:hand;" ></a>
+	  		<a href="home/forgot_password"><img src="media/images/login/forgot_pass.png" width="119" height="31" style="cursor:pointer; cursor:hand;" ></a>
 	  	</td>
 		<td colspan="3" bgcolor="#e8f8fc" align="center">			
 			<input type="image" src="media/images/login/login.png" width="132" height="31">
