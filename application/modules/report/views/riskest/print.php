@@ -20,7 +20,6 @@ body{
 	}
 .table td{
 	border: 1px solid #000000;
-    text-align : left;
 	padding:0.2em;
 }
 .table th{
@@ -58,7 +57,7 @@ body{
 </table>
 <b>ภารกิจ </b> : <label><?=$result['mission_title'];?></label> <br />
 <b>กระบวนงาน</b> : <label><?=$result['process_title'];?></label> <br /><br />
-<table class="table">
+<table class="table" width="100%">
 	<tr>
 		<td rowspan="2" style="text-align: center"><b>เหตุการณ์ความเสี่ยง<b/></td>
 		<td rowspan="2" style="text-align: center"><b>สาเหตุ<b/></td>

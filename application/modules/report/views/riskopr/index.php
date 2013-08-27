@@ -53,7 +53,7 @@
 </table>
 <b>ภารกิจ </b> : <label><?=$result['mission_title'];?></label> <br />
 <b>กระบวนงาน</b> : <label><?=$result['process_title'];?></label> <br /><br />
-<table border="1">
+<table border="1" width="100%">
 	<tr>
 		<td rowspan="3" align="center" width="150px"><b>เหตุการณ์ความเสี่ยง<b/></td>
 		<td rowspan="3" align="center" width="250px"><b>ตัวชี้วัดความเสี่ยง ( Key Risk Indicators : KRI )<b/></td>
@@ -111,8 +111,13 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-		
+			<td rowspan="2">
+				<? 
+				for($i=1;$i<=4;$i++){
+					echo $result['result'.$i]."<br />";
+				}
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td>ผล</td>
@@ -128,13 +133,7 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td>
-				<? 
-				for($i=1;$i<=4;$i++){
-					echo $result['result'.$i]."<br />";
-				}
-				?>
-			</td>
+			
 
 		</tr>
 </table>

@@ -91,8 +91,13 @@ header("Content-Disposition: attachment; filename=".$filename);
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-		
+			<td rowspan="2">
+				<? 
+				for($i=1;$i<=4;$i++){
+					echo $result['result'.$i]."<br />";
+				}
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td>ผล</td>
@@ -108,14 +113,6 @@ header("Content-Disposition: attachment; filename=".$filename);
 			<td></td>
 			<td></td>
 			<td></td>
-			<td>
-				<? 
-				for($i=1;$i<=4;$i++){
-					echo $result['result'.$i]."<br />";
-				}
-				?>
-			</td>
-
 		</tr>
 </table>
 <br />
