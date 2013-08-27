@@ -1,4 +1,20 @@
 <script type="text/javascript">
+$(document).ready(function(){
+    $("#start_date").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#end_date").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        }
+    });
+    $("#end_date").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#start_date").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        }
+         
+    });  
+});
 $(function(){
 	function validate_form(){
 		$(".commentForm").validate({
@@ -347,11 +363,11 @@ $(document).ready(function(){
   </tr>
   <tr>
     <th width="400px">วันที่เริ่มดำเนินการ</th>
-    <td><input type="text" name="start_date" value="<?=@$rs['start_date'];?>" style="width:100px" class="datepicker" /></td>
+    <td><input type="text" name="start_date" id="start_date" value="<?=@$rs['start_date'];?>" style="width:100px" /></td>
   </tr>
   <tr>
     <th width="400px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="end_date" value="<?=@$rs['end_date'];?>" style="width:100px" class="datepicker" /></td>
+    <td><input type="text" name="end_date" id="end_date" value="<?=@$rs['end_date'];?>" style="width:100px" /></td>
   </tr>
 </table>
 <div align="center">
