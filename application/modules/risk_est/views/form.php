@@ -129,7 +129,7 @@ $(document).ready(function(){
 		$("[name=estimate_control_risk["+jj+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการประเมินการควบคุมที่มีอยู่"}});
 		}
 });
-	
+
 </script>
 
 <h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง (เพิ่ม/แก้ไข)</h3>

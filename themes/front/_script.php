@@ -13,5 +13,4 @@
 <script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="themes/front/js/myscript.js"></script>
 <script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>
-<script type="text/javascript" src="media/js/jquery.inputmask.js"></script>
 <script type="text/javascript" src="media/js/yoke.inputmarkup.js"></script>
