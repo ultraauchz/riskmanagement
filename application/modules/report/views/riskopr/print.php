@@ -59,9 +59,9 @@ body{
 <b>กระบวนงาน</b> : <label><?=$result['process_title'];?></label> <br /><br />
 <table class="table" width="100%">
 	<tr>
-		<td rowspan="3" align="center" width="150px"><b>เหตุการณ์ความเสี่ยง<b/></td>
+		<td rowspan="3" align="center" width="100px"><b>เหตุการณ์ความเสี่ยง<b/></td>
 		<td rowspan="3" align="center" width="250px"><b>ตัวชี้วัดความเสี่ยง ( Key Risk Indicators : KRI )<b/></td>
-		<td rowspan="3" align="center" width="200px"><b>กิจกรรมดำเนินงาน<b/></td>
+		<td rowspan="3" align="center" width="100px"><b>กิจกรรมดำเนินงาน<b/></td>
 		<td rowspan="3" align="center" width="50px"><b>แผน/ผล<b/></td>
 		<td colspan="12"align="center"><b>ระยะเวลาการดำเนินการ<b/></td>
 		<td rowspan="3" align="center"><b>ผลลัพธ์ที่ได้(Outcome)<b/></td>
@@ -102,7 +102,7 @@ body{
 		<? $i++; } ?>		
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
-			<td height="50px">แผน</td>
+			<td height="<?=$i*20?>">แผน</td>
 			<td></td>
 			<td></td>
 			<td></td>

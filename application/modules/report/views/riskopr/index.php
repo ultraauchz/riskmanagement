@@ -120,12 +120,9 @@
 			<td height="50px">แผน</td>
 			<? for($i=1;$i<=4;$i++){
 				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
-					//echo  $result['plot_start_date'.$i]."-".$result['plot_end_date'.$i]."<br>";				
 					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
 				}
-				//var_dump($months);
 			} ?>
-			<?// get_line_months($months, '2013-10-1', '2013-12-1'); ?>
 			<?php foreach($months as $key => $value): ?>
 				<td style="height:60px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
 			<?php endforeach; ?>
