@@ -36,7 +36,7 @@ if ( ! function_exists('unix_to_human_date'))
 	}
 }
 
-function date_to_mysql($date,$is_date_thai = FALSE)
+function date_to_mysql($date,$is_date_thai = true)
 {
 	list($d,$m,$y) = explode('-', $date);
 	$y = ($is_date_thai) ? $y - 543 : $y;
@@ -44,10 +44,12 @@ function date_to_mysql($date,$is_date_thai = FALSE)
 }
 
 
-function mysql_to_date($date,$is_date_thai = FALSE)
+function mysql_to_date($date,$is_date_thai = true)
 {
+	if($date > 0 ){
 	@list($y,$m,$d) = @explode('-', $date);
 	$y = ($is_date_thai) ? $y + 543 : $y;
+	}else{ $date = NULL;}
 	return @$date ? $d.'-'.$m.'-'.$y : NULL;
 }
 
@@ -217,5 +219,25 @@ function getAgefromTimestamp($birth){
 	$t = time();
 	$age = ($birth < 0) ? ( $t + ($birth * -1) ) : $t - $birth;
 	return floor($age/31536000);
+}
+
+function get_range_months($date1, $date2) {
+$time1  = strtotime($date1);
+$time2  = strtotime($date2);
+$tmp     = date('mY', $time2);
+
+//$months[] = array("month"    => date('m', $time1), "year"    => date('Y', $time1));
+$months[] = date('m', $time1);
+
+while($time1 < $time2) {
+  $time1 = strtotime(date('Y-m-d', $time1).' +1 month');
+  if(date('mY', $time1) != $tmp && ($time1 < $time2)) {
+     //$months[] = array("month"    => date('m', $time1), "year"    => date('Y', $time1));
+     $months[] =  date('m', $time1);
+  }
+}
+//$months[] = array("month"    => date('m', $time2), "year"    => date('Y', $time2));
+$months[] = date('m', $time2);
+return $months; //returns array of month names with year
 }
 ?>

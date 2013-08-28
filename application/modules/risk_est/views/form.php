@@ -363,11 +363,11 @@ $(document).ready(function(){
   </tr>
   <tr>
     <th width="400px">วันที่เริ่มดำเนินการ</th>
-    <td><input type="text" name="start_date" id="start_date" value="<?=@$rs['start_date'];?>" style="width:100px" /></td>
+    <td><input type="text" name="start_date" id="start_date" value="<?=@mysql_to_date($rs['start_date']);?>" style="width:100px" /></td>
   </tr>
   <tr>
     <th width="400px">วันที่เสร็จสิ้น</th>
-    <td><input type="text" name="end_date" id="end_date" value="<?=@$rs['end_date'];?>" style="width:100px" /></td>
+    <td><input type="text" name="end_date" id="end_date" value="<?=@mysql_to_date($rs['end_date']);?>" style="width:100px" /></td>
   </tr>
 </table>
 <div align="center">

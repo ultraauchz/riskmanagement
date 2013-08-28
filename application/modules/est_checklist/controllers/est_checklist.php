@@ -102,8 +102,7 @@ class est_checklist extends Public_Controller
 			$description = $action.' '.$menu_name.' : '.$_POST['est_name'];		
 			save_log($menu_id,$action,$description);
 		}
-		$est_date = explode('-',$_POST['est_date']);
-		$_POST['est_date'] = $est_date[2]."-".$est_date[1]."-".$est_date[0];
+		$_POST['est_date'] = date_to_mysql($_POST['est_date']);
 		$id = $this->estchecklist->save($_POST);
 		//est_title_id คือ hidden ที่เก็บไอดี ของแต่ล่ะข้อ
 		//check_value คือ checkbox

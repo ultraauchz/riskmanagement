@@ -6,6 +6,25 @@
     padding: 2px 10px;
     text-align: left;
 }</style>
+<style>
+	.cursor a{height:44px;display:block;}
+	#left{left:0px;width:60px;}
+	#left {background: url('media/images/cursor.png') 0 -40px;}
+	
+	#center{left:0px;width:40px;}
+	#center {background: url('media/images/cursor.png') -41px -40px;}
+	
+	#next{left:0px;width:40px;text-align:left;}
+	#next {background: url('media/images/cursor.png') -81px -40px;text-align:left;}
+	
+	#end{left:0px;width:55px;text-align:center;}
+	#end {background: url('media/images/cursor_end.png');}
+	
+	#line{left:0px;width:60px;text-align:center;}
+	#line {background: url('media/images/cursor.png')-41px -40px;text-align:left;}
+	
+	#none{display:none;}
+</style>
 <h3>รายงานข้อมูลแผนการปฎิบัติการและรายงานผล</h3>
 <form enctype="multipart/form-data" method="get">
 <div id="search">
@@ -99,13 +118,17 @@
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
 			<td height="50px">แผน</td>
-			<? for($i=1;$i<=4;$i++){ 
-			get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);
+			<? for($i=1;$i<=4;$i++){
+				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
+					//echo  $result['plot_start_date'.$i]."-".$result['plot_end_date'.$i]."<br>";				
+					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
+				}
+				//var_dump($months);
 			} ?>
-			
+			<?// get_line_months($months, '2013-10-1', '2013-12-1'); ?>
 			<?php foreach($months as $key => $value): ?>
-		<td style="height:60px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
-		<?php endforeach; ?>
+				<td style="height:60px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
+			<?php endforeach; ?>
 			<td rowspan="2">
 				<? 
 				for($i=1;$i<=4;$i++){

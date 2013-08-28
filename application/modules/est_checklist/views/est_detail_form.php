@@ -77,11 +77,7 @@ $(document).ready(function(){
 	    </tr>
 	    <tr>
 		  <th width="400px">วันที่ประเมิน</th>
-		  <?	if(@$rs['est_date'] != ''){
-		  			$est_date = explode('-',@$rs['est_date']);
-					@$rs['est_date'] = $est_date[2]."-".$est_date[1]."-".$est_date[0];
-		  		} ?>
-		  <td><input type="text" name="est_date" class="datepicker" value="<?=@$rs['est_date']?>" style="width:100px" /></td>
+		  <td><input type="text" name="est_date" class="datepicker" value="<?=@mysql_to_date($rs['est_date']);?>" style="width:100px" /></td>
 	    </tr>	         
 		</table>
 	<div align="center">
