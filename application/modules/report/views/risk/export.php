@@ -1,7 +1,11 @@
+<html>
+    <head>
 <?php
-header("Content-type: application/vnd.ms-word");
+
 $filename= "risk_data_".date("Y-m-d_H_i_s").".doc";
-header("Content-Disposition: attachment; filename=".$filename);
+  header("Content-Type: application/vnd.ms-word; name=\"$filename\"");
+  header("Content-Disposition: inline; filename=\"$filename\"");
+  header("Pragma: no-cache");
 if($sectionid == ''){
 	$sectionid = "……………………(ชื่อส่วนงาน)………………………..…….";
 }
@@ -9,36 +13,14 @@ if($year_data == ''){
 	$year_data = "....................";
 }
 ?>
-<style>
-#print label {
-    border-bottom: 1px dashed #333333;
-    display: inline-block;
-    overflow: hidden;
-    padding: 2px 10px;
-    text-align: left;
-}
-#print{
-	font-size:16px;
-	line-height: 25px;
-}
-</style>
-<div id="print" align="center">
-<table width="1024px">
-	<tr>
-		<td align="center"><b>หนังสือรับรองการควบคุมภายในของผู้บริหารระดับส่วนงาน</b></td>
-	</tr>
-	<tr>
-		<td><br /><br /></td>
-	</tr>
-	<tr>
-		<td>เรียน อธิการบดี</td>
-	</tr>
-	<tr>
-		<td><br /><br /></td>
-	</tr>
-	<tr>
-		<td align="left">
-			<div contenteditable="true">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+<body>
+<div align="center"  style="font-size: 18pt;"><b>หนังสือรับรองการควบคุมภายในของผู้บริหารระดับส่วนงาน</b></div>
+<br /><br />
+<div align="left" style="font-size: 18pt;">เรียน อธิการบดี</div>
+<br /><br />
+			<div align="left" style="font-size: 16pt;">
 	        <p style="text-indent: 50px"><?=$sectionid?> ได้ประเมินผลการควบคุมภายใน
 	      	สำหรับปีสิ้นสุดวันที่ 30 เดือน กันยายน พ.ศ. <?=$year_data?> 
 	      	ด้วยวิธีที่  <?=$sectionid?>
@@ -50,27 +32,17 @@ if($year_data == ''){
 		        ของฝ่ายบริหาร<br /></p>
 	        <p style="text-indent: 50px">จากผลการประเมินดังกล่าวเห็นว่าการควบคุมภายในของ <?=$sectionid?> 
 	              สำหรับปีสิ้นสุดวันที่ 30 เดือน กันยาน พ.ศ. <?=$year_data?> เป็นไปตามระบบการควบคุมภายในที่กำหนดไว้ มีความเพียงพอและบรรลุวัตถุประสงค์ของการควบคุมภายในตามที่กล่าวในวรรคแรก
-			</p><p style="text-indent: 50px">อนึ่ง การควบคุมภายในยังคงมีจุดอ่อนที่มีนัยสำคัญดังนี้
-	<div contenteditable="true">
-			<p style="text-indent: 50px">..............................................................……………………………..…………………….................................................................................</div>
-			</div>
-		</td>
-		
-	</tr>
-<tr>
-		<td><br /><br /></td>
-</tr>
+			</p><p style="text-indent: 50px">อนึ่ง การควบคุมภายในยังคงมีจุดอ่อนที่มีนัยสำคัญดังนี้<br />
+			<p style="text-indent: 50px">..............................................................……………………………..…………………….................................................................................
+		</div>
+<br /><br />
 </div>	
-<tr>
-	<td>
 		<div align="right">
 			<div style="padding-left:40%;">ลายมือชื่อ....................................................................</div>
 			<div style="padding-left:70%;">(ชื่อผู้บริหารส่วนงาน)</div>
 			<div style="padding-left:40%;">ตำแหน่ง.....................................................................</div>
 			<div style="padding-left:45%;">วันที่ 30  เดือน กันยายน  พ.ศ. <?=$year_data?></div>
 		</div>
-	</td>
-</tr>
-</table>
-</div>
+	</body>
+</html>
 

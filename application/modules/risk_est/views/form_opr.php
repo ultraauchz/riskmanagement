@@ -99,20 +99,20 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td colspan="2"><input type="text" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@$rs['plot_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@$rs['plot_start_date'.$i];?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td colspan="2"><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@$rs['plot_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@$rs['plot_end_date'.$i];?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
   </tr>
   <tr>
   	<th rowspan="7" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td colspan="2"><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@$rs['results_start_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@$rs['results_start_date'.$i];?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td colspan="2"><input type="text" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@$rs['results_end_date'.$i];?>" style="width:150px" class="datepicker_1" /></td>
+    <td colspan="2"><input type="text" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@$rs['results_end_date'.$i];?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
   </tr>
   <tr>
   	<th>ผลลัพธ์ที่ได้</th>

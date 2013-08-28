@@ -106,8 +106,8 @@ $(document).ready(function(){
 	        <p style="text-indent: 50px">จากผลการประเมินดังกล่าวเห็นว่าการควบคุมภายในของ <span class="section">…......(ชื่อส่วนงาน)…………….</span> 
 	              สำหรับปีสิ้นสุดวันที่ 30 เดือน กันยายน พ.ศ. <span class="year_data">.............</span> เป็นไปตามระบบการควบคุมภายในที่กำหนดไว้ มีความเพียงพอและบรรลุวัตถุประสงค์ของการควบคุมภายในตามที่กล่าวในวรรคแรก
 			</p><p style="text-indent: 50px">อนึ่ง การควบคุมภายในยังคงมีจุดอ่อนที่มีนัยสำคัญดังนี้
-	<div contenteditable="true">
-			<p style="text-indent: 50px"  contenteditable="true">..............................................................……………………………..…………………….................................................................................</div>
+	<div>
+			<p style="text-indent: 50px">..............................................................……………………………..…………………….................................................................................</div>
 			</div>
 		</td>
 		
@@ -120,8 +120,8 @@ $(document).ready(function(){
 	<td>
 		<div align="right">
 			<div style="padding-left:40%;">ลายมือชื่อ<label style="width:45%; text-align:center;">&nbsp</label></div>
-			<div style="padding-left:70%;"><div align="center" contenteditable="true">(ชื่อผู้บริหารส่วนงาน)</div></div>
-			<div style="padding-left:40%;">ตำแหน่ง <label style="width:45%; text-align:center;" contenteditable="true">&nbsp</label></div>
+			<div style="padding-left:70%;"><div align="center">(ชื่อผู้บริหารส่วนงาน)</div></div>
+			<div style="padding-left:40%;">ตำแหน่ง <label style="width:45%; text-align:center;">&nbsp</label></div>
 			<div style="padding-left:45%;">วันที่<label style="width:7%; text-align:center;"> 30 </label>เดือน<label style="width:15%; text-align:center;"> กันยายน </label>พ.ศ. <label style="width:10%; text-align:center;"><span class="year_data">&nbsp</span></label></div>
 		</div>
 	</td>

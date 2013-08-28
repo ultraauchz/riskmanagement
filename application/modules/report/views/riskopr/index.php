@@ -86,7 +86,7 @@
 	</tr>
 	
 	<tr>
-		
+		<? $months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0); ?>
 		<? $nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one(); ?>
 		<td rowspan="2"><?=$result['event_risk'];?></td>
 		<td rowspan="2">
@@ -99,25 +99,13 @@
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
 			<td height="50px">แผน</td>
-			<?
-			 echo $left = '<img src="media/images/cursor_left.png">';
-			 echo $center = '<img src="media/images/cursor_center.png">';
-			 echo $rigth = '<img src="media/images/cursor_rigth.png">';
-			 
-			 $one = "";
-			?>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<? for($i=1;$i<=4;$i++){ 
+			get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);
+			} ?>
+			
+			<?php foreach($months as $key => $value): ?>
+		<td style="height:60px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
+		<?php endforeach; ?>
 			<td rowspan="2">
 				<? 
 				for($i=1;$i<=4;$i++){
