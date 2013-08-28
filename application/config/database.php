@@ -41,8 +41,8 @@ $active_record = TRUE;
 #$db['default']['hostname'] = '27.254.33.52';
 #$db['default']['hostname'] = '192.168.1.64';
 
-#$db['default']['hostname'] = 'devo-pc';
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = 'devo-pc';
+#$db['default']['hostname'] = 'localhost';
 
 
 $db['default']['username'] = 'root';

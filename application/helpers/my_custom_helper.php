@@ -536,4 +536,75 @@ function GetMenuProperty($id, $field) {
 	$result = $CI -> db -> getone("SELECT " . $field . " from admin_menu where id=" . $id);
 	return $result;
 }
+
+function get_line_months(&$months, $date1, $date2) 
+{
+	$time1  = strtotime($date1);
+	$time2  = strtotime($date2);
+	$tmp     = date('mY', $time2);
+	
+	$months[number_format(date('m', $time1))] = 1;
+	
+	while($time1 < $time2) {
+	  $time1 = strtotime(date('Y-m-d', $time1).' +1 month');
+	  if(date('mY', $time1) != $tmp && ($time1 < $time2)) {
+	     $months[number_format(date('m', $time1))] = 1;
+	  }
+	}
+	$months[number_format(date('m', $time2))] = 1;
+	return $months;
+}
+
+function array_neighbor($arr, $key)
+{
+   $keys = array_keys($arr);
+   $keyIndexes = array_flip($keys);
+  
+   $return = array();
+   if (isset($keys[$keyIndexes[$key]-1])) {
+       $return[] = $keys[$keyIndexes[$key]-1];
+   }
+   else {
+       $return[] = $keys[sizeof($keys)-1];
+   }
+   
+   if (isset($keys[$keyIndexes[$key]+1])) {
+       $return[] = $keys[$keyIndexes[$key]+1];
+   }
+   else {
+       $return[] = $keys[0];
+   }
+   
+   return $return;
+}
+
+function set_line($months, $key, $value)
+{
+	$check = array_neighbor($months, $key);
+	$line = ($value == 1) ? 'line' : '';
+	
+	if($key == 10 && $value == 1)
+	{
+		$line = ($months[$check[1]] == 1) ? 'left' : 'end';  
+	}
+	else if($key == 9 && $value == 1)
+	{
+		$line = ($months[$check[0]] == 1) ? 'next' : 'end';  
+	}
+	else if($value == 1 && ($months[$check[0]] == 0) && ($months[$check[1]] == 0))
+	{
+		$line = 'end';
+	}
+	else if($value == 1 && ($months[$check[0]] == 0))
+	{
+		$line = 'left';
+	}
+	else if($value == 1 && ($months[$check[1]] == 0))
+	{
+		$line = 'next';
+	}
+	
+	return $line;
+}
+
 ?>
