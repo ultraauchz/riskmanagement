@@ -8,7 +8,7 @@ class risk extends Public_Controller
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 55;
-	public $urlpage = 'report/checklist';
+	public $urlpage = 'report/risk';
 	public function index($mode=false)
 	{
 		$pid=0;
@@ -40,7 +40,8 @@ class risk extends Public_Controller
 			
 		switch($mode){
 			case 'export':
-				$data['sectionid']=$_POST['sectionid'];
+				$data['sectionid']=$_GET['sectionid'];
+				$data['year_data']=$_GET['year_data'];
 				$this->load->view('risk/export',$data);
 			break;
 			case 'print':

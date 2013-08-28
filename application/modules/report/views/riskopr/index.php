@@ -99,6 +99,13 @@
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
 			<td height="50px">แผน</td>
+			<?
+			 echo $left = '<img src="media/images/cursor_left.png">';
+			 echo $center = '<img src="media/images/cursor_center.png">';
+			 echo $rigth = '<img src="media/images/cursor_rigth.png">';
+			 
+			 $one = "";
+			?>
 			<td></td>
 			<td></td>
 			<td></td>
