@@ -98,7 +98,7 @@
 		<? $i++; } ?>		
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
-			<td height="50px">แผน</td>
+			<td height="<?=$i*20?>">แผน</td>
 			<? for($i=1;$i<=4;$i++){ 
 			get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);
 			} ?>
