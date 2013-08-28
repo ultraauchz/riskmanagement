@@ -3,12 +3,12 @@
     border-bottom: 1px dashed #333333;
     display: inline-block;
     overflow: hidden;
-    padding: 2px 10px;
-    text-align: left;
+    padding: 5px 10px;    
+    text-align: left;    
 }</style>
 <style>
-	.cursor a{height:44px;display:block;}
-	#left{left:0px;width:60px;}
+	.cursor a{height:40px;display:block;}
+	#left{left:0px;width:40px;}
 	#left {background: url('media/images/cursor.png') 0 -40px;}
 	
 	#center{left:0px;width:40px;}
@@ -17,10 +17,10 @@
 	#next{left:0px;width:40px;text-align:left;}
 	#next {background: url('media/images/cursor.png') -81px -40px;text-align:left;}
 	
-	#end{left:0px;width:55px;text-align:center;}
-	#end {background: url('media/images/cursor_end.png');}
+	#end{left:0px;width:40px;text-align:center;}
+	#end {background: url('media/images/cursor_end_2.png');}
 	
-	#line{left:0px;width:60px;text-align:center;}
+	#line{left:0px;width:40px;text-align:center;}
 	#line {background: url('media/images/cursor.png')-41px -40px;text-align:left;}
 	
 	#none{display:none;}
@@ -89,44 +89,39 @@
 		<td align="center" rowspan="1" colspan="3"><b>ไตรมาสที่ 3</b></td>
 		<td align="center" rowspan="1" colspan="3"><b>ไตรมาสที่ 4</b></td>
 	</tr>
+	<?
+	$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
+	$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
+	$head = $months;
+	?>
 	<tr>
-		<td align="center" width="30px"><b>ต.ค.</b></td>
-		<td align="center" width="30px"><b>พ.ย.</b></td>
-		<td align="center" width="30px"><b>ธ.ค.</b></td>
-		<td align="center" width="30px"><b>ม.ค.</b></td>
-		<td align="center" width="30px"><b>ก.พ.</b></td>
-		<td align="center" width="30px"><b>มี.ค.</b></td>
-		<td align="center" width="30px"><b>เม.ย.</b></td>
-		<td align="center" width="30px"><b>พ.ค.</b></td>
-		<td align="center" width="30px"><b>มิ.ย.</b></td>
-		<td align="center" width="30px"><b>ก.ค.</b></td>
-		<td align="center" width="30px"><b>ส.ค.</b></td>
-		<td align="center" width="30px"><b>ก.ย.</b></td>
+		<?php foreach($head as $key => $item): ?>
+		<td style="width:35px;text-align:center;"><?php echo $month_th[$key]; ?></td>
+		<?php endforeach; ?>
 	</tr>
 	
 	<tr>
-		<? $months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0); ?>
 		<? $nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one(); ?>
-		<td rowspan="2"><?=$result['event_risk'];?></td>
-		<td rowspan="2">
+		<td rowspan="2" valign="top"><?=$result['event_risk'];?></td>
+		<td rowspan="2" valign="top">
 		 <?	$risk_kri = $this->risk_kri->where('risk_est_id='.@$result_est['id'])->get();
 		 $i = 1;
 	      	foreach ($risk_kri as $kri) { ?>
-			<?=$i?>. ตัวชี้วัดความเสี่ยง : <?=$kri['kri_risk'];?> จำนวน : <?=$kri['kri_risk_count']?> หน่วยนับ : <?=$kri['kri_risk_unit']?> <br / >
+			<?=$i?>. <?=$kri['kri_risk'];?> จำนวน : <?=$kri['kri_risk_count']?> <?=$kri['kri_risk_unit']?> <br / >
 			
 		<? $i++; } ?>		
 		</td>
-			<td rowspan="2"><?=$result['manage_risk'];?></td>
-			<td height="50px">แผน</td>
+			<td rowspan="2" valign="top"><?=$result['manage_risk'];?></td>
+			<td height="50px" valign="middle" align="center">แผน</td>
 			<? for($i=1;$i<=4;$i++){
 				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
 					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
 				}
 			} ?>
 			<?php foreach($months as $key => $value): ?>
-				<td style="height:60px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
+				<td style="height:60px;padding:0px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
 			<?php endforeach; ?>
-			<td rowspan="2">
+			<td rowspan="2" valign="top" align="left">
 				<? 
 				for($i=1;$i<=4;$i++){
 					echo $result['result'.$i]."<br />";
@@ -135,7 +130,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>ผล</td>
+			<td height="50px" valign="middle" align="center">ผล</td>
 			<td></td>
 			<td></td>
 			<td></td>
