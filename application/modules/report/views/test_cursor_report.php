@@ -37,3 +37,14 @@ get_line_months($months, '2013-10-1', '2013-12-1');
 		<?php endforeach; ?>
 	</tr>
 </table>
+<script>
+	$(document).ready(function(){
+		$("#flsample").change(function(){
+			alert($(this).val());
+		})
+		$("#btn_clear").click(function(){
+			$("#flsample").val('');
+		})
+	})
+</script>
+<input type="file" name="flsample" id="flsample" ><input type="button" value="clear" id="btn_clear">
