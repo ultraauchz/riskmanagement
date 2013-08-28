@@ -1,19 +1,19 @@
 <style>
-	.cursor a{height:44px;display:block;}
-	#left{left:0px;width:60px;}
-	#left {background: url('media/images/cursor.png') 0 -40px;}
+	.cursor a{height:40px;display:block;}
+	#left{left:0px;width:40px;}
+	#left {background: url('../../../media/images/cursor.png') 0 -40px;}
 	
 	#center{left:0px;width:40px;}
-	#center {background: url('media/images/cursor.png') -41px -40px;}
+	#center {background: url('../../../media/images/cursor.png') -41px -40px;}
 	
 	#next{left:0px;width:40px;text-align:left;}
-	#next {background: url('media/images/cursor.png') -81px -40px;text-align:left;}
+	#next {background: url('../../../media/images/cursor.png') -81px -40px;text-align:left;}
 	
-	#end{left:0px;width:55px;text-align:center;}
-	#end {background: url('media/images/cursor_end.png');}
+	#end{left:0px;width:40px;text-align:center;}
+	#end {background: url('../../../media/images/cursor_end_2.png');}
 	
-	#line{left:0px;width:60px;text-align:center;}
-	#line {background: url('media/images/cursor.png')-41px -40px;text-align:left;}
+	#line{left:0px;width:40px;text-align:center;}
+	#line {background: url('../../../media/images/cursor.png')-41px -40px;text-align:left;}
 	
 	#none{display:none;}
 </style>
@@ -28,7 +28,7 @@ get_line_months($months, '2013-10-1', '2013-12-1');
 <table border="1">
 	<tr>
 		<?php foreach($head as $key => $item): ?>
-		<th style="width:60px;"><?php echo $month_th[$key]; ?></th>
+		<th style="width:40px;"><?php echo $month_th[$key]; ?></th>
 		<?php endforeach; ?>
 	</tr>
 	<tr>
