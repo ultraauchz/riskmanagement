@@ -125,37 +125,7 @@ class risk_est extends Public_Controller
 			$data['rs'] = @$this->risk->get_row($id);
 			$data['rs']['risk_est_id']=$id;
 			$data['rs']['id']='';
-			}else{
-				/*
-				for($i=1;$i<=4;$i++){
-					//$start_date = explode('-',$data['rs']['plot_start_date'.$i]);
-					$data['rs']['plot_start_date'.$i] = mysql_to_date($data['rs'][]) $start_date[2]."-".$start_date[1]."-".($start_date[0]+543);
-						if($data['rs']['plot_start_date'.$i] == "00-00-0000")
-						{
-							$data['rs']['plot_start_date'.$i] = '';
-						}
-					$end_date = explode('-',$data['rs']['plot_end_date'.$i]);
-					$data['rs']['plot_end_date'.$i] = $start_date[2]."-".$start_date[1]."-".($start_date[0]+543);
-						if($data['rs']['plot_end_date'.$i] == "00-00-0000")
-						{
-							$data['rs']['plot_end_date'.$i] = '';
-						}
-					
-					$start_date = explode('-',$data['rs']['results_start_date'.$i]);
-					$data['rs']['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".($start_date[0]+543);
-						if($data['rs']['results_start_date'.$i] == "00-00-0000")
-						{
-							$data['rs']['results_start_date'.$i] = '';
-						}
-					$end_date = explode('-',$data['rs']['results_end_date'.$i]);
-					$data['rs']['results_end_date'.$i] = $start_date[2]."-".$start_date[1]."-".($start_date[0]+543);
-						if($data['rs']['results_end_date'.$i] == "00-00-0000")
-						{
-							$data['rs']['results_end_date'.$i] = '';
-						}	
-				}	*/
-			}	
-										
+			}							
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			if($data['rs']['permis'] != 'on'){
 				if($data['rs']['sectionid'] == login_data('sectionid')){
@@ -262,23 +232,15 @@ class risk_est extends Public_Controller
 			$action='Update';
 			for($i=1;$i<=4;$i++){
 				if($_POST['plot_start_date'.$i] != ''){
-					//$start_date = explode('-',$_POST['plot_start_date'.$i]);
-					//$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
 					$_POST['plot_start_date'.$i] = date_to_mysql($_POST['plot_start_date'.$i]);
 				}
 				if($_POST['plot_end_date'.$i] != ''){
-					//$end_date = explode('-',$_POST['plot_end_date'.$i]);
-					//$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
 					echo $_POST['plot_end_date'.$i] = date_to_mysql($_POST['plot_end_date'.$i]);
 				}
 				if($_POST['results_start_date'.$i] != ''){
-					//$start_date = explode('-',$_POST['results_start_date'.$i]);
-					//$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
 					$_POST['results_start_date'.$i] = date_to_mysql($_POST['results_start_date'.$i]);
 				}
 				if($_POST['results_end_date'.$i] != ''){
-					//$end_date = explode('-',$_POST['results_end_date'.$i]);
-					//$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
 					$_POST['results_end_date'.$i] = date_to_mysql($_POST['results_end_date'.$i]);
 				}
 			}
@@ -290,23 +252,15 @@ class risk_est extends Public_Controller
 			$action='Add';
 			for($i=1;$i<=4;$i++){
 				if($_POST['plot_start_date'.$i] != ''){
-					//$start_date = explode('-',$_POST['plot_start_date'.$i]);
-					//$_POST['plot_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
 					 $_POST['plot_start_date'.$i] = date_to_mysql($_POST['plot_start_date'.$i]);
 				}
 				if($_POST['plot_end_date'.$i] != ''){
-					//$end_date = explode('-',$_POST['plot_end_date'.$i]);
-					//$_POST['plot_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
 					 $_POST['plot_end_date'.$i] = date_to_mysql($_POST['plot_end_date'.$i]);
 				}
 				if($_POST['results_start_date'.$i] != ''){
-					//$start_date = explode('-',$_POST['results_start_date'.$i]);
-					//$_POST['results_start_date'.$i] = $start_date[2]."-".$start_date[1]."-".$start_date[0];
 					$_POST['results_start_date'.$i] = date_to_mysql($_POST['results_start_date'.$i]);
 				}
 				if($_POST['results_end_date'.$i] != ''){
-					//$end_date = explode('-',$_POST['results_end_date'.$i]);
-					//$_POST['results_end_date'.$i] = $end_date[2]."-".$end_date[1]."-".$end_date[0];
 					$_POST['results_end_date'.$i] = date_to_mysql($_POST['results_end_date'.$i]);
 				}
 			}

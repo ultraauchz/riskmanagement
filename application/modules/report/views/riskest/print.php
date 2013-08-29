@@ -104,11 +104,7 @@ body{
 		<td style="text-align: center" rowspan="<?=$nrow?>"><?=$result['remain_risk_1']*$result['remain_risk_2'];?></td>
 		<td rowspan="<?=$nrow?>"><?=$result['manage_risk'];?></td>
 		<td rowspan="<?=$nrow?>"><?=$result['owner_risk'];?></td>
-		<? 			$start_date = explode('-',$result['start_date']);
-					$result['start_date'] = $start_date[2]."/".$start_date[1]."/".$start_date[0];
-					$end_date = explode('-',$result['end_date']);
-					$result['end_date'] = $end_date[2]."/".$end_date[1]."/".$end_date[0]; ?>
-		<td rowspan="<?=$nrow?>"><?=$result['start_date']." - ".$result['end_date'];?></td>
+		<td rowspan="<?=$nrow?>"><?=mysql_to_date($result['start_date'])." ถึง ".mysql_to_date($result['end_date'])?></td>
 		<? } ?>
 		<? if($i != 1 ) {?> </tr> <? } ?>
 		<? $i++;} ?>

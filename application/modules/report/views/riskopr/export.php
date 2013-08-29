@@ -39,25 +39,6 @@ body{
 	padding : 0.2em;
 }
 </style>
-<style>
-	.cursor a{height:40px;display:block;}
-	#left{left:0px;width:40px;}
-	#left {background: url('../../../media/images/cursor.png') 0 -40px;}
-	
-	#center{left:0px;width:40px;}
-	#center {background: url('../../../media/images/cursor.png') -41px -40px;}
-	
-	#next{left:0px;width:40px;text-align:left;}
-	#next {background: url('../../../media/images/cursor.png') -81px -40px;text-align:left;}
-	
-	#end{left:0px;width:40px;text-align:center;}
-	#end {background: url('../../../media/images/cursor_end_2.png');}
-	
-	#line{left:0px;width:40px;text-align:center;}
-	#line {background: url('../../../media/images/cursor.png')-41px -40px;text-align:left;}
-	
-	#none{display:none;}
-</style>
 	</head>
 <body>
 <div id="print">
@@ -104,7 +85,7 @@ body{
 	</tr>
 	<?
 	$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
-	$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
+	$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย.',5=>'พ.ค.',6=>'มิ.ย.',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
 	$head = $months;
 	?>
 	<tr>
@@ -135,16 +116,16 @@ body{
 				<td style="height:60px;padding:0px;">
 					<?php switch(set_line($months, $key, $value)){
 						case 'left':
-							echo '<img src="http://localhost:7000/riskmanagement/media/images/cursor_report_left.png">';
+							echo '<img src="'.base_url().'media/images/cursor_report_left.png" width="27">';
 						break;
 						case 'next':
-							echo '<img src="http://localhost:7000/riskmanagement/media/images/cursor_report_right.png">';
+							echo '<img src="'.base_url().'media/images/cursor_report_right.png" width="27">';
 						break;
 						case 'end':
-							echo '<img src="http://localhost:7000/riskmanagement/media/images/cursor_report_end.png">';
+							echo '<img src="'.base_url().'media/images/cursor_report_end.png" width="27">';
 						break;
 						case 'line':
-							echo '<img src="http://localhost:7000/riskmanagement/media/images/cursor_report_line.png">';
+							echo '<img src="'.base_url().'media/images/cursor_report_line.png"  width="27">';
 						break;
 						default:
 							echo '&nbsp;';
@@ -178,14 +159,26 @@ body{
 		</tr>
 </table>
 <br /><br />
-
-		<div align="right">
-			<div style="padding-left:45%;">ลายมือชื่อผู้อนุมัติแผน<label style="width:40%; text-align:center;">&nbsp</label></div>
-			<div style="padding-left:45%;">(<label style="width:40%; text-align:center;">&nbsp</label>)</div>
-			<div style="padding-left:45%;">ตำแหน่ง <label style="width:40%; text-align:center;">คณบดีคณะสาธารณสุขศาสตร์</label></div>
-			<div style="padding-left:45%;">วันที่<label style="width:7%; text-align:center;">&nbsp</label>เดือน<label style="width:10%; text-align:center;">กันยายน</label>พ.ศ. <label style="width:10%; text-align:center;"><?=$result['year_data'];?></label></div>
-		</div>
+<table>
+	<tr>
+		<td colspan="15" align="right">ลายมือชื่อผู้อนุมัติแผน</td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan="15" align="right"></td>
+		<td align="left" style="width:30px;">(</td>
+		<td align="right">)</td>
+	</tr>
+	<tr>
+		<td colspan="15" align="right"></td>
+		<td colspan="2" align="center">ตำแหน่ง คณบดีคณะสาธารณสุขศาสตร์</td>
+	</tr>
+	<tr>
+		<td colspan="15" align="right"></td>
+		<td colspan="2" align="center">วันที่ 30 เดือน กันยายน พ.ศ. <?=$result['year_data'];?></td>
+	</tr>
+	
+</table>
 </div>
-<script>window.print();</script>
 </body>
 </html>
