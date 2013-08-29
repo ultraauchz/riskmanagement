@@ -41,7 +41,7 @@
 			<? $quarters = array("--เลือกช่วงไตรมาส--"=>'',"--ทุกช่วงไตรมาส--"=>'1',"--ช่วงครึ่งไตรมาสแรก--"=>'2',"--ช่วงครึ่งไตรมาสหลัง--"=>'3') ;
 				foreach($quarters as $key => $item):
 			?>
-			<option value="<?=$item?>" <? if($_GET['quarter']==$item){ echo 'selected="selected"';}?>><?=$key?></option>
+			<option value="<?=$item?>" <? if(@$_GET['quarter']==$item){ echo 'selected="selected"';}?>><?=$key?></option>
 			<?php endforeach; ?>
 		</select>
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
