@@ -37,6 +37,13 @@
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
 			<?=form_dropdown('sectionid',get_option('id','title','section where id = "'.@$result1['id'].'" order by title '),@$rs['sectionid'],'style="width:370px"');?>
 		<? } ?>	
+		<select name="quarter">
+			<? $quarters = array("--เลือกช่วงไตรมาส--"=>'',"--ทุกช่วงไตรมาส--"=>'1',"--ช่วงครึ่งไตรมาสแรก--"=>'2',"--ช่วงครึ่งไตรมาสหลัง--"=>'3') ;
+				foreach($quarters as $key => $item):
+			?>
+			<option value="<?=$item?>" <? if($_GET['quarter']==$item){ echo 'selected="selected"';}?>><?=$key?></option>
+			<?php endforeach; ?>
+		</select>
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
@@ -113,7 +120,19 @@
 		</td>
 			<td rowspan="2" valign="top"><?=$result['manage_risk'];?></td>
 			<td height="50px" valign="middle" align="center">แผน</td>
-			<? for($i=1;$i<=4;$i++){
+			
+			<? if($quarter == '' || $quarter == 1){
+					$i = 1;
+					$max = 4;
+				}elseif($quarter == 2 ){
+					$i =1;
+					$max=2;
+				}elseif($quarter == 3){
+					$i =3;
+					$max=4;
+				}
+			
+			for($i;$i<=$max;$i++){
 				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
 					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
 				}

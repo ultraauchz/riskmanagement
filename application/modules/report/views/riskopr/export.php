@@ -107,7 +107,18 @@ body{
 		</td>
 			<td rowspan="2"><?=$result['manage_risk'];?></td>
 			<td height="50px">แผน</td>
-			<? for($i=1;$i<=4;$i++){
+			<? if($quarter == '' || $quarter == 1){
+					$i = 1;
+					$max = 4;
+				}elseif($quarter == 2 ){
+					$i =1;
+					$max=2;
+				}elseif($quarter == 3){
+					$i =3;
+					$max=4;
+				}
+			
+			for($i;$i<=$max;$i++){
 				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
 					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
 				}

@@ -20,6 +20,7 @@ class riskopr extends Public_Controller
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
+		$data['quarter'] = $_GET['quarter'];
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
