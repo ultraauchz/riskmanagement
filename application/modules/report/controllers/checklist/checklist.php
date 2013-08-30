@@ -53,7 +53,13 @@ class checklist extends Public_Controller
 				$this->load->view('checklist/print',$data);
 			break;
 			default:
-				$this->template->build('checklist/index',$data);
+				if(@$_GET['sectionid'] !='' && @$_GET['year_data'] !=''){
+					$this->template->build('checklist/index',$data);
+				}elseif(@$_GET['year_data'] !='' && @$_GET['sectionid'] =='' && $data['rs']['permis'] == 'on'){
+					$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get_row();
+					$this->template->build('checklist/median',$data);
+				}
+				
 			break;
 		}
 		
