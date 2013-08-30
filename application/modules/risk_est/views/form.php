@@ -108,7 +108,10 @@ $(function(){
 		var r1 = $("[name=remain_risk_1]").val();
 		var r2 = $("[name=remain_risk_2]").val();
 		var r3 = parseInt(r1) * parseInt(r2);
-		$("[name=remain_risk_3]").val(r3);	
+		if(r1 != '' && r2 !=''){
+			$("[name=remain_risk_3]").val(r3);
+		}
+			
 	})
 	
 	$(".btn_delete_control_risk").live("click",function(){
