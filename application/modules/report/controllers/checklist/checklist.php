@@ -14,6 +14,7 @@ class checklist extends Public_Controller
 	public $urlpage = 'report/checklist';
 	public function index($mode=false)
 	{
+		#$this->db->debug=true;
 		$pid=0;
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
@@ -58,6 +59,8 @@ class checklist extends Public_Controller
 				}elseif(@$_GET['year_data'] !='' && @$_GET['sectionid'] =='' && $data['rs']['permis'] == 'on'){
 					$data['result'] = $this->estchecklist->where($condition)->order_by('id','desc')->get_row();
 					$this->template->build('checklist/median',$data);
+				}else{
+					$this->template->build('checklist/index',$data);
 				}
 				
 			break;
