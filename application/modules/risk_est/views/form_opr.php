@@ -1,48 +1,255 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	$('.datepicker_1').datepick({
-			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543-1?>,09,01), 
-			maxDate: new Date(<?=@$rs['year_data']-543-1?>, 09 + 2, 31),
-			minDate: new Date(<?=@$rs['year_data']-543-1?>, 09, 01), 
-			buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'}); 
+	////////////// ไตรมาสที่1 //////////////
+    $("#plot_start_date1").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#plot_end_date1").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543-1?>,09,01),
+        minDate: new Date(<?=@$rs['year_data']-543-1?>, 09, 01),
+        maxDate: new Date(<?=@$rs['year_data']-543-1?>, 09 + 2, 31)
+    });
+    $("#plot_end_date1").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#plot_start_date1").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543-1?>,09,01),
+        minDate: new Date(<?=@$rs['year_data']-543-1?>, 09, 01),
+        maxDate: new Date(<?=@$rs['year_data']-543-1?>, 09 + 2, 31)
+         
+    });
+    $("#results_start_date1").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#results_end_date1").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543-1?>,09,01),
+        minDate: new Date(<?=@$rs['year_data']-543-1?>, 09, 01),
+        maxDate: new Date(<?=@$rs['year_data']-543-1?>, 09 + 2, 31)
+    });
+    $("#results_end_date1").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#results_start_date1").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543-1?>,09,01),
+        minDate: new Date(<?=@$rs['year_data']-543-1?>, 09, 01),
+        maxDate: new Date(<?=@$rs['year_data']-543-1?>, 09 + 2, 31)
+         
+    });
+    ////////////// ไตรมาสที่1 //////////////
+    
+    ////////////// ไตรมาสที่2 //////////////
+    $("#plot_start_date2").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#plot_end_date2").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01)
+    });
+    $("#plot_end_date2").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#plot_start_date2").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01)
+         
+    });
+    $("#results_start_date2").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#results_end_date2").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01)
+    });
+    $("#results_end_date2").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#results_start_date2").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01)
+         
+    });
+    ////////////// ไตรมาสที่2 //////////////
+    
+    ////////////// ไตรมาสที่3 //////////////
+    $("#plot_start_date3").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#plot_end_date3").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+       	defaultDate: new Date(<?=@$rs['year_data']-543?>,03,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 03 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 03, 01)
+    });
+    $("#plot_end_date3").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#plot_start_date3").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,03,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 03 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 03, 01)
+         
+    });
+    $("#results_start_date3").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#results_end_date3").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,03,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 03 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 03, 01)
+    });
+    $("#results_end_date3").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#results_start_date3").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,03,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 03 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 03, 01)
+         
+    });
+    ////////////// ไตรมาสที่3 //////////////
+    
+    ////////////// ไตรมาสที่4 //////////////
+    $("#plot_start_date4").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#plot_end_date4").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+       	defaultDate: new Date(<?=@$rs['year_data']-543?>,06,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 06 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 06, 01)
+    });
+    $("#plot_end_date4").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#plot_start_date4").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,06,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 06 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 06, 01)
+         
+    });
+    $("#results_start_date4").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+          $("#results_end_date4").datepick("option","minDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])+1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,06,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 06 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 06, 01)
+    });
+    $("#results_end_date4").datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png',
+        onSelect: function(selected) {
+        	var myarr = selected.split("-");
+        	selected = (parseInt(myarr[0])+543)+"-"+myarr[1]+"-"+myarr[2];
+           $("#results_start_date4").datepick("option","maxDate", new Date(myarr[0],parseInt(myarr[1])-1,parseInt(myarr[2])-1))
+        },
+        defaultDate: new Date(<?=@$rs['year_data']-543?>,06,01), 
+		maxDate: new Date(<?=@$rs['year_data']-543?>, 06 + 2, 30),
+		minDate: new Date(<?=@$rs['year_data']-543?>, 06, 01)
+         
+    });
+    ////////////// ไตรมาสที่4 //////////////
 });
 
-$(document).ready(function(){
-	$('.datepicker_2').datepick({
-			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543?>,00,01),
-			maxDate: new Date(<?=@$rs['year_data']-543?>, 00 + 2, 31),
-			minDate: new Date(<?=@$rs['year_data']-543?>, 00, 01), 
-			buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'}); 
-});
-
-$(document).ready(function(){
-	$('.datepicker_3').datepick({
-			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543?>,03,01), 
-			maxDate: new Date(<?=@$rs['year_data']-543?>, 03 + 2, 30),
-			minDate: new Date(<?=@$rs['year_data']-543?>, 03, 01), 
-			buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'}); 
-});
-
-$(document).ready(function(){
-	$('.datepicker_4').datepick({
-			showOn: 'both',defaultDate: new Date(<?=@$rs['year_data']-543?>,06,01), 
-			maxDate: new Date(<?=@$rs['year_data']-543?>, 06 + 2, 30),
-			minDate: new Date(<?=@$rs['year_data']-543?>, 06, 01), 
-			buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'}); 
-});
 
 $(function(){
 	$(".commentForm").validate({
 	rules: 
 	{
 		event_risk_opr:{ required: true },
-		outcome:{ required: true}
-	
+		outcome:{ required: true},
+		plot_start_date1:{ required : function(element) {
+        return $("#plot_end_date1").val() != '';}
+        },
+        plot_start_date2:{ required : function(element) {
+        return $("#plot_end_date2").val() != '';}
+        },
+        plot_start_date3:{ required : function(element) {
+        return $("#plot_end_date3").val() != '';}
+        },
+        plot_start_date4:{ required : function(element) {
+        return $("#plot_end_date4").val() != '';}
+        },
+		plot_end_date1:{ required : function(element) {
+        return $("#plot_start_date1").val() != '';}
+        },
+        plot_end_date2:{ required : function(element) {
+        return $("#plot_start_date2").val() != '';}
+        },
+        plot_end_date3:{ required : function(element) {
+        return $("#plot_start_date3").val() != '';}
+        },
+        plot_end_date4:{ required : function(element) {
+        return $("#plot_start_date4").val() != '';}
+        },
+        results_start_date1:{ required : function(element){
+        return $("#results_end_date1").val() != '';	}
+        },
+        results_start_date2:{ required : function(element){
+        return $("#results_end_date2").val() != '';	}
+        },
+        results_start_date3:{ required : function(element){
+        return $("#results_end_date3").val() != '';	}
+        },
+        results_start_date4:{ required : function(element){
+        return $("#results_end_date4").val() != '';	}
+        },
+        results_end_date1:{ required : function(element){
+        return $("#results_start_date1").val() != ''; }
+        },
+        results_end_date2:{ required : function(element){
+        return $("#results_start_date2").val() != ''; }
+        },
+        results_end_date3:{ required : function(element){
+        return $("#results_start_date3").val() != ''; }	
+        },
+        results_end_date4:{ required : function(element){
+        return $("#results_start_date4").val() != ''; }
+        }
+
 	},
 	messages:
 	{
 		event_risk_opr:{ required: " กรุณาระบุกิจกรรมการดำเนินงาน"},
-		outcome:{ required: "กรุณาระบุผลลัพธ์ที่ได้"}
+		outcome:{ required: "กรุณาระบุผลลัพธ์ที่ได้"},
+		plot_end_date1:{ required: "กรุณาระบุวันที่เสร็จสินของแผน"},
+		plot_end_date2:{ required: "กรุณาระบุวันที่เสร็จสินของแผน"},
+		plot_end_date3:{ required: "กรุณาระบุวันที่เสร็จสินของแผน"},
+		plot_end_date4:{ required: "กรุณาระบุวันที่เสร็จสินของแผน"},
+		plot_start_date1:{ required: "กรุณาระบุวันที่เริ่มแผน"},
+		plot_start_date2:{ required: "กรุณาระบุวันที่เริ่มแผน"},
+		plot_start_date3:{ required: "กรุณาระบุวันที่เริ่มแผน"},
+		plot_start_date4:{ required: "กรุณาระบุวันที่เริ่มแผน"},
+		results_start_date1:{ required: "กรุณาระบุวันที่เริ่มของผลลัพธ์"},
+		results_start_date2:{ required: "กรุณาระบุวันที่เริ่มของผลลัพธ์"},
+		results_start_date3:{ required: "กรุณาระบุวันที่เริ่มของผลลัพธ์"},
+		results_start_date4:{ required: "กรุณาระบุวันที่เริ่มของผลลัพธ์"},
+		results_end_date1:{ required: "กรุณาระบุวันที่เสร็จสิ้นของผลลัพธ์"},
+		results_end_date2:{ required: "กรุณาระบุวันที่เสร็จสิ้นของผลลัพธ์"},
+		results_end_date3:{ required: "กรุณาระบุวันที่เสร็จสิ้นของผลลัพธ์"},
+		results_end_date4:{ required: "กรุณาระบุวันที่เสร็จสิ้นของผลลัพธ์"}
 	}
 	});
 });
@@ -99,20 +306,20 @@ $(function(){
   <tr>
   	<th rowspan="2" width="100" style="vertical-align:middle;"><div align="center">แผน</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td colspan="2"><input type="text" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@mysql_to_date($rs['plot_start_date'.$i]);?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
+    <td colspan="2"><input type="text" id="plot_start_date<?=$i?>" name="plot_start_date<?=$i;?>" id="plot_start_date<?=$i;?>" value="<?=@mysql_to_date($rs['plot_start_date'.$i]);?>" style="width:150px"  /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td colspan="2"><input type="text" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@mysql_to_date($rs['plot_end_date'.$i]);?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
+    <td colspan="2"><input type="text" id="plot_end_date<?=$i;?>" name="plot_end_date<?=$i;?>" id="plot_end_date<?=$i;?>" value="<?=@mysql_to_date($rs['plot_end_date'.$i]);?>" style="width:150px"  /></td>
   </tr>
   <tr>
   	<th rowspan="7" width="100" style="vertical-align:middle;"><div align="center">ผล</div></th>
     <th width="280px">วันที่เริ่ม</th>
-    <td colspan="2"><input type="text" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@mysql_to_date($rs['results_start_date'.$i]);?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
+    <td colspan="2"><input type="text" id="results_start_date<?=$i;?>" name="results_start_date<?=$i;?>" id="results_start_date<?=$i;?>" value="<?=@mysql_to_date($rs['results_start_date'.$i]);?>" style="width:150px"  /></td>
   </tr>
   <tr>
     <th width="280px">วันที่เสร็จสิ้น</th>
-    <td colspan="2"><input type="text" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@mysql_to_date($rs['results_end_date'.$i]);?>" style="width:150px" class="datepicker_<?=$i;?>" /></td>
+    <td colspan="2"><input type="text" id="results_end_date<?=$i;?>" name="results_end_date<?=$i;?>" id="results_end_date<?=$i;?>" value="<?=@mysql_to_date($rs['results_end_date'.$i]);?>" style="width:150px" /></td>
   </tr>
   <tr>
   	<th>ผลลัพธ์ที่ได้</th>
