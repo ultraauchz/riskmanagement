@@ -13,7 +13,7 @@ class detail extends Public_Controller
 	
 	public function index(){
 		#$this->db->debug = true;
-		$menu_id=63;
+		$menu_id=64;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
 		if(is_login()){
@@ -25,7 +25,7 @@ class detail extends Public_Controller
 			}
 	}
 	public function detail_form(){
-		$menu_id=63;
+		$menu_id=64;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
 		if(is_login()){
@@ -37,7 +37,7 @@ class detail extends Public_Controller
 			}
 	}
 	public function detail_save(){
-		$menu_id=63;
+		$menu_id=64;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
 		$title = "รายละเอียดโครงการ";
