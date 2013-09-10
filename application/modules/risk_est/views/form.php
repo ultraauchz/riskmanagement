@@ -250,7 +250,7 @@ $(document).ready(function(){
 			    	<input name="kri_risk[<?=$i?>]" id="kri_risk" type="text" style="width:300px;" value="<?=$kri['kri_risk']?>" class="required" />	    	
 			    </td>
 			    <td>
-			    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" value="<?=$kri['kri_risk_count']?>" class="required double" />	    	
+			    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" value="<?=$kri['kri_risk_count']?>" onKeyPress="return double(event)" class="required" />	    	
 			    </td>
 			    <td>
 			    	<input name="kri_risk_unit[<?=$i?>]" type="text" style="width:150px;" value="<?=$kri['kri_risk_unit']?>" class="required" />	    	
@@ -267,7 +267,7 @@ $(document).ready(function(){
 	    	<input name="kri_risk[<?=$i?>]" type="text" style="width:300px;" value="" class="required" />	    	
 	    </td>
 	    <td>
-	    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" value="" class="required double" />	    	
+	    	<input name="kri_risk_count[<?=$i?>]"  type="text" style="width:100px;" onKeyPress="return double(event)" value="" class="required" />	    	
 	    </td>
 	    <td>
 	    	<input name="kri_risk_unit[<?=$i?>]" type="text"  style="width:150px;" value="" class="required" />	    	
