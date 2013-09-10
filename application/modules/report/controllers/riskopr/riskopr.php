@@ -20,7 +20,7 @@ class riskopr extends Public_Controller
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
-		$data['quarter'] = @$_GET['quarter'];
+		$data['quarter'] = 1;
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
@@ -58,6 +58,62 @@ class riskopr extends Public_Controller
 			break;
 			default:
 				$this->template->build('riskopr/index',$data);
+			break;
+		}
+		
+		
+			
+		}
+		else{
+			
+			redirect('front');	
+		}
+	}		
+
+	public function index_6($mode=false)
+	{
+		$pid=0;
+		$menu_id=$this->menu_id;
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = $this->urlpage;
+		$data['quarter'] = 2;
+		if(is_login()){
+			if(permission($menu_id, 'canview')!='on')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] == 'on'){
+				$condition = " 1=1 ";
+				if(@$_GET['sectionid'] !='')
+				{
+					$condition .= "AND risk_est.sectionid ='".$_GET['sectionid']."'  ";
+				}
+				if(@$_GET['year_data'] !=''){
+					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
+				}
+				
+				}else{
+					$condition1 = " section.id ='". login_data('sectionid')."' ";
+					$data['result1'] = $this->section->where($condition1)->get_row();
+					$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
+					if(@$_GET['year_data'] !=''){
+						$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
+						}
+				}
+			if(@$_GET['year_data'] !='' && @$_GET['sectionid'] !=''){
+				$data['result_est'] = $this->risk->where($condition)->order_by('id','desc')->get_row();
+				$data['result']	= $this->risk_opr->where("risk_est_id=".@$data['result_est']['id'])->order_by('id','desc')->get_row();		
+			}else{
+				$data['result']['id'] = '';
+			}
+			
+		switch($mode){
+			case 'export':
+				$this->load->view('riskopr/export_6',$data);
+			break;
+			case 'print':
+				$this->load->view('riskopr/print_6',$data);
+			break;
+			default:
+				$this->template->build('riskopr/index_6',$data);
 			break;
 		}
 		

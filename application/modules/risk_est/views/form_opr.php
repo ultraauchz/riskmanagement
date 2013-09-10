@@ -252,11 +252,16 @@ $(function(){
 		results_end_date4:{ required: "กรุณาระบุวันที่เสร็จสิ้นของผลลัพธ์"}
 	}
 	});
+	$("#btn_detail").colorbox({inline:true, href:"#inline_content", width:"80%",height:"80%"});
 });
 
 </script>
 
 <h3>ข้อมูลแผนการปฏิบัติการและรายงานผล</h3>
+<div id="btnBox">
+<input type="button" class="btn btn-primary" id="btn_detail" value="คำอธิบาย" />
+</div>
+<br />
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save_opr" class="commentForm">
 	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
 	<input type="hidden" name="risk_est_id" value="<?=@$rs['risk_est_id'];?>" />
@@ -276,13 +281,13 @@ $(function(){
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน</th><td><?=@$rs['objective_title2'];?></td>
   </tr>
 	<tr>
-	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของงาน</th><td><?=@$rs['objective_title3'];?></td>
+	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของงาน</th><td><?=@$rs['objective_3'];?></td>
   </tr>
 	<tr>
 	  <th width="400px">ภารกิจ</th><td><?=@$rs['mission_title'];?></td>
   </tr>
 	<tr>
-	  <th width="400px">กระบวนงาน</th><td><?=@$rs['process_title'];?></td>
+	  <th width="400px">กระบวนงาน</th><td><?=@$rs['process'];?></td>
   </tr>
 	<tr>
 	  <th width="400px">เหตุการณ์ความเสี่ยง</th><td><?=@$rs['event_risk'];?></td>
@@ -332,7 +337,7 @@ $(function(){
 	 foreach($fl_upload as $fl){
 	 	if($fl['id'] != ''){ ?>
   <tr>
-  	<th>ไฟล์</th>
+  	<th>หลักฐาน</th>
   	<td>
   		<a href="import_file/risk_est/<?=$fl['fl_import']?>"><?=$fl['fl_name']?></a>
   	</td>
@@ -345,7 +350,7 @@ $(function(){
 	 }
   ?>
   <tr>
-  	<th>ไฟล์</th>
+  	<th>หลักฐาน</th>
   	<td colspan="2">
   		<input type="file" name="fl_import<?=$i;?>" >
   	</tr>
@@ -356,3 +361,8 @@ $(function(){
 				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
 </div>
 </form>
+<div style='display:none'>
+			<div id='inline_content' style='padding:10px; background:#fff;'>
+			<?=$detail_opr['detail']?>
+			</div>
+</div>

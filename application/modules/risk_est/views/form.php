@@ -147,11 +147,17 @@ $(document).ready(function(){
 		 	$("[name=control_risk["+jj+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการควบคุมที่มีอยู่"}});
 		$("[name=estimate_control_risk["+jj+"]]").rules( 'add', {required: true , messages: {required: "กรุณาระบุการประเมินการควบคุมที่มีอยู่"}});
 		}
+		
+		$("#btn_detail").colorbox({inline:true, href:"#inline_content", width:"80%",height:"80%"});
 });
 
 </script>
 
 <h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง (เพิ่ม/แก้ไข)</h3>
+<div id="btnBox">
+<input type="button" class="btn btn-primary" id="btn_detail" value="คำอธิบาย" />
+</div>
+<br />
 <form enctype="multipart/form-data" method="post" action="<? echo $urlpage?>/save" class="commentForm">
 	<input type="hidden" name="id" value="<?=@$rs['id'];?>" />
 <div id="btnBox">
@@ -180,7 +186,7 @@ $(document).ready(function(){
   </tr>
 	<tr>
 	  <th width="400px">วัตถุประสงค์ตามยุทธศาสตร์ของงาน</th>
-	  <td><?=form_dropdown('objectiveid_3',get_option('id','title','objective where objective_type = 3 order by title '),@$rs['objectiveid_3'],'style="width:390px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน--');?></td>
+	  <td><textarea name="objective_3" rows="4" style="width:700px"><?=@$rs['objective_3'];?></textarea></td>
   </tr>
 	<tr>
 	  <th width="400px">ภารกิจ</th>
@@ -188,11 +194,11 @@ $(document).ready(function(){
   </tr>
 	<tr>
 	  <th width="400px">กระบวนงาน</th>
-	  <td><?=form_dropdown('processid',get_option('id','title','process order by title '),@$rs['processid'],'style="width:390px"','--เลือกกระบวนงาน--');?></td>
+	  <td><textarea name="process" rows="4" style="width:700px"><?=@$rs['process'];?></textarea></td>
   </tr>
 	<tr>
 	  <th width="400px">เหตุการณ์ความเสี่ยง</th>
-	  <td><input name="event_risk" type="text" class="" value="<?=@$rs['event_risk'];?>" /></td>
+	  <td><textarea name="event_risk" rows="4" style="width:700px"><?=@$rs['event_risk']?></textarea></td>
   </tr>
 	<tr>
 	  <th width="400px">ทบทวนเหตุการณ์ความเสี่ยง</th>
@@ -378,3 +384,8 @@ $(document).ready(function(){
 				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
 </div>
 </form>
+<div style='display:none'>
+			<div id='inline_content' style='padding:10px; background:#fff;'>
+			<?=$detail_est['detail']?>
+			</div>
+</div>

@@ -14,3 +14,4 @@
 <script type="text/javascript" src="themes/front/js/myscript.js"></script>
 <script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>
 <script type="text/javascript" src="media/js/yoke.inputmarkup.js"></script>
+<script type="text/javascript" src="media/js/jquery.colorbox.js"></script>

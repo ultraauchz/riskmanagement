@@ -4,5 +4,6 @@
 <link rel="stylesheet" type="text/css" href="themes/front/css/skins/light_blue.css" />
 <link rel="stylesheet" type="text/css" href="themes/front/css/vtip.css" />
 <link rel="stylesheet" type="text/css" href="themes/front/css/jquery.treeview.css" />
+<link rel="stylesheet" type="text/css" href="themes/front/css/colorbox.css" />
 <link rel="stylesheet" type="text/css" href="media/js/jquery.datepick/redmond.datepick.css" />
 <link rel="stylesheet" type="text/css" href="media/css/pagination.css" />

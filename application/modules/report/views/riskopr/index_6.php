@@ -44,8 +44,8 @@
 <? if(@$_GET['year_data'] >0 && @$_GET['sectionid']>0 ) {
 	if(@$result['id'] != ''){?>
 <div style="padding:10px; text-align:right;">
-<a href="report/riskopr/index/export<?=GetCurrentUrlGetParameter();?>"><img src="themes/front/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-<a href="report/riskopr/index/print<?=GetCurrentUrlGetParameter();?>" target="_blank"><img src="themes/front/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a></div>
+<a href="report/riskopr/index_6/export<?=GetCurrentUrlGetParameter();?>"><img src="themes/front/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<a href="report/riskopr/index_6/print<?=GetCurrentUrlGetParameter();?>" target="_blank"><img src="themes/front/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a></div>
 <br />		
 <div id="print">
 <div align="right">เอกสารหมายเลข 4</div>

@@ -19,14 +19,14 @@ function tiny(elements){
 		*/
 		
 		theme : "advanced",
-	    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,forecolor,|,backcolor",
+	    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,forecolor,|,backcolor,|,justifyleft,justifycenter,justifyright,|,fontsizeselect",
 	    theme_advanced_toolbar_location: "top",
 		theme_advanced_toolbar_align: "left",
 		theme_advanced_statusbar_location: "bottom",
 		theme_advanced_resizing: true,
 
-		height: "300",
-		width: "500",
+		height: "500",
+		width: "900",
 		relative_urls : false,
 		content_css: "css/content.css",
 		accessibility_warnings: false,

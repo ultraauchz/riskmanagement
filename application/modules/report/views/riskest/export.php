@@ -27,12 +27,12 @@ header("Content-Disposition: attachment; filename=".$filename);
 	</tr>
 	<tr>
 		<td><b>วัตถุประสงค์ตามยุทธศาสตร์ของงาน </b></td>
-		<td> : <label><?=$result['objective_title3'];?></label></td>
+		<td> : <label><?=$result['objective_3'];?></label></td>
 	</tr>
 
 </table>
 <b>ภารกิจ </b> : <label><?=$result['mission_title'];?></label> <br />
-<b>กระบวนงาน</b> : <label><?=$result['process_title'];?></label> <br /><br />
+<b>กระบวนงาน</b> : <label><?=$result['process'];?></label> <br /><br />
 <table class="table" border="1">
 	<tr>
 		<td rowspan="2" style="text-align: center"><b>เหตุการณ์ความเสี่ยง<b/></td>

@@ -12,6 +12,8 @@ class risk_est extends Public_Controller
 		$this->load->model('risk_level_model','risk_level');
 		$this->load->model('section_model','section');
 		$this->load->model('file_upload_model','file_upload');
+		$this->load->model('risk_est_detail_model','est_detail');
+		$this->load->model('risk_opr_detail_model','opr_detail');
 	}
 	public $menu_id = 52;
 	public function index()
@@ -71,6 +73,7 @@ class risk_est extends Public_Controller
 		$menu_id = $this->menu_id;	
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
+		$data['detail_est'] = $this->est_detail->get_row(1);
 		$menu_name = GetMenuProperty($menu_id,'title');	
 		$data['id']=$id;
 		if(is_login()){
@@ -114,6 +117,7 @@ class risk_est extends Public_Controller
 		$menu_id = 53;	
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
+		$data['detail_opr'] = $this->opr_detail->get_row(1);
 		$menu_name = GetMenuProperty($menu_id,'title');	
 		$data['risk_est_id']=$id;
 		if(is_login()){
@@ -277,6 +281,7 @@ class risk_est extends Public_Controller
 	}
  
 	function delete($id=FALSE){
+		$this->db->Execute('delete from risk_opr where risk_est_id ='.$id);
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
 		if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
