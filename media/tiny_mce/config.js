@@ -19,7 +19,7 @@ function tiny(elements){
 		*/
 		
 		theme : "advanced",
-	    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,forecolor,|,backcolor,|,justifyleft,justifycenter,justifyright,|,fontsizeselect",
+	    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,forecolor,|,backcolor,|,justifyleft,justifycenter,justifyright,|,fontsizeselect|,tablecontrols,",
 	    theme_advanced_toolbar_location: "top",
 		theme_advanced_toolbar_align: "left",
 		theme_advanced_statusbar_location: "bottom",

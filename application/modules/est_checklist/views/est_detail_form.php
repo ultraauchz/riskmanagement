@@ -19,7 +19,7 @@ $(document).ready(function(){
 				<td colspan="4"><?=$num. " ." . $main_item['title'];?></td>
 			</tr>
 		<? 
-			$second_title = $this->est_title->where('pid='.$main_item['id'])->get();
+			$second_title = $this->est_title->where('pid='.$main_item['id'])->get('',TRUE);
 			$num_second = 1 ;
 			foreach($second_title as $second_item):			
 		?>
@@ -27,7 +27,7 @@ $(document).ready(function(){
 			
 			<? 
 				$nrow = $this->est_title->select('count(*)')->where('pid='.$second_item['id'])->get_one();
-				$third_title = $this->est_title->where('pid='.$second_item['id'])->get();
+				$third_title = $this->est_title->where('pid='.$second_item['id'])->get('',TRUE);
 				$check_id = 0;
 				$num_third = 1 ;
 				foreach($third_title as $third_item):			
@@ -37,15 +37,15 @@ $(document).ready(function(){
 						if($check_id!= $third_item['pid']){
 							$check_id = $third_item['pid'];
 					?>
-					<td style="width:250px;" rowspan="<?=$nrow;?>"><?="$num.$num_second ".$second_item['title'];?></td>
-					<?
-						}										
+								<td style="width:250px;" rowspan="<?=$nrow;?>"><?=$second_item['title'];?></td>
+				
+					<?	}										
 					$check_detail = $id > 0 ? $this->est_detail->where('pid='.$id.' AND est_title_id ='.$third_item['id'])->get_row() : array();
 					
 					$i++
 					?>
 					<td class="third_title" >
-						<?="$num.$num_second.$num_third " .$third_item['title'];?>
+						<?=$third_item['title'];?>
 						
 					</td>
 					<td style="width:60px;text-align:center;">

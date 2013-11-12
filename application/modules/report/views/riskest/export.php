@@ -51,7 +51,7 @@ header("Content-Disposition: attachment; filename=".$filename);
 		<td style="text-align: center"><b>ระดับผลกระทบ</b></td>
 		<td style="text-align: center"><b>ระดับความเสี่ยงที่เหลืออยู่</b></td>
 	</tr>
-	
+	<? foreach ($result_all as $result) {?>
 	<tr>
 		
 		<? $nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one(); ?>
@@ -83,7 +83,7 @@ header("Content-Disposition: attachment; filename=".$filename);
 		<td rowspan="<?=$nrow?>"><?=mysql_to_date($result['start_date'])." ถึง ".mysql_to_date($result['end_date'])?></td>
 		<? } ?>
 		<? if($i != 1 ) {?> </tr> <? } ?>
-		<? $i++;} ?>
+		<? $i++;} }?>
 		
 </table>
 <br />

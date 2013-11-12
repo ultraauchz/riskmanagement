@@ -59,6 +59,14 @@ if(!function_exists('get_year_option'))
 	{
 	    $data = array();
         $year = (date('Y') + 543) + $plus;
+		$month = date('m');
+				if(@$_GET['year_data'] != ''){
+					$year=@$_GET['year_data'];
+				}else{
+					if($month > '09'){
+						$year = $year+1;
+					}
+				}
         if(empty($start)) $start = 2535;
 	    if(!empty($table) and !empty($field_year))
         {

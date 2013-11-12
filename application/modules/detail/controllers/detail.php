@@ -8,6 +8,7 @@ class detail extends Public_Controller
 		$this->load->model('risk_est_detail_model','est_detail');
 		$this->load->model('risk_opr_detail_model','opr_detail');
 		$this->load->model('risk_detail_model','index_detail');
+		$this->load->model('explanation_risk_detail_model','explanation_risk');
 	}
 	public $urlpage = 'detail';
 	
@@ -151,6 +152,53 @@ class detail extends Public_Controller
 		$this->opr_detail->save($_POST);
 		set_notify('detail/detail_opr', lang('save_data_complete'));
 		redirect('detail/detail_opr');
+	}
+//	explanation_risk_manage คำธิบายแนวทางการจัดการความเสี่ยง
+	public function explanation_risk_manage(){
+		#$this->db->debug = true;
+		$menu_id=65;
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = $this->urlpage;
+		if(is_login()){
+			if(permission($menu_id, 'canview')!='on')redirect('front');
+			$data['result'] = $this->explanation_risk->get_row(1);
+			$this->template->build('detail_explanation_risk',$data);
+			}else{
+				redirect('front');
+			}
+	}
+	public function explanation_risk_form(){
+		$menu_id=65;
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = $this->urlpage;
+		if(is_login()){
+			if(permission($menu_id, 'canedit')!='on')redirect('front');
+			$data['result'] = $this->explanation_risk->get_row(1);
+			$this->template->build('detail_explanation_risk_form',$data);
+			}else{
+				redirect('front');
+			}
+	}
+	public function explanation_risk_save(){
+		$menu_id=65;
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = $this->urlpage;
+		$title = "คำธิบายแนวทางการจัดการความเสี่ยง";
+		if($_POST['id']!='')
+		{
+			if(permission($menu_id, 'canedit')=='')redirect('front');
+			$action='Update';
+			$description = $action.' '.$menu_name.' : '.$title;	
+			save_log($menu_id,$action,$description);
+		}else{
+			if(permission($menu_id, 'canadd')=='')redirect('front');	
+			$action='Add';
+			$description = $action.' '.$menu_name.' : '.$title;		
+			save_log($menu_id,$action,$description);
+		}
+		$this->explanation_risk->save($_POST);
+		set_notify('detail/explanation_risk_manage', lang('save_data_complete'));
+		redirect('detail/explanation_risk_manage');
 	}
 }
 ?>

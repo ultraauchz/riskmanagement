@@ -3,13 +3,8 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <link rel="stylesheet" type="text/css" href="themes/front/css/style.css"/>
 <style>
-#print label {
-    border-bottom: 1px dashed #333333;
-    display: inline-block;
-    overflow: hidden;
-    padding: 2px 10px;
-    text-align: left;
-}
+#print label { display:inline-block; text-align:left; border-bottom:1px dashed #333; padding:2px 10px; overflow:hidden; margin-bottom: 0px;}
+#print div { margin-bottom:10px; }
 body{
 	font-size:11px;
 }
@@ -59,7 +54,7 @@ body{
 	ประจำปีงบประมาณ   <?=$result['year_data'];?>
 	</B><br />
 </div><br />
-<table style="font-size:13px">
+<table style="font-size:11px">
 	<tr>
 		<td><b>วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</b> </td>
 		<td> : <label><?=$result['objective_title1'];?></label></td>
@@ -83,6 +78,8 @@ body{
 		<td rowspan="3" align="center" width="100px"><b>กิจกรรมดำเนินงาน<b/></td>
 		<td rowspan="3" align="center" width="50px"><b>แผน/ผล<b/></td>
 		<td colspan="12"align="center"><b>ระยะเวลาการดำเนินการ<b/></td>
+		<td colspan="3"  align="center" width="50px"><b>ก่อนวางแผน<b/></td>
+		<td colspan="3" align="center" width="50px"><b>หลังวางแผน<b/></td>
 		<td rowspan="3" align="center"><b>ผลลัพธ์ที่ได้(Outcome)<b/></td>
 
 		 
@@ -92,6 +89,13 @@ body{
 		<td align="center" rowspan="1" colspan="3"><b>ไตรมาสที่ 2</b></td>
 		<td align="center" rowspan="1" colspan="3"><b>ไตรมาสที่ 3</b></td>
 		<td align="center" rowspan="1" colspan="3"><b>ไตรมาสที่ 4</b></td>
+		
+		<td align="center" rowspan="2" ><b>โอกาสเกิด</b></td>
+		<td align="center" rowspan="2" ><b>ผลกระทบ</b></td>
+		<td align="center" rowspan="2" ><b>ระดับความเสี่ยง</b></td>
+		<td align="center" rowspan="2" ><b>โอกาสเกิด</b></td>
+		<td align="center" rowspan="2" ><b>ผลกระทบ</b></td>
+		<td align="center" rowspan="2" ><b>ระดับความเสี่ยง</b></td>
 	</tr>
 	<?
 	$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
@@ -103,12 +107,17 @@ body{
 		<td style="width:35px;text-align:center;"><?php echo $month_th[$key]; ?></td>
 		<?php endforeach; ?>
 	</tr>
-	
+	<? foreach ($result_all as $result_1) {
+		//$this->db->debug = true;
+		
+	 $result = $this->risk_opr->where("risk_est_id=".@$result_1['id'])->order_by('id','asc')->get_row();
+
+	 ?>	
 	<tr>
 		<? $nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one(); ?>
 		<td rowspan="2"><?=$result['event_risk'];?></td>
 		<td rowspan="2">
-		 <?	$risk_kri = $this->risk_kri->where('risk_est_id='.@$result_est['id'])->get();
+		 <?	$risk_kri = $this->risk_kri->where('risk_est_id='.@$result_1['id'])->get();
 		 $i = 1;
 	      	foreach ($risk_kri as $kri) { ?>
 			<?=$i?>. ตัวชี้วัดความเสี่ยง : <?=$kri['kri_risk'];?> จำนวน : <?=$kri['kri_risk_count']?> หน่วยนับ : <?=$kri['kri_risk_unit']?> <br / >
@@ -135,6 +144,14 @@ body{
 			<?php foreach($months as $key => $value): ?>
 				<td style="height:60px;padding:0px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
 			<?php endforeach; ?>
+			
+			<td><div align="center"><?=$result['before_risk_chance']?></div></td>
+			<td><div align="center"><?=$result['before_risk_effect']?></div></td>
+			<td><div align="center"><?=$result['before_risk_step']?></div></td>
+			<td><div align="center"><?=$result['after_risk_chance']?></div></td>
+			<td><div align="center"><?=$result['after_risk_effect']?></div></td>
+			<td><div align="center"><?=$result['after_risk_step']?></div></td>
+			
 			<td rowspan="2">
 				<? 
 				for($i=1;$i<=4;$i++){
@@ -157,7 +174,15 @@ body{
 			<td></td>
 			<td></td>
 			<td></td>
+			
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
+		<? } ?>
 </table>
 <br /><br />
 

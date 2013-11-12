@@ -12,18 +12,39 @@ class riskest extends Public_Controller
 		$this->load->model('section_model','section');
 	}
 	public $menu_id = 55;
-	public $urlpage = 'report/checklist';
+	public $urlpage = 'report/riskest';
 	public function index($mode=false)
 	{
 		$pid=0;
 		$menu_id=$this->menu_id;
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = $this->urlpage;
+		//$this->db->debug = true;
 		if(is_login()){
 			if(permission($menu_id, 'canview')!='on')redirect('front');
+			
+			$condition = " 1=1 ";
+				if(@$_GET['objectiveid_1'] !=''){
+					$condition .= "AND risk_est.objectiveid_1 ='".$_GET['objectiveid_1']."' ";
+				}
+				if(@$_GET['objectiveid_2'] !=''){
+					$condition .= "AND risk_est.objectiveid_2 ='".$_GET['objectiveid_2']."' ";
+				}
+				if(@$_GET['objectiveid_2'] !=''){
+					$condition .= "AND risk_est.objectiveid_2 ='".$_GET['objectiveid_2']."' ";
+				}
+				if(@$_GET['objective_3'] !=''){
+					$condition .= "AND risk_est.objective_3 ='".$_GET['objective_3']."' ";
+				}
+				if(@$_GET['missionid'] !=''){
+					$condition .= "AND risk_est.missionid ='".$_GET['missionid']."' ";
+				}
+				if(@$_GET['process'] !=''){
+					$condition .= "AND risk_est.process ='".$_GET['process']."' ";
+				}
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			if($data['rs']['permis'] == 'on'){
-				$condition = " 1=1 ";
+				
 				if(@$_GET['sectionid'] !='')
 				{
 					$condition .= "AND risk_est.sectionid ='".$_GET['sectionid']."'  ";
@@ -31,19 +52,28 @@ class riskest extends Public_Controller
 				if(@$_GET['year_data'] !=''){
 					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
 				}
-				
-				}else{
+
+			}else{
 					$condition1 = " section.id ='". login_data('sectionid')."' ";
 					$data['result1'] = $this->section->where($condition1)->get_row();
-					$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
-					if(@$_GET['year_data'] !=''){
-						$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
+					$condition .= " AND risk_est.sectionid ='". login_data('sectionid')."' ";
+					if(@$_GET['year_data1'] !=''){
+						$_GET['year_data'] = $_GET['year_data1'];
+						 $condition .= "AND risk_est.year_data ='".$_GET['year_data1']."' ";	
 						}
-				}
-			if(@$_GET['year_data'] !='' && @$_GET['sectionid'] !=''){
-				$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get_row();					
+			}
+			if(@$_GET['year_data'] !='' && @$_GET['sectionid'] !='' && @$_GET['missionid'] != '' && @$_GET['objectiveid_1'] != '' && @$_GET['objectiveid_2'] != '' && @$_GET['objective_3'] != '' && @$_GET['missionid'] != '' && @$_GET['process'] != ''){
+					
+					$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get_row();
+					//$this->db->debug =true;
+					$select = 'risk_est.*';
+					  
+					$data['result_all'] = $this->risk->select($select)->where($condition)->order_by('risk_est.id','asc')->get('','FALSE');
+								
 			}else{
-				$data['result']['id'] = '';
+				
+					$data['result'] = "";
+
 			}
 			
 		switch($mode){
@@ -65,6 +95,65 @@ class riskest extends Public_Controller
 			
 			redirect('front');	
 		}
-	}		
-}
+	}
+	function report_section(){
+		$year_data = @$_POST['year_data'];
+
+				echo form_dropdown('sectionid',get_option('id','title','section'," id IN (SELECT sectionid FROM risk_est WHERE year_data='".$year_data."') order by title "),@$_GET['sectionid'],'style="width:370px"','--เลือกภาควิชา--');
+
+	}
+	function report_objectiveid_1(){
+		$year_data = @$_POST['year_data'];
+		$data['rs']['permis'] = permission('55', 'can_access_all');
+			if($data['rs']['permis'] == 'on'){
+				$sectionid = @$_POST['sectionid'];
+			}else{
+			    $sectionid = login_data('sectionid');
+			}
+	
+			echo form_dropdown('objectiveid_1',get_option('id','title','objective'," id IN (SELECT objectiveid_1 FROM risk_est WHERE year_data='".$year_data."' and sectionid='".$sectionid."') order by title "),'','style="width:550px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย--');
+		
+	}
+	function report_objectiveid_2(){
+		$year_data = @$_POST['year_data'];
+		$sectionid = @$_POST['sectionid'];
+		$objectiveid_1 = @$_POST['objectiveid_1'];
+	
+			echo form_dropdown('objectiveid_2',get_option('id','title','objective'," id IN (SELECT objectiveid_2 FROM risk_est WHERE year_data='".$year_data."' and sectionid='".$sectionid."' and objectiveid_1='".$objectiveid_1."') order by title "),'','style="width:550px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน--');
+		
+	}
+	function report_objective_3(){
+		$year_data = @$_POST['year_data'];
+		$sectionid = @$_POST['sectionid'];
+		$objectiveid_1 = @$_POST['objectiveid_1'];
+		$objectiveid_2 = @$_POST['objectiveid_2'];
+	
+			echo form_dropdown('objective_3',get_option('objective_3 AS id','objective_3 as title','risk_est'," objective_3 IN (SELECT DISTINCT objective_3 FROM risk_est WHERE year_data='".$year_data."' and sectionid='".$sectionid."' and objectiveid_1='".$objectiveid_1."' and objectiveid_2='".$objectiveid_2."') order by title "),'','style="width:450px"','--เลือกวัตถุประสงค์ตามยุทธศาสตร์ของงาน--');
+		
+	}
+	function report_missionid(){
+		$year_data = @$_POST['year_data'];
+		$sectionid = @$_POST['sectionid'];
+		$objectiveid_1 = @$_POST['objectiveid_1'];
+		$objectiveid_2 = @$_POST['objectiveid_2'];
+		$objective_3 = @$_POST['objective_3'];
+	
+			echo form_dropdown('missionid',get_option('id','title','mission'," id IN (SELECT missionid FROM risk_est WHERE year_data='".$year_data."' and sectionid='".$sectionid."' and objectiveid_1='".$objectiveid_1."' and objectiveid_2='".$objectiveid_2."' and objective_3 ='".$objective_3."') order by title "),'','','--เลือกภาระกิจ--');
+		
+	}
+	function report_process(){
+		$year_data = @$_POST['year_data'];
+		$sectionid = @$_POST['sectionid'];
+		$objectiveid_1 = @$_POST['objectiveid_1'];
+		$objectiveid_2 = @$_POST['objectiveid_2'];
+		$objective_3 = @$_POST['objective_3'];
+		$missionid = @$_POST['missionid'];
+	
+			echo form_dropdown('process',get_option('process as id','process as title','risk_est'," process IN (SELECT DISTINCT process FROM risk_est WHERE year_data='".$year_data."' and sectionid='".$sectionid."' and objectiveid_1='".$objectiveid_1."' and objectiveid_2='".$objectiveid_2."' and objective_3 ='".$objective_3."' and missionid ='".$missionid."') order by title "),'','','--เลือกกระบวนงาน--');
+		
+	}
+	
+	
+}	
+
 ?>

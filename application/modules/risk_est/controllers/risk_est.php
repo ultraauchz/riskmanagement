@@ -14,6 +14,7 @@ class risk_est extends Public_Controller
 		$this->load->model('file_upload_model','file_upload');
 		$this->load->model('risk_est_detail_model','est_detail');
 		$this->load->model('risk_opr_detail_model','opr_detail');
+		$this->load->model('explanation_risk_detail_model','explanation_risk');
 	}
 	public $menu_id = 52;
 	public function index()
@@ -118,6 +119,7 @@ class risk_est extends Public_Controller
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
 		$data['detail_opr'] = $this->opr_detail->get_row(1);
+		$data['detail_risk_manage'] = $this->explanation_risk->get_row(1);
 		$menu_name = GetMenuProperty($menu_id,'title');	
 		$data['risk_est_id']=$id;
 		if(is_login()){

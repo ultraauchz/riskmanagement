@@ -1,34 +1,18 @@
-<h3>ข้อมูลวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง</h3>
+<h3>รายงานการวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง</h3>
 <form enctype="multipart/form-data" method="get">
 <div id="search">
   <div id="searchBox">
-  	<h4>ค้นหา</h4>
 		<? if(@$rs['permis']=='on'){ ?>
-		<script>
-    	$(function(){
-        	$('[name=section_id]').chainedSelect({parent: '[name=division_id]',url: 'risk_est/report_section',value: 'id',label: 'text'});
-    	});
-		</script>
-			<span>ปีงบประมาณ : </span>
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<span>ภาควิชา : </span>
 			<?=form_dropdown('section_id',get_option('id','title','section order by section_type_id asc, title asc '),@$_GET['section_id'],'style="width:370px"','แสดงภาควิชา/งานทั้งหมด');?>
-		<? }else{ ?>
-			<span>ปีงบประมาณ : </span>	
+		<? }else{ ?>	
 			<?=form_dropdown('year_data',get_year_option(),@$_GET['year_data'],'','แสดงทุกปี');?>
-			<span>ภาควิชา : </span>
 			<?=form_dropdown('section_id',get_option('id','title','section where id = "'.@$result1['id'].'" order by section_type_id asc, title asc  '),@$_GET['section_id'],'style="width:370px"');?>
 		<? } ?>	
-			<span>ภารกิจ : </span>
-			<?=form_dropdown('missionid',get_option('id','title','mission order by title '),@$_GET['missionid'],'style="width:390px"','แสดงภารกิจทั้งหมด');?>
-			<br />เหตุการณ์ความเสี่ยง <input type="text" name="event_risk" value="<?=@$_GET['event_risk']?>" style="width:370px" />
 		<input type="submit" class="btn_search" value=" " title="ค้นหา" id="button9" name="button9"></div>
   </div>
 </div>
 </form>
-<div id="btnBox">
-<a href="risk_est/form" class="btn btn-primary">เพิ่มรายการ</a>
-</div>
 <div id="paging" class="pagination">
 <?php echo $pagination;?>
 </div>
@@ -39,9 +23,8 @@
 		<th >ระดับความเสี่ยง</th>
 		<th >ปีงบประมาณ</th>
 		<th >ภารกิจ</th>
-		<th>หน่วยงาน</th>
-		<th>แผนการปฎิบัติการและรายงานผล</th>
-		<th >จัดการข้อมูล</th>
+		<th style="width: 250px">หน่วยงาน</th>
+		<th style="width: 50px">รายงาน</th>
 	</tr>
 	<?php 
 		  $rowStyle = '';
@@ -58,19 +41,7 @@
 		<td align="left" width="5%" style="text-align:center;"><?=$row['year_data']?></td>
 		<td align="left" width="15%" ><?=$row['mission_title']?></td>
 		<td align="left"  ><?=$row['section_title']?></td>
-		<td align="left" width="10%" >
-			<? if(permission($menu_id, 'canedit')!=''){ ?>
-		  	<a href="<?=$urlpage;?>/form_opr/<?=@$row['id'];?>" title="Edit" class="btn btn-primary">แผนการปฎิบัติการ</a>
-		  	<? } ?>
-		</td>
-		<td align="left" width="12%" >
-		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
-		  	<a href="<?=$urlpage;?>/form/<?=@$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
-		  	<? } ?>
-		  	<? if(permission($menu_id, 'candelete')!=''){ ?>
-		  	<a href="<?=$urlpage;?>/delete/<?php echo @$row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
-		  	<? } ?> 
-		</td>		
+		<td><div align="center"><a href="<?=$urlpage;?>/index/index_view/?id=<?=@$row['id'];?>&sectionid=<?=$row['sectionid']?>" title="Edit" class="btn btn-primary">รายงาน</a></div></td>
 	</tr>
 	<? 
 				$i++;

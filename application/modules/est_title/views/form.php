@@ -5,6 +5,11 @@
 .status{color:red;}
 .txtRed {color: #ea0000;}
 </style>
+<script type="text/javascript" src="media/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="media/tiny_mce/config.js"></script>
+<script type="text/javascript">
+tiny('title');
+</script>
 <script type="text/javascript">
 $(function(){
 	

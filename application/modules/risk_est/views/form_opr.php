@@ -253,7 +253,27 @@ $(function(){
 	}
 	});
 	$("#btn_detail").colorbox({inline:true, href:"#inline_content", width:"80%",height:"80%"});
+	$("#btn_detail_risk").colorbox({inline:true, href:"#inline_content_risk", width:"80%",height:"80%"});
+	
+	$(".remain_risk").change(function(){		
+		var b1 = $("[name=before_risk_chance]").val();
+		var b2 = $("[name=before_risk_effect]").val();
+		var b3 = parseInt(b1) * parseInt(b2);
+		if(b1 != '' && b2 !=''){
+			$("[name=before_risk_step]").val(b3);
+		}
+		
+		var a1 = $("[name=after_risk_chance]").val();
+		var a2 = $("[name=after_risk_effect]").val();
+		var a3 = parseInt(a1) * parseInt(a2);
+		if(a1 != '' && a2 !=''){
+			$("[name=after_risk_step]").val(a3);
+		}
+			
+	})
+	
 });
+
 
 </script>
 
@@ -269,7 +289,7 @@ $(function(){
 </div>
 <table class="table table-form table-bordered table-striped table-horizontal">
   <tr>
-		<th width="400px">ปีงบประมาณ</th><td><?=@$rs['year_data']?></td>
+	<th width="400px">ปีงบประมาณ</th><td><?=@$rs['year_data']?></td>
 	</tr>
 	<tr>
 	  <th width="400px">ภาควิชา</th><td><?=@$rs['section_title'];?></td>
@@ -356,6 +376,81 @@ $(function(){
   	</tr>
 </table>
 <? endfor;?>
+<fieldset>
+	<legend>แนวทางการจัดการความเสี่ยง</legend>	
+<div id="btnBox">
+<input type="button" class="btn btn-primary" id="btn_detail_risk" value="คำธิบายแนวทางการจัดการความเสี่ยง" />
+</div>
+<br />
+  <table class="table table-form table-bordered table-striped table-horizontal">
+	  	<tr>
+	  		<th colspan="2"><div align="center">ก่อนวางแผน</div></th>
+	  	</tr>	
+		<tr>
+        	<th width="400px">ระดับโอกาสเกิด</th>
+            <td>
+            	<select name="before_risk_chance" class="remain_risk" style="width:50px;">
+            		<option value="" <? if(@$rs['before_risk_chance']=='')echo 'selected="selected"';?>>--</option>
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['before_risk_chance']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
+            </td>
+        </tr>
+    	<tr>
+        	<th width="400px">ระดับผลกระทบ</th>
+            <td>
+               	<select name="before_risk_effect" class="remain_risk"  style="width:50px;">
+               		<option value="" <? if(@$rs['before_risk_effect']=='')echo 'selected="selected"';?>>--</option>
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['before_risk_effect']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
+            </td>
+        </tr>
+        <tr>
+        	<th width="400px">ระดับความเสี่ยง</th>
+            <td>
+               	<input name="before_risk_step" type="text" style="width:30px;" readonly="readonly" value="<?=(@$rs['before_risk_chance'] * @$rs['before_risk_effect']);?>" />
+            </td>
+        </tr>        
+    </table>
+    
+  
+    <table class="table table-form table-bordered table-striped table-horizontal">
+	  	<tr>
+	  		<th colspan="2"><div align="center">หลังดำเนินการ ตามแผน</div></th>
+	  	</tr>	
+		<tr>
+        	<th width="400px">ระดับโอกาสเกิด</th>
+            <td>
+            	<select name="after_risk_chance" class="remain_risk" style="width:50px;">
+            		<option value="" <? if(@$rs['after_risk_chance']=='')echo 'selected="selected"';?>>--</option>
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['after_risk_chance']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
+            </td>
+        </tr>
+    	<tr>
+        	<th width="400px">ระดับผลกระทบ</th>
+            <td>
+               	<select name="after_risk_effect" class="remain_risk"  style="width:50px;">
+               		<option value="" <? if(@$rs['after_risk_effect']=='')echo 'selected="selected"';?>>--</option>
+            		<? for($i=1;$i<=5;$i++): ?>
+            		<option value="<?=$i;?>" <? if(@$rs['after_risk_effect']==$i)echo 'selected="selected"';?>><?=$i;?></option>
+            		<? endfor;?>
+            	</select>
+            </td>
+        </tr>
+        <tr>
+        	<th width="400px">ระดับความเสี่ยง</th>
+            <td>
+               	<input name="after_risk_step" type="text" style="width:30px;" readonly="readonly" value="<?=(@$rs['after_risk_chance'] * @$rs['after_risk_effect']);?>" />
+            </td>
+        </tr>        
+    </table>
+</fieldset>
 <div align="center">
 				<input type="submit" value="Save" class="btn btn-primary"> 
 				<input type="button" value="  Back  " onclick="history.back();" class="btn btn-inverse">
@@ -364,5 +459,10 @@ $(function(){
 <div style='display:none'>
 			<div id='inline_content' style='padding:10px; background:#fff;'>
 			<?=$detail_opr['detail']?>
+			</div>
+
+<div style='display:none'>
+			<div id='inline_content_risk' style='padding:10px; background:#fff;'>
+			<?=$detail_risk_manage['detail']?>
 			</div>
 </div>
