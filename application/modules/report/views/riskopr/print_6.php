@@ -43,34 +43,37 @@ body{
 	#line {background: url('../../../media/images/cursor.png')-41px -40px;text-align:left;}
 	
 	#none{display:none;}
+	.pagebreak  { display:block; page-break-before:always; }  
 </style>
 	</head>
 <body>
+
+<? 	foreach ($result as $item_h) { ?>
 <div id="print">
 <div align="right">เอกสารหมายเลข 4</div>
 <div align="center">
-	<B>ชื่อหน่วยงาน/ส่วนงาน <label><?=$result['section_title'];?></label> <br />
+	<B>ชื่อหน่วยงาน/ส่วนงาน <label><?=$item_h['section_title'];?></label> <br />
 	รายงานการวิเคราะห์เหตุการณ์ความเสี่ยงและการประเมินความเสี่ยง <br />
-	ประจำปีงบประมาณ   <?=$result['year_data'];?>
+	ประจำปีงบประมาณ   <?=$item_h['year_data'];?>
 	</B><br />
 </div><br />
 <table style="font-size:11px">
 	<tr>
 		<td><b>วัตถุประสงค์ตามยุทธศาสตร์ของมหาวิทยาลัย</b> </td>
-		<td> : <label><?=$result['objective_title1'];?></label></td>
+		<td> : <label><?=$item_h['objective_title1'];?></label></td>
 	</tr>
 	<tr>
 		<td><b>วัตถุประสงค์ตามยุทธศาสตร์ของหน่วยงาน/ส่วนงาน  </b></td>
-		<td> : <label><?=$result['objective_title2'];?></label></td>
+		<td> : <label><?=$item_h['objective_title2'];?></label></td>
 	</tr>
 	<tr>
 		<td><b>วัตถุประสงค์ตามยุทธศาสตร์ของงาน </b></td>
-		<td> : <label><?=$result['objective_3'];?></label></td>
+		<td> : <label><?=$item_h['objective_3'];?></label></td>
 	</tr>
 
 </table>
-<b>ภารกิจ </b> : <label><?=$result['mission_title'];?></label> <br />
-<b>กระบวนงาน</b> : <label><?=$result['process'];?></label> <br /><br />
+<b>ภารกิจ </b> : <label><?=$item_h['mission_title'];?></label> <br />
+<b>กระบวนงาน</b> : <label><?=$item_h['process'];?></label> <br /><br />
 <table class="table" width="100%" cellpadding="0">
 	<tr>
 		<td rowspan="3" align="center" width="100px"><b>เหตุการณ์ความเสี่ยง<b/></td>
@@ -107,24 +110,47 @@ body{
 		<td style="width:35px;text-align:center;"><?php echo $month_th[$key]; ?></td>
 		<?php endforeach; ?>
 	</tr>
-	<? foreach ($result_all as $result_1) {
-		//$this->db->debug = true;
-		
-	 $result = $this->risk_opr->where("risk_est_id=".@$result_1['id'])->order_by('id','asc')->get_row();
+	<? 
+	 			 $section = $item_h['sectionid'] ;
+				 $objectiveid_1 = $item_h['objectiveid_1']; 
+				 $objectiveid_2 = $item_h['objectiveid_2']; 
+				 $objective_3  =  $item_h['objective_3'];
+				 $missionid =  $item_h['missionid'];
+				 $process =  $item_h['process'];
+				 $condition = " risk_est_head.sectionid = '".$section."' AND risk_est_head.objectiveid_1 = '".$objectiveid_1."' AND risk_est_head.objectiveid_2 = '".$objectiveid_2."' AND risk_est_head.objective_3 = '".$objective_3."'
+						  AND missionid = '".$missionid."' AND risk_est_head.process = '".$process."'";
+			$select = 'risk_opr.* , risk_est.event_risk ';
+			//$this->db->debug = true;
+		$event_risk = '';
+		$result_all = $this->risk_opr->select($select)->where($condition)->order_by('risk_est_head.objectiveid_1', 'asc' , 'risk_est_head.objectiveid_2', 'asc' ,'risk_est_head.objective_3', 'asc' , 'risk_est_head.missionid' ,'asc' , 'risk_est_head.process', 'asc')->get('','FALSE');		
+		//$num_row_all = count($result_all)*2;
+		foreach ($result_all as $key_result =>$result) {
 
 	 ?>	
 	<tr>
-		<? $nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one(); ?>
-		<td rowspan="2"><?=$result['event_risk'];?></td>
-		<td rowspan="2">
-		 <?	$risk_kri = $this->risk_kri->where('risk_est_id='.@$result_1['id'])->get();
+		<? 
+			if($result['event_risk'] != $event_risk){
+			//$nrow = $this->risk_control->select('count(*)')->where('risk_est_id='.@$result['id'])->get_one();
+			
+			$event_risk = $result['event_risk'];
+			//$this->db->debug = true;
+			$condition_1 = $condition." AND risk_est.event_risk = '".$event_risk."' ";
+			$nrow = $this->risk_opr->select($select)->where($condition_1)->get('','FALSE');		
+			$num_row_all = count($nrow)*2;
+			$condition_1 = '';
+			
+		?>
+		<td rowspan="<?=$num_row_all?>" valign="top"><?=@$result['event_risk'];?></td>
+		<td rowspan="<?=$num_row_all?>" valign="top">
+		 <?	$risk_kri = $this->risk_kri->where('risk_est_id='.@$result['risk_est_id'])->get();
 		 $i = 1;
 	      	foreach ($risk_kri as $kri) { ?>
-			<?=$i?>. ตัวชี้วัดความเสี่ยง : <?=$kri['kri_risk'];?> จำนวน : <?=$kri['kri_risk_count']?> หน่วยนับ : <?=$kri['kri_risk_unit']?> <br / >
+			<?=$i?>. <?=$kri['kri_risk'];?> จำนวน : <?=$kri['kri_risk_count']?> <?=$kri['kri_risk_unit']?> <br / >
 			
 		<? $i++; } ?>		
 		</td>
-			<td rowspan="2"><?=$result['manage_risk'];?></td>
+		<? } ?>
+			<td rowspan="2" valign="top"><?=$result['event_risk_opr'];?></td>
 			<td height="50px">แผน</td>
 			<? if($quarter == '' || $quarter == 1){
 					$i = 1;
@@ -136,26 +162,36 @@ body{
 					$i =3;
 					$max=4;
 				}
+			$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
 			for($i;$i<=$max;$i++){
 				if($result['plot_start_date'.$i] > 0 &&  $result['plot_end_date'.$i] > 0){
 					get_line_months($months, $result['plot_start_date'.$i], $result['plot_end_date'.$i]);					
 				}
-			} ?>
-			<?php foreach($months as $key => $value): ?>
-				<td style="height:60px;padding:0px;"><div class="cursor" id="<?php echo set_line($months, $key, $value); ?>"><a href="#" onclick="return false;"></a></div></td>
-			<?php endforeach; ?>
+			} 
+				
+				foreach($months as $key_m => $value):
+					$line = set_line($months, $key_m, $value); 
+			?>
+				<td style="height:60px;padding:0px;"><div class="cursor" id="<?php echo $line; ?>"><a href="#" onclick="return false;"></a></div></td>
+			<?php 
+				endforeach; 
+				$line = '';
+				$value = '';
+			?>
 			
-			<td><div align="center"><?=$result['before_risk_chance']?></div></td>
-			<td><div align="center"><?=$result['before_risk_effect']?></div></td>
-			<td><div align="center"><?=$result['before_risk_step']?></div></td>
-			<td><div align="center"><?=$result['after_risk_chance']?></div></td>
-			<td><div align="center"><?=$result['after_risk_effect']?></div></td>
-			<td><div align="center"><?=$result['after_risk_step']?></div></td>
+			<td><div align="center"><?=@$result['before_risk_chance']?></div></td>
+			<td><div align="center"><?=@$result['before_risk_effect']?></div></td>
+			<td><div align="center"><?=@$result['before_risk_step']?></div></td>
+			<td><div align="center"><?=@$result['after_risk_chance']?></div></td>
+			<td><div align="center"><?=@$result['after_risk_effect']?></div></td>
+			<td><div align="center"><?=@$result['after_risk_step']?></div></td>
 			
 			<td rowspan="2">
 				<? 
 				for($i=1;$i<=4;$i++){
-					echo $result['result'.$i]."<br />";
+					if(@$result['result'.$i] != ''){
+						echo $result['result'.$i]."<br />";
+					}
 				}
 				?>
 			</td>
@@ -190,9 +226,12 @@ body{
 			<div style="padding-left:45%;">ลายมือชื่อผู้อนุมัติแผน<label style="width:40%; text-align:center;">&nbsp</label></div>
 			<div style="padding-left:45%;">(<label style="width:40%; text-align:center;">&nbsp</label>)</div>
 			<div style="padding-left:45%;">ตำแหน่ง <label style="width:40%; text-align:center;">คณบดีคณะสาธารณสุขศาสตร์</label></div>
-			<div style="padding-left:45%;">วันที่<label style="width:7%; text-align:center;">&nbsp</label>เดือน<label style="width:10%; text-align:center;">กันยายน</label>พ.ศ. <label style="width:10%; text-align:center;"><?=$result['year_data'];?></label></div>
+			<div style="padding-left:45%;">วันที่<label style="width:7%; text-align:center;">&nbsp</label>เดือน<label style="width:10%; text-align:center;">กันยายน</label>พ.ศ. <label style="width:10%; text-align:center;"><?=$_GET['year_data'];?></label></div>
 		</div>
 </div>
+<div class="pagebreak"></div>
+<? } ?>
+
 <script>window.print();</script>
 </body>
 </html>

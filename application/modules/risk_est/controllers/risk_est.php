@@ -6,6 +6,7 @@ class risk_est extends Public_Controller
 		parent::__construct();
 		$this->load->model('admin_menu_model','admin_menu');
 		$this->load->model('risk_est_model','risk');
+		$this->load->model('risk_est_head_model','risk_head');
 		$this->load->model('risk_opr_model','risk_opr');
 		$this->load->model('risk_est_control_model','risk_control');
 		$this->load->model('risk_est_kri_model','risk_kri');
@@ -30,13 +31,13 @@ class risk_est extends Public_Controller
 				$condition = " 1=1 ";
 				if(@$_GET['section_id'] !='')
 				{
-					$condition .= "AND risk_est.sectionid ='".$_GET['section_id']."'  ";
+					$condition .= "AND risk_est_head.sectionid ='".$_GET['section_id']."'  ";
 				}
 				if(@$_GET['year_data'] !=''){
-					$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";
+					$condition .= "AND risk_est_head.year_data ='".$_GET['year_data']."' ";
 				}
 				if(@$_GET['missionid'] != ''){
-					$condition .= "AND risk_est.missionid ='".$_GET['missionid']."' ";
+					$condition .= "AND risk_est_head.missionid ='".$_GET['missionid']."' ";
 				}
 				if(@$_GET['event_risk'] != ''){
 					$condition .= "AND risk_est.event_risk like '%".$_GET['event_risk']."%' ";
@@ -45,20 +46,22 @@ class risk_est extends Public_Controller
 			}else{
 				$condition1 = " section.id ='". login_data('sectionid')."' ";
 				$data['result1'] = $this->section->where($condition1)->get_row();
-				$condition = " risk_est.sectionid ='". login_data('sectionid')."' ";
+				$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' ";
 				if(@$_GET['year_data'] !=''){
-				$condition .= "AND risk_est.year_data ='".$_GET['year_data']."' ";	
+				$condition .= "AND risk_est_head.year_data ='".$_GET['year_data']."' ";	
 				}
 				if(@$_GET['missionid'] != ''){
-					$condition .= "AND risk_est.missionid ='".$_GET['missionid']."' ";
+					$condition .= "AND risk_est_head.missionid ='".$_GET['missionid']."' ";
 				}
 				if(@$_GET['event_risk'] != ''){
 					$condition .= "AND risk_est.event_risk like '%".$_GET['event_risk']."%' ";
 				}
 				
 			}
-				$data['result'] = $this->risk->where($condition)->order_by('id','desc')->get();
-				$data['pagination'] = $this->risk->pagination();					
+			//$this->db->debug = true;
+			
+				$data['result'] = $this->risk_head->where($condition)->order_by('id','desc')->get();
+				$data['pagination'] = $this->risk_head->pagination();					
 				$this->template->build('index',$data);
 			
 		}
@@ -103,8 +106,148 @@ class risk_est extends Public_Controller
 				}		
 					
 			if($id>0){
+				$action='View';
+				$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk'];	
+				save_log($menu_id,$action,$description);		
+			}
+		}
+		else{			
+			redirect('front');	
+		}
+	}
+	
+	public function risk_dtl()
+	{
+		//$this->db->debug = true;
+		$risk_est_head_id = @$_POST['risk_est_head_id'];
+		$id = @$_POST['id'];
+		$menu_id = $this->menu_id;	
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$data['detail_est'] = $this->est_detail->get_row(1);
+		$menu_name = GetMenuProperty($menu_id,'title');	
+		$data['id']=$id;
+		if(is_login()){
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est.id = '".$id."' ";
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+				$data['rs'] = @$this->risk->where($condition)->get_row();
+			}else{
+				$data['rs'] = @$this->risk->get_row($id);
+			}		
+				if($id != ''){
+					if(permission($menu_id, 'can_access_all') != 'on'){
+						if($data['rs']['id'] !=''){
+						$this->load->view('form_est_dtl',$data);
+						}else{
+						redirect('risk_est');
+						}
+					}else{
+						$this->load->view('form_est_dtl',$data);
+					}	
+				}else{
+					$this->load->view('form_est_dtl',$data);
+				}		
+					
+			if($id>0){
+				$action='View';
+				$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk'];	
+				save_log($menu_id,$action,$description);		
+			}
+		}
+		else{			
+			redirect('front');	
+		}
+	}
+	
+	public function form_head($id=false)
+	{
+		//$this->db->debug = true;
+		$menu_id = $this->menu_id;	
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$data['detail_est'] = $this->est_detail->get_row(1);
+		$menu_name = GetMenuProperty($menu_id,'title');	
+		$data['id']=$id;
+		if(is_login()){
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				
+				$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est_head.id = '".$id."' ";
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+				$data['rs'] = @$this->risk_head->where($condition)->get_row();
+			}else{
+				$data['rs'] = @$this->risk_head->get_row($id);
+			}		
+				if($id != ''){
+					if(permission($menu_id, 'can_access_all') != 'on'){
+						if($data['rs']['id'] !=''){
+						$this->template->build('form_head',$data);
+						}else{
+						redirect('risk_est');
+						}
+					}else{
+						$this->template->build('form_head',$data);
+					}	
+				}else{
+					$this->template->build('form_head',$data);
+				}		
+					
+			if($id>0){
 			$action='View';
-			$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk'];	
+			$description = $action.' '.$menu_name.'(ส่วนที่แรก) : ปีงบประมาน'.$data['rs']['year_data'].' '.$data['rs']['section_title'].' '.$data['rs']['mission_title']
+						   .' กระบวนงาน'.$data['rs']['process'];	
+			save_log($menu_id,$action,$description);		
+			}
+		}
+		else{			
+			redirect('front');	
+		}
+	}
+	
+	public function form_head_view($id=false)
+	{
+		//$this->db->debug = true;
+		$menu_id = $this->menu_id;	
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$data['detail_est'] = $this->est_detail->get_row(1);
+		$menu_name = GetMenuProperty($menu_id,'title');	
+		$data['id']=$id;
+		if(is_login()){
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est_head.id = '".$id."' ";
+				$condition1 = " section.id ='". login_data('sectionid')."' ";
+				$data['result1'] = $this->section->where($condition1)->get_row();
+				$data['rs'] = @$this->risk_head->where($condition)->get_row();
+			}else{
+				$data['rs'] = @$this->risk_head->get_row($id);
+			}		
+				if($id != ''){
+					if(permission($menu_id, 'can_access_all') != 'on'){
+						if($data['rs']['id'] !=''){
+							$this->template->build('form_head_view',$data);
+						}else{
+							redirect('risk_est');
+						}
+					}else{
+						$this->template->build('form_head_view',$data);
+					}	
+				}else{
+					$this->template->build('form_head_view',$data);
+				}		
+					
+			if($id>0){
+			$action='View';
+			$description = $action.' '.$menu_name.'(ส่วนที่สอง) : ปีงบประมาน '.$data['rs']['year_data'].' '.$data['rs']['section_title'].' '.$data['rs']['mission_title']
+						   .' กระบวนงาน'.$data['rs']['process'];	
 			save_log($menu_id,$action,$description);		
 			}
 		}
@@ -118,25 +261,22 @@ class risk_est extends Public_Controller
 		$menu_id = 53;	
 		$data['menu_id'] = $menu_id;
 		$data['urlpage'] = 'risk_est';
-		$data['detail_opr'] = $this->opr_detail->get_row(1);
-		$data['detail_risk_manage'] = $this->explanation_risk->get_row(1);
 		$menu_name = GetMenuProperty($menu_id,'title');	
 		$data['risk_est_id']=$id;
 		if(is_login()){
 			if(permission($menu_id, 'canview')=='')redirect('front');
 			#$this->db->debug = true;
 			$condition = "risk_opr.risk_est_id = ".$id;			
-			$data['rs'] = @$this->risk_opr->where($condition)->get_row();
-			if(@$data['rs']['id'] == ''){
+			
 			$data['rs'] = @$this->risk->get_row($id);
-			$data['rs']['risk_est_id']=$id;
-			$data['rs']['id']='';
-			}							
+			//$this->db->debug = true;
+			$data['rs_opr'] = $this->risk_opr->where($condition)->get('','true');	
+							
 			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
 			if($data['rs']['permis'] != 'on'){
 				if($data['rs']['sectionid'] == login_data('sectionid')){
 					$this->template->build('form_opr',$data);	
-				}else{
+				}else{	
 					redirect('risk_est');
 				}						
 			}else{
@@ -144,11 +284,11 @@ class risk_est extends Public_Controller
 			}
 			
 			if($id>0){
-			if(@$data['rs']['event_risk_opr'] != ''){
-			$action='View';
-			$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk_opr'];	
-			save_log($menu_id,$action,$description);
-			}		
+				
+					$action='View';
+					$description = $action.' '.$menu_name.' : '.$data['rs']['event_risk'];	
+					save_log($menu_id,$action,$description);
+						
 			}
 		}
 		else{			
@@ -164,12 +304,12 @@ class risk_est extends Public_Controller
 		{
 			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
 			$action='Update';
-			$description = $action.' '.$menu_name.' : '.$_POST['event_risk'];	
+			$description = $action.' '.$menu_name.' : เหตุการณ์ความเสี่ยง '.$_POST['event_risk'];	
 			save_log($menu_id,$action,$description);
 		}else{
 			if(permission($menu_id, 'canadd')=='')redirect('risk_est');	
 			$action='Add';
-			$description = $action.' '.$menu_name.' : '.$_POST['event_risk'];		
+			$description = $action.' '.$menu_name.' : เหตุการณ์ความเสี่ยง '.$_POST['event_risk'];		
 			save_log($menu_id,$action,$description);
 		}
 		$_POST['start_date'] =  date_to_mysql($_POST['start_date']);
@@ -206,32 +346,42 @@ class risk_est extends Public_Controller
 		  }
 		
 		set_notify('risk_est', lang('save_data_complete'));
-		redirect('risk_est');
+		redirect('risk_est/form_head_view/'.$_POST['risk_est_head_id']);
+	}
+
+	public function save_head(){
+		//$this->db->debug = true;
+		$menu_id=$this->menu_id;
+		$menu_name = GetMenuProperty($menu_id,'title');
+		$pid = $this->risk_head->save($_POST);
+		$risk_head = $this->risk_head->get_row($pid);
+		if($_POST['id']!='')
+		{
+			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
+			$action='Update';
+			$description = $action.' '.$menu_name.'(ส่วนที่แรก) : ปีงบประมาน '.$risk_head['year_data'].' '.$risk_head['section_title'].' '.$risk_head['mission_title']
+						   .' กระบวนงาน'.$risk_head['process'];	
+			save_log($menu_id,$action,$description);
+		}else{
+			if(permission($menu_id, 'canadd')=='')redirect('risk_est');	
+			$action='Add';
+			$description = $action.' '.$menu_name.'(ส่วนที่แรก) : ปีงบประมาน  '.$risk_head['year_data'].' '.$risk_head['section_title'].' '.$risk_head['mission_title']
+						   .' กระบวนงาน'.$risk_head['process'];			
+			save_log($menu_id,$action,$description);
+		}
+		
+		
+		
+		
+		set_notify('risk_est', lang('save_data_complete'));
+		redirect('risk_est/form_head_view/'.$pid);
 	}
 
 	public function save_opr(){
 		//$this->db->debug = true;
 		$menu_id=53;
 		$menu_name = GetMenuProperty($menu_id,'title');
-		
-		for($i=1;$i<=4;$i++){
-			if($_FILES['fl_import'.$i]['name']!=''){
-				$ext = pathinfo($_FILES['fl_import'.$i]['name'], PATHINFO_EXTENSION);
-				$data['risk_est_id']=$_POST['risk_est_id'];			
-				$file_name = 'risk_est'."_(".$data['risk_est_id'].")_".date("Y_m_d_H_i_s")."_($i)".'.'.$ext;
-				$data['fl_import'] = $file_name;
-				$data['fl_name']=$_FILES['fl_import'.$i]['name'];
-				$data['quarter'] = $i;
-				/*---for insert value to info table ---*/
-				$_POST['fl_upload_id'.$i] =$this->file_upload->save($data);
-				/*--end--*/
-				$uploaddir = 'import_file/risk_est/';
-				$fpicname = $uploaddir.$file_name;
-				move_uploaded_file($_FILES['fl_import'.$i]['tmp_name'], $fpicname);
-			}
-		}
-		
-		
+
 		if($_POST['id']!='')
 		{
 			if(permission($menu_id, 'canedit')=='')redirect('risk_est');
@@ -275,27 +425,176 @@ class risk_est extends Public_Controller
 		}
 		
 		
-			
-		
-		$id = $this->risk_opr->save($_POST);		
+		$id = $this->risk_opr->save($_POST);
+		//return FALSE;	
+		for($i=1;$i<=4;$i++){
+			if($_FILES['fl_import'.$i]['name']!=''){
+				$ext = pathinfo($_FILES['fl_import'.$i]['name'], PATHINFO_EXTENSION);
+				$data['risk_est_id']=$_POST['risk_est_id'];	
+				$data['risk_opr_id'] = $id;		
+				$file_name = 'risk_est'."_(".$data['risk_est_id'].")_".date("Y_m_d_H_i_s")."_($i)".'.'.$ext;
+				$data['fl_import'] = $file_name;
+				$data['fl_name']=$_FILES['fl_import'.$i]['name'];
+				$data['quarter'] = $i;
+				/*---for insert value to info table ---*/
+				$data_opr['fl_upload_id'.$i] =$this->file_upload->save($data);
+				/*--end--*/
+				$uploaddir = 'import_file/risk_est/';
+				$fpicname = $uploaddir.$file_name;
+				move_uploaded_file($_FILES['fl_import'.$i]['tmp_name'], $fpicname);
+				
+				$data_opr['id'] = $id;
+				$this->risk_opr->save($data_opr);
+			}
+		}
+				
 		set_notify('risk_est', lang('save_data_complete'));
-		redirect('risk_est');
+	    redirect('risk_est/form_opr/'.$_POST['risk_est_id']);
 	}
  
-	function delete($id=FALSE){
-		$this->db->Execute('delete from risk_opr where risk_est_id ='.$id);
-		$menu_id=$this->menu_id;
-		$menu_name = GetMenuProperty($menu_id,'title');		
-		if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
-		$risk_est = $this->risk->get_row($id);
-		$action='Delete';
-		$description = $action.' '.$menu_name.' : '.$risk_est['event_risk'];		
-		save_log($menu_id,$action,$description);
-		$this->risk->delete($id);
-		$this->db->Execute('delete from risk_opr where risk_est_id = ?',$id);
-		redirect('risk_est');
+ 	public function opr_dtl(){
+ 		$menu_id = 53;	
+		$data['menu_id'] = $menu_id;
+		$data['urlpage'] = 'risk_est';
+		$menu_name = GetMenuProperty($menu_id,'title');	
+		
+ 		@$risk_est_id = $_POST['risk_est_id'];
+		@$risk_opr_id = $_POST['risk_opr_id'];
+		
+		
+			$data['risk_est_id'] = $risk_est_id; 
+			$data['detail_opr'] = $this->opr_detail->get_row(1);
+			$data['detail_risk_manage'] = $this->explanation_risk->get_row(1);
+			
+		if(is_login()){
+			if(permission($menu_id, 'canview')=='')redirect('front');
+			#$this->db->debug = true;			
+			if(@$risk_est_id != '' && $risk_opr_id == ''){
+				$data['risk_est'] = $this->risk->get_row($risk_est_id);
+				$data['rs'] = '';
+			}else if($risk_opr_id != ''){
+				$data['risk_est'] = $this->risk->get_row($risk_est_id);
+				$data['rs'] = $this->risk_opr->get_row($risk_opr_id);
+			}
+									
+			$data['rs']['permis'] = permission($menu_id, 'can_access_all');
+			if($data['rs']['permis'] != 'on'){
+				if($data['risk_est']['sectionid'] == login_data('sectionid')){
+					$this->load->view('form_opr_dtl.php',@$data);	
+				}else{
+					redirect('risk_est');
+				}						
+			}else{
+				$this->load->view('form_opr_dtl.php',@$data);
+			}	
+			if(@$data['rs']['id'] != ''){		
+					$action='View';
+					$description = $action.' '.$menu_name.' : '.@$data['rs']['event_risk_opr'];	
+					save_log($menu_id,$action,$description);
+						
+			}
+		}else{			
+			redirect('front');	
+		}
+		
+	}
+ 
+ 
+	function delete_risk($id=FALSE,$risk_h=FALSE){
+			
+		$menu_id = $this->menu_id;
+		$permis = permission($menu_id, 'can_access_all');
+		if($permis != 'on'){
+			$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est_head.id = '".$risk_h."' AND risk_est.id = '".$id."' ";
+			$chk_owner = @$this->risk->where($condition)->get();
+			$num_row_chk = count($chk_owner);
+			if($num_row_chk = 0){
+				redirect('risk_est');
+			}
+		}		
+			
+			$menu_name = GetMenuProperty($menu_id,'title');		
+			if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
+			$risk_est = $this->risk->get_row($id);
+			$action='Delete';
+			$description = $action.' '.$menu_name.' : เหตุการณ์ความเสี่ยง '.$risk_est['event_risk'];		
+			save_log($menu_id,$action,$description);
+			$this->risk->delete($id);
+			$this->db->Execute('delete from risk_opr where risk_est_id = ?',$id);
+			$this->db->Execute('delete from risk_est_kri where risk_est_id ='.$id);
+			$this->db->Execute('delete from risk_est_control where risk_est_id ='.$id);
+			
+			redirect('risk_est/form_head_view/'.$risk_h);
+		
 	}
 	
+	function delete_risk_opr($id=FALSE,$risk_est=FALSE){
+		$menu_id = 53;
+		$permis = permission($menu_id, 'can_access_all');
+		if($permis != 'on'){
+			$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est.id = '".$risk_est."' AND risk_opr.id = '".$id."' ";
+			$chk_owner = $this->risk_opr->where($condition)->get();
+			echo $num_row_chk = count($chk_owner);
+			if($num_row_chk = 0){
+				redirect('risk_est');
+			}
+		}
+
+			$menu_name = GetMenuProperty($menu_id,'title');		
+			if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
+			$risk_opr = $this->risk_opr->get_row($id);
+			$action='Delete';
+			$description = $action.' '.$menu_name.' : กิจกรรมการดำเนินงาน '.$risk_opr['event_risk_opr'];		
+			save_log($menu_id,$action,$description);
+			
+			$this->risk_opr->delete($id);
+			$fl_upload = $this->file_upload->where("risk_est_id = '".$risk_est."' and risk_opr_id = '".$id."' ")->get();
+			foreach($fl_upload as $fl){
+				$this->file_upload->delete($fl['id']);
+				unlink("import_file/risk_est/".$fl['fl_import']);
+			}
+			
+			redirect('risk_est/form_opr/'.$risk_est);
+		
+	}
+
+	function delete_risk_head($id=FALSE){
+			
+		$menu_id=$this->menu_id;
+		$permis = permission($menu_id, 'can_access_all');
+		if($permis != 'on'){	
+			$condition = " risk_est_head.sectionid ='". login_data('sectionid')."' AND risk_est_head.id = '".$id."' ";
+			$chk_owner = @$this->risk_head->where($condition)->get();
+			$num_row_chk = count($chk_owner);
+			if($num_row_chk = 0){
+				redirect('risk_est');
+			}
+		}		
+		
+			
+			$menu_name = GetMenuProperty($menu_id,'title');		
+			if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
+			$risk_head = $this->risk_head->get_row($id);
+			$action='Delete';
+			$description = $action.' '.$menu_name.'(ส่วนที่แรก) : ปีงบประมาน '.$risk_head['year_data'].' '.$risk_head['section_title'].' '.$risk_head['mission_title']
+						   .' กระบวนงาน'.$risk_head['process'];		
+			save_log($menu_id,$action,$description);
+			 
+			$chk_risk = $this->risk->where("risk_est_head_id = '".$id."' ")->get();
+			$num_risk = count($chk_risk);
+			if($num_risk != '0'){
+				foreach ($chk_risk as $key => $risk) {
+					$this->risk->delete($risk['id']);
+					$this->db->Execute('delete from risk_opr where risk_est_id = ?',$risk['id']);
+					$this->db->Execute('delete from risk_est_kri where risk_est_id ='.$risk['id']);
+					$this->db->Execute('delete from risk_est_control where risk_est_id ='.$risk['id']);
+				}
+			}
+			$this->risk_head->delete($id);
+		
+			redirect('risk_est');
+	}
+	/*
 	function delete_fl($id=FALSE,$risk_est_id=FALES){
 		$menu_id=$this->menu_id;
 		$menu_name = GetMenuProperty($menu_id,'title');		
@@ -306,6 +605,34 @@ class risk_est extends Public_Controller
 		unlink("import_file/risk_est/".$fl['fl_import']);
 		redirect('risk_est/form_opr/'.$risk_est_id);
 	}
+	*/
+	function del_fl(){ // ลบไฟล์หลักฐาน
+		$menu_id=$this->menu_id;
+		$id = $_POST['id'];
+		$risk_est_id = $_POST['risk_est_id'];
+		$risk_opr_id = $_POST['risk_opr_id'];
+		$rel_id = $_POST['rel_id'];
+		$menu_name = GetMenuProperty($menu_id,'title');		
+		if(permission($menu_id, 'candelete')=='')redirect('risk_est');		
+		$fl = $this->file_upload->get_row($id);
+		$action='Delete';
+		$this->file_upload->delete($id);
+		unlink("import_file/risk_est/".$fl['fl_import']);
+		//redirect('risk_est/form_opr/'.$risk_est_id);
+		$risk_opr = $this->risk_opr->get_row($risk_opr_id);
+		$description = $action.' '.$menu_name.' : ลบไฟล์เอกสาร '.$fl['fl_name'].' ของกิจกรรมการดำเนินงาน '.$risk_opr['event_risk_opr'];
+		save_log($menu_id,$action,$description);
+		
+			$fl_upload = $this->file_upload->where("risk_est_id = ".$risk_est_id." and quarter = ".$rel_id." and risk_opr_id = ".$risk_opr_id)->get();
+				foreach($fl_upload as $fl){
+				 	if($fl['id'] != ''){
+				  	echo	"<div style='width: 600px;display: inline-block; margin-top: 10px'><a href='import_file/risk_est/".$fl['fl_import']."' target='_blank' >".$fl['fl_name']."</a></div>
+					  		<a href='".$fl['id']."' rel_id='".$rel_id."' risk_opr_id = '".$risk_opr_id."' style='text-decoration:none;' onclick='return false;' title='Delete' class='btn btn-small btn-danger del_fl'><i class=' icon-trash'></i>ลบ</a>
+					  		<br />";
+			  		}
+				}
+	}
+	
 	function report_section($type = NULL){
 		  if($_GET['q'] != ''){
 		  	$type = 'report';

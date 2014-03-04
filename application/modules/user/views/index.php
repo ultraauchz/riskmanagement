@@ -47,13 +47,15 @@
 		  	<? if(permission($menu_id, 'canedit')!=''){ ?>
 		  	<a href="<?=$urlpage;?>/form/<?=$row['id'];?>" title="Edit" class="btn btn-small btn-info"><i class=" icon-pencil"></i>แก้ไข</a>
 		  	<? } ?>
-		  	<? if(permission($menu_id, 'candelete')!=''){ ?>
+		  	<? if(permission($menu_id, 'candelete')!=''){
+		  		if($row['usertype'] != 1){	?>
 		  	<a href="<?=$urlpage;?>/delete/<?php echo $row['id']?>" style="text-decoration:none;" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')" title="Delete" class="btn btn-small btn-danger"><i class=" icon-trash"></i>ลบ</a>
-		  	<? } ?> 
+		  	<? }} ?> 
 		  </td>
 		  </tr>
 		<tr>
 		<? 
+		
 				$i++;
 		  		endforeach; 
 ?>		

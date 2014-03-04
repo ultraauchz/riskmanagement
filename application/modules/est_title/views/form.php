@@ -1,5 +1,4 @@
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
- <style type="text/css">
+<style type="text/css">
 .commentForm label { color:red; }
 .commentForm label.error{ color:red; }
 .status{color:red;}
@@ -29,6 +28,10 @@ $(function(){
 		}
 	}
 	});
+// ทำให้ผ่าน tiny ผ่าน validate
+$('.btn-primary').click(function() {
+     tinymce.triggerSave();
+});
 });
 </script>
 <h3>ข้อมูลพื้นฐาน > จัดการข้อมูลภารกิจ[เพิ่ม / แก้ไข]</h3>
