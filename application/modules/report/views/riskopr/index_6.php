@@ -354,9 +354,9 @@ $(document).ready(function() {
 		<td align="center" rowspan="2" ><b>ระดับความเสี่ยง</b></td>
 	</tr>
 	<?
-	$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
-	$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย.',5=>'พ.ค.',6=>'มิ.ย.',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-	$head = $months;
+		$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
+		$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย.',5=>'พ.ค.',6=>'มิ.ย.',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
+		$head = $months;
 	?>
 	<tr>
 	
@@ -453,18 +453,35 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td height="50px" valign="middle" align="center">ผล</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+		<? if($quarter == '' || $quarter == 1){
+					$i = 1;
+					$max = 4;
+				}elseif($quarter == 2 ){
+					$i =1;
+					$max=2;
+				}elseif($quarter == 3){
+					$i =3;
+					$max=4;
+				}
+			$months = array(10 => 0, 11 => 0, 12 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0);
+			
+			for($i;$i<=$max;$i++){
+				if($result['results_start_date'.$i] > 0 &&  $result['results_end_date'.$i] > 0){
+					get_line_months($months, $result['results_start_date'.$i], $result['results_end_date'.$i]);	
+					echo $result['results_start_date'.$i]." ".$result['results_end_date'.$i];
+					echo "<br/>";			
+				}
+			} 
+				
+				foreach($months as $key_m => $value):
+					$line = set_line($months, $key_m, $value); 
+			?>
+				<td style="height:60px;padding:0px;"><div class="cursor" id="<?php echo $line ?>"><a href="#" onclick="return false;"></a></div></td>
+			<?php 
+				endforeach; 
+				$line = '';
+				$value = '';
+			?>
 			
 			<td></td>
 			<td></td>
